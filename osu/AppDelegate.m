@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MyScene.h"
+#import "ScaningScene.h"
 
 @implementation AppDelegate
 
@@ -31,7 +32,26 @@
         if (result == NSFileHandlingPanelOKButton) {
             NSURL *songsDir = panel.URL;
             //NSLog(@"%@",[songsDir.path stringByResolvingSymlinksInPath]);
+            ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1280, 720)];
+            scaningScene.scaleMode = SKSceneScaleModeAspectFit;
+            [self.skView presentScene:scaningScene];
+            self.skView.showsFPS = YES;
+            self.skView.showsNodeCount= YES;
             
+            [scaningScene addLoadingLineWithString:@"1"];
+            [scaningScene addLoadingLineWithString:@"2"];
+            [scaningScene addLoadingLineWithString:@"3"];
+            [scaningScene addLoadingLineWithString:@"3"];
+            [scaningScene addLoadingLineWithString:@"4"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
+            [scaningScene addLoadingLineWithString:@"5"];
         }else if (result == NSFileHandlingPanelCancelButton){
             [NSApp terminate:self];
         }
@@ -43,8 +63,6 @@
     
     [self.skView presentScene:scene];
     
-    self.skView.showsFPS = YES;
-    self.skView.showsNodeCount = YES;
 }
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;

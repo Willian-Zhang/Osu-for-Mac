@@ -8,6 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface ScaningScene : SKScene
+@interface ScaningScene : SKScene{
+    int loadingLabelNumberCount;
+}
+
+-(void)addLoadingLineWithString:(NSString *)aString;
 
 @end
