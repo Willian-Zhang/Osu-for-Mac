@@ -21,6 +21,7 @@
 		7D713213188C3F5000959B80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EC188C3F5000959B80 /* Cocoa.framework */; };
 		7D71321B188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D713219188C3F5000959B80 /* InfoPlist.strings */; };
 		7D71321D188C3F5000959B80 /* osuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71321C188C3F5000959B80 /* osuTests.m */; };
+		7D71322B188C4B8100959B80 /* ScaningScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71322A188C4B8100959B80 /* ScaningScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		7D713218188C3F5000959B80 /* osuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "osuTests-Info.plist"; sourceTree = "<group>"; };
 		7D71321A188C3F5000959B80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7D71321C188C3F5000959B80 /* osuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = osuTests.m; sourceTree = "<group>"; };
+		7D713229188C4B8100959B80 /* ScaningScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScaningScene.h; path = ../ScaningScene.h; sourceTree = "<group>"; };
+		7D71322A188C4B8100959B80 /* ScaningScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScaningScene.m; path = ../ScaningScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				7D713200188C3F5000959B80 /* MainMenu.xib */,
 				7D713202188C3F5000959B80 /* MyScene.m */,
 				7D713204188C3F5000959B80 /* MyScene.h */,
+				7D713229188C4B8100959B80 /* ScaningScene.h */,
+				7D71322A188C4B8100959B80 /* ScaningScene.m */,
 				7D713205188C3F5000959B80 /* AppDelegate.m */,
 				7D713207188C3F5000959B80 /* AppDelegate.h */,
 				7D713208188C3F5000959B80 /* Spaceship.png */,
@@ -266,6 +271,7 @@
 			files = (
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
 				7D7131FB188C3F5000959B80 /* main.m in Sources */,
+				7D71322B188C4B8100959B80 /* ScaningScene.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
