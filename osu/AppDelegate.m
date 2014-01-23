@@ -35,6 +35,10 @@
             ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1280, 720)];
             scaningScene.scaleMode = SKSceneScaleModeAspectFit;
             [self.skView presentScene:scaningScene];
+            
+            [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeCursor) userInfo:nil repeats:NO];
+            //[self changeCursor];
+            
             self.skView.showsFPS = YES;
             self.skView.showsNodeCount= YES;
             
@@ -56,6 +60,13 @@
             [NSApp terminate:self];
         }
     }];
+}
+- (void)changeCursor{
+    NSImage *cursorImage = [NSImage imageNamed:@"cursor.png"];
+    NSPoint cursorPoint = {cursorImage.size.width, cursorImage.size.height};
+    
+    NSCursor *cursor = [[NSCursor alloc] initWithImage:cursorImage hotSpot:cursorPoint];
+    [cursor set];
 }
 - (void)persentSelectorScene{
     SKScene *scene = [MyScene sceneWithSize:CGSizeMake(1280, 720)];

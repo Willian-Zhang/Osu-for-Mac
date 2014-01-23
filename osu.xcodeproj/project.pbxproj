@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D27CB8F188D97DF00EBF90B /* templateskin in Resources */ = {isa = PBXBuildFile; fileRef = 7D27CB8E188D97DF00EBF90B /* templateskin */; };
+		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D7131ED188C3F5000959B80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EC188C3F5000959B80 /* Cocoa.framework */; };
 		7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EE188C3F5000959B80 /* SpriteKit.framework */; };
 		7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D7131F7188C3F5000959B80 /* InfoPlist.strings */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D27CB8E188D97DF00EBF90B /* templateskin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = templateskin; path = Skin/templateskin; sourceTree = "<group>"; };
+		7D27CB94188DA20900EBF90B /* CustomizedSKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedSKView.h; sourceTree = "<group>"; };
+		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
 		7D7131E9188C3F5000959B80 /* osu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = osu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7131EC188C3F5000959B80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7D7131EE188C3F5000959B80 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -87,6 +92,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D27CB8B188D97AF00EBF90B /* Skin */ = {
+			isa = PBXGroup;
+			children = (
+				7D27CB8E188D97DF00EBF90B /* templateskin */,
+			);
+			name = Skin;
+			sourceTree = "<group>";
+		};
+		7D27CB93188DA1DB00EBF90B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D27CB94188DA20900EBF90B /* CustomizedSKView.h */,
+				7D27CB95188DA20900EBF90B /* CustomizedSKView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		7D7131E0188C3F5000959B80 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				7D713200188C3F5000959B80 /* MainMenu.xib */,
+				7D27CB93188DA1DB00EBF90B /* View */,
 				7D713202188C3F5000959B80 /* MyScene.m */,
 				7D713204188C3F5000959B80 /* MyScene.h */,
 				7D713229188C4B8100959B80 /* ScaningScene.h */,
@@ -149,6 +172,7 @@
 		7D7131F5188C3F5000959B80 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7D27CB8B188D97AF00EBF90B /* Skin */,
 				7D7131F6188C3F5000959B80 /* osu-Info.plist */,
 				7D7131F7188C3F5000959B80 /* InfoPlist.strings */,
 				7D7131FA188C3F5000959B80 /* main.m */,
@@ -252,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D713209188C3F5000959B80 /* Spaceship.png in Resources */,
+				7D27CB8F188D97DF00EBF90B /* templateskin in Resources */,
 				7D71320B188C3F5000959B80 /* Images.xcassets in Resources */,
 				7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */,
 				7D7131FF188C3F5000959B80 /* Credits.rtf in Resources */,
@@ -277,6 +302,7 @@
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
 				7D7131FB188C3F5000959B80 /* main.m in Sources */,
 				7D71322E188C705E00959B80 /* MainScene.m in Sources */,
+				7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */,
 				7D71322B188C4B8100959B80 /* ScaningScene.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
 			);
@@ -483,6 +509,7 @@
 				7D713222188C3F5000959B80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D713223188C3F5000959B80 /* Build configuration list for PBXNativeTarget "osuTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +518,7 @@
 				7D713225188C3F5000959B80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

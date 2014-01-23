@@ -112,7 +112,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView id="Wjy-UC-qi6" customClass="SKView">
+                    <customView id="Wjy-UC-qi6" customClass="CustomizedSKView">
                         <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </customView>

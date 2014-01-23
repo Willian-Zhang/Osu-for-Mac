@@ -9,5 +9,11 @@
 #import "MainScene.h"
 
 @implementation MainScene
-
+-(id)initWithSize:(CGSize)size {
+    if (self = [super initWithSize:size]) {
+        /* Setup your scene here */
+        
+    }
+    return self;
+}
 @end
