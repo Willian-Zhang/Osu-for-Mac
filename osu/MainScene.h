@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface MainScene : SKScene{
+    CGSize sceneSize;
     SKTexture *cursorTexture;
     SKTexture *cursortailTexture;
     SKNode *cursor;

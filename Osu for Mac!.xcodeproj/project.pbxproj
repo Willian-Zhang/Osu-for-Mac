@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
-		7D6471741892C78D00BA29F6 /* theBigOSU.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6471731892C78D00BA29F6 /* theBigOSU.png */; };
+		7D64717B1892CBDC00BA29F6 /* theBigOSU.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6471791892CBDC00BA29F6 /* theBigOSU.png */; };
+		7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */; };
 		7D7131ED188C3F5000959B80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EC188C3F5000959B80 /* Cocoa.framework */; };
 		7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EE188C3F5000959B80 /* SpriteKit.framework */; };
 		7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D7131F7188C3F5000959B80 /* InfoPlist.strings */; };
@@ -41,7 +42,8 @@
 /* Begin PBXFileReference section */
 		7D27CB94188DA20900EBF90B /* CustomizedSKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedSKView.h; sourceTree = "<group>"; };
 		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
-		7D6471731892C78D00BA29F6 /* theBigOSU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theBigOSU.png; sourceTree = "<group>"; };
+		7D6471791892CBDC00BA29F6 /* theBigOSU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theBigOSU.png; sourceTree = "<group>"; };
+		7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "theBigOSU@2x.png"; sourceTree = "<group>"; };
 		7D7131E9188C3F5000959B80 /* Osu for Mac!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Osu for Mac!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7131EC188C3F5000959B80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7D7131EE188C3F5000959B80 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -97,7 +99,8 @@
 		7D27CB8B188D97AF00EBF90B /* Skin */ = {
 			isa = PBXGroup;
 			children = (
-				7D6471731892C78D00BA29F6 /* theBigOSU.png */,
+				7D6471791892CBDC00BA29F6 /* theBigOSU.png */,
+				7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */,
 				7DFA7E3F18918E7100AB5E4D /* osu! by peppy */,
 			);
 			name = Skin;
@@ -281,10 +284,11 @@
 				7D713209188C3F5000959B80 /* Spaceship.png in Resources */,
 				7D71320B188C3F5000959B80 /* Images.xcassets in Resources */,
 				7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */,
-				7D6471741892C78D00BA29F6 /* theBigOSU.png in Resources */,
+				7D64717B1892CBDC00BA29F6 /* theBigOSU.png in Resources */,
 				7D7131FF188C3F5000959B80 /* Credits.rtf in Resources */,
 				7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */,
 				7D713201188C3F5000959B80 /* MainMenu.xib in Resources */,
+				7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

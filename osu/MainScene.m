@@ -12,32 +12,40 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+        sceneSize = size;
         self.backgroundColor = [SKColor colorWithRed:0.08 green:0.46 blue:0.98 alpha:1.0];
-        [self initCursorWithSize:size];
+        [self initTheBigOSU];
+        [self initCursor];
+        
     }
     return self;
 }
-- (void)initCursorWithSize:(CGSize)size{
+- (void)initCursor{
     NSString *pathToCursorImage = [[NSBundle mainBundle] pathForResource:@"cursor@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
     cursorTexture = [SKTexture textureWithImageNamed:pathToCursorImage];
     //CGPoint location = [theEvent locationInNode:self];
     cursor = [SKSpriteNode spriteNodeWithTexture:cursorTexture];
-    cursor.position = CGPointMake(size.width/2, size.height/2);
-    cursor.scale =1;
+    cursor.position = CGPointMake(sceneSize.width/2, sceneSize.height/2);
     SKAction *rotationForOnce = [SKAction rotateByAngle:-M_PI duration:10];
     [cursor runAction:[SKAction repeatActionForever:rotationForOnce]];
-    
     [self addChild:cursor];
+    
     NSString *pathToCursortailImage = [[NSBundle mainBundle] pathForResource:@"cursortrail@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
     cursortailTexture = [SKTexture textureWithImageNamed:pathToCursortailImage];
     
-    lastFrameCursorPosition = CGPointMake(size.width/2, size.height/2);
+    lastFrameCursorPosition = CGPointMake(sceneSize.width/2, sceneSize.height/2);
 }
-
+- (void)initTheBigOSU{
+    NSString *pathToTheBigOSUImage = [[NSBundle mainBundle] pathForResource:@"theBigOSU@2x" ofType:@"png" inDirectory:@""];
+    
+    SKSpriteNode *theBigOSU = [SKSpriteNode spriteNodeWithImageNamed:pathToTheBigOSUImage];
+    theBigOSU.position = CGPointMake(sceneSize.width/2, sceneSize.height/2);
+    [self addChild:theBigOSU];
+}
 - (void)mouseDown:(NSEvent *)theEvent{
     cursor.position = [theEvent locationInNode:self];
     [self.view.window makeFirstResponder:self.view.scene];
-    NSLog(@"%f | %f",cursor.position.x,cursor.position.y);
+    //NSLog(@"%f | %f",cursor.position.x,cursor.position.y);
 }
 - (void)mouseUp:(NSEvent *)theEvent{
     cursor.position = [theEvent locationInNode:self];
