@@ -8,6 +8,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MainScene : SKScene
+@interface MainScene : SKScene{
+    SKTexture *cursorTexture;
+    SKTexture *cursortailTexture;
+    SKNode *cursor;
+    CGPoint lastFrameCursorPosition;
+}
 
 @end

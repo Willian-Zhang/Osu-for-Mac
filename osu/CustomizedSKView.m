@@ -46,7 +46,8 @@
 }
 - (NSCursor *)getCustomCursor{
     if (cursor == nil) {
-        NSString *pathToCursorImage = [[NSBundle mainBundle] pathForResource:@"cursor" ofType:@"png" inDirectory:@"templateskin"];
+        
+        NSString *pathToCursorImage = [[NSBundle mainBundle] pathForResource:@"cursormiddle@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
         NSImage *cursorImage = [[NSImage alloc] initWithContentsOfFile:pathToCursorImage];
         NSPoint cursorPoint = NSMakePoint(cursorImage.size.width/2,cursorImage.size.height/2);
         cursor = [[NSCursor alloc] initWithImage:cursorImage hotSpot:cursorPoint];

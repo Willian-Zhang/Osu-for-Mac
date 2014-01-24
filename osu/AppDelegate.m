@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MyScene.h"
 #import "ScaningScene.h"
+#import "MainScene.h"
 
 @implementation AppDelegate
 
@@ -16,8 +17,27 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self selectFolder];
+    self.skView.showsFPS = YES;
+    self.skView.showsNodeCount= YES;
+    self.skView.frameInterval = 3;
+    [self startMainScene];
+    //[self selectFolder];
     
+}
+- (void)startScaningScene{
+    ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1152, 720)];
+    scaningScene.scaleMode = SKSceneScaleModeResizeFill;
+    [self.skView presentScene:scaningScene];
+    
+    [scaningScene addLoadingLineWithString:@"1"];
+    [scaningScene addLoadingLineWithString:@"2"];
+}
+- (void)startMainScene{
+    MainScene *mainScene = [MainScene sceneWithSize:CGSizeMake(1280, 720)];
+    mainScene.scaleMode = SKSceneScaleModeAspectFit;
+    [self.skView presentScene:mainScene];
+    [self.window setAcceptsMouseMovedEvents:YES];
+    [self.window makeFirstResponder:self.skView.scene];
 }
 - (void)selectFolder{
     NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -32,41 +52,11 @@
         if (result == NSFileHandlingPanelOKButton) {
             NSURL *songsDir = panel.URL;
             //NSLog(@"%@",[songsDir.path stringByResolvingSymlinksInPath]);
-            ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1280, 720)];
-            scaningScene.scaleMode = SKSceneScaleModeAspectFit;
-            [self.skView presentScene:scaningScene];
             
-            [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeCursor) userInfo:nil repeats:NO];
-            //[self changeCursor];
-            
-            self.skView.showsFPS = YES;
-            self.skView.showsNodeCount= YES;
-            
-            [scaningScene addLoadingLineWithString:@"1"];
-            [scaningScene addLoadingLineWithString:@"2"];
-            [scaningScene addLoadingLineWithString:@"3"];
-            [scaningScene addLoadingLineWithString:@"3"];
-            [scaningScene addLoadingLineWithString:@"4"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
-            [scaningScene addLoadingLineWithString:@"5"];
         }else if (result == NSFileHandlingPanelCancelButton){
             [NSApp terminate:self];
         }
     }];
-}
-- (void)changeCursor{
-    NSImage *cursorImage = [NSImage imageNamed:@"cursor.png"];
-    NSPoint cursorPoint = {cursorImage.size.width, cursorImage.size.height};
-    
-    NSCursor *cursor = [[NSCursor alloc] initWithImage:cursorImage hotSpot:cursorPoint];
-    [cursor set];
 }
 - (void)persentSelectorScene{
     SKScene *scene = [MyScene sceneWithSize:CGSizeMake(1280, 720)];
