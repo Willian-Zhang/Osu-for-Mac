@@ -16,5 +16,5 @@
     CGPoint lastFrameCursorPosition;
     SKNode *backgroundCircles;
 }
-
+- (void)displayDirectorySettings;
 @end

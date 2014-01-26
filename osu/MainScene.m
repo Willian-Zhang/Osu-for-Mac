@@ -16,15 +16,43 @@ static inline CGFloat skRandf() {
 static inline CGFloat skRand(CGFloat low, CGFloat high) {
     return skRandf() * (high - low) + low;
 }
+#pragma mark 方法
 
--(id)initWithSize:(CGSize)size {
+- (void)displayDirectorySettings{
+    SKNode *message = [[SKNode alloc] init];
+    message.name = @"message";
+    SKNode *messageMask = [self messageNodeWithLines:3];
+    [message addChild:messageMask];
+    [message runAction:[SKAction playSoundFileNamed:@"notify.wav" waitForCompletion:NO]];
+    SKLabelNode *selectLabel = [self labelWithString:@"Select:"];
+    selectLabel.position = CGPointMake(0, 35);
+    SKLabelNode *connectLabel = [self labelWithString:@"Connect with my Windows version Osu!"];
+    connectLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    connectLabel.position = CGPointMake(-20, 0);
+    SKLabelNode *newLabel = [self labelWithString:@"Start a brand new Osu for Mac!"];
+    newLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    newLabel.position = CGPointMake(-20, -35);
+    [message addChild:newLabel];
+    [message addChild:connectLabel];
+    [message addChild:selectLabel];
+    
+    message.alpha = 0.75;
+    message.zPosition = 30;
+    [self addChild:message];
+    
+}
+
+#pragma mark 初始化
+- (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        size = size;
+        sceneSize = size;
+        [self setAnchorPoint:CGPointMake(0.5, 0.5)];
         self.backgroundColor = [SKColor colorWithRed:0.08 green:0.46 blue:0.98 alpha:1.0];
         [self initCursor];
         [self initTheBigOSU];
         [self initBackground];
+        
     }
     return self;
 }
@@ -48,26 +76,20 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
         aCircle.alpha = 0.1;
         aCircle.path = theCirclePath;
         aCircle.zPosition = 10;
-        aCircle.position = CGPointMake(skRand(0, self.size.width), skRand(0, self.size.height));
+        aCircle.position = CGPointMake(skRand(-self.size.width/2, self.size.width/2), skRand(-self.size.height/2, self.size.height/2));
         [backgroundCircles addChild:aCircle];
     }
     if (backgroundCircleGroup == nil) {
         [self addChild:backgroundCircles];
     }
 }
-- (void)resizeBackground{
-    SKNode *backgroundCircleGroup = [self childNodeWithName:@"backgroundCircles"];
-    if (backgroundCircleGroup != nil) {
-        [backgroundCircleGroup removeAllChildren];
-        [self initBackground];
-    }
-}
+
 - (void)initCursor{
     NSString *pathToCursorImage = [[NSBundle mainBundle] pathForResource:@"cursor@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
     cursorTexture = [SKTexture textureWithImageNamed:pathToCursorImage];
     //CGPoint location = [theEvent locationInNode:self];
     cursor = [SKSpriteNode spriteNodeWithTexture:cursorTexture];
-    cursor.position = [self centerPointForSize:self.size];
+    cursor.position = CGPointZero;
     cursor.zPosition = 300;
     SKAction *rotationForOnce = [SKAction rotateByAngle:-M_PI duration:10];
     [cursor runAction:[SKAction repeatActionForever:rotationForOnce]];
@@ -76,7 +98,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     NSString *pathToCursortailImage = [[NSBundle mainBundle] pathForResource:@"cursortrail@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
     cursortailTexture = [SKTexture textureWithImageNamed:pathToCursortailImage];
     
-    lastFrameCursorPosition = [self centerPointForSize:self.size];
+    lastFrameCursorPosition = CGPointZero;
 }
 - (void)initTheBigOSU{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
@@ -87,7 +109,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     SKTexture *theBigOSUTexture = [SKTexture textureWithImageNamed:@"theBigOSU"];
     SKSpriteNode *theBigOSU = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
     theBigOSU.zPosition = 20;
-    theBigOSU.position = CGPointMake(self.size.width/2, self.size.height * (0.5 + 0.04266) );
+    theBigOSU.position = CGPointMake(0, self.size.height * 0.04266 );
     theBigOSU.name = @"theBigOSU";
     
     SKAction *theShadowAction = [SKAction sequence:@[
@@ -146,26 +168,48 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
   
     [theBigOSU runAction:theOSUAction];
 }
+#pragma mark 响应事件
+- (void)didChangeSize:(CGSize)oldSize{
+    sceneSize = self.scene.size;
+    [self resizeTheBigOSU:oldSize];
+    [self resizeBackground];
+    [self resizeMessage];
+}
+- (void)resizeMessage{
+    SKNode *message = [self childNodeWithName:@"message"];
+    if (message != nil) {
+        SKNode *messageMask = [message childNodeWithName:@"messageMask"];
+        [messageMask runAction:[SKAction resizeToWidth:self.size.width duration:0]];
+    }
+}
+- (void)resizeBackground{
+    SKNode *backgroundCircleGroup = [self childNodeWithName:@"backgroundCircles"];
+    if (backgroundCircleGroup != nil) {
+        [backgroundCircleGroup removeAllChildren];
+        [self initBackground];
+    }
+}
 - (void)resizeTheBigOSU:(CGSize)oldSize{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
     float theBigOSUSize = screenLimitScaleWidth * 7 / 9;
     
     SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
-    theBigOSU.position = CGPointMake(self.size.width/2, self.size.height * (0.5 + 0.04266) );
     [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0]];
 }
-- (void)didChangeSize:(CGSize)oldSize{
-    sceneSize = self.scene.size;
-    [self resizeTheBigOSU:oldSize];
-    [self resizeBackground];
+- (void)pressed{
+    [cursor runAction:[SKAction scaleTo:1.3 duration:0.1]];
 }
 - (void)mouseDown:(NSEvent *)theEvent{
     cursor.position = [theEvent locationInNode:self];
     [self.view.window makeFirstResponder:self.view.scene];
-    //NSLog(@"%f | %f",cursor.position.x,cursor.position.y);
+    [self pressed];
 }
 - (void)mouseUp:(NSEvent *)theEvent{
     cursor.position = [theEvent locationInNode:self];
+    [cursor runAction:[SKAction scaleTo:1 duration:0.1]];
+}
+- (void)mouseDragged:(NSEvent *)theEvent{
+    [self mouseMoved:theEvent];
 }
 - (void)mouseMoved:(NSEvent *)theEvent{
     CGPoint thisFrameCursorPosition = [theEvent locationInNode:self];
@@ -206,4 +250,23 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     CGPoint point = CGPointMake(size.width/2, size.height/2);
     return point;
 }
+- (SKNode *)messageNodeWithLines:(int)lineNumber{
+    int height = (35 + 25 * lineNumber + 10*(lineNumber-1)  );
+    
+    SKSpriteNode *blackRect = [SKSpriteNode spriteNodeWithColor:[NSColor blackColor] size:CGSizeMake(self.size.width, height)];
+    blackRect.zPosition = 30;
+    blackRect.position = CGPointZero;
+    blackRect.name = @"messageMask";
+    return blackRect;
+}
+- (SKLabelNode *)labelWithString:(NSString *)aString{
+    SKLabelNode *aLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvitica"];
+    aLabel.text = aString;
+    aLabel.fontSize = 25;
+    aLabel.color = [NSColor whiteColor];
+    aLabel.zPosition = 31;
+    aLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    return aLabel;
+}
+
 @end
