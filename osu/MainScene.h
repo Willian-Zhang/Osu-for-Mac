@@ -14,6 +14,7 @@
     SKTexture *cursortailTexture;
     SKNode *cursor;
     CGPoint lastFrameCursorPosition;
+    SKNode *backgroundCircles;
 }
 
 @end

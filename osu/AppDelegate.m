@@ -33,8 +33,8 @@
     [scaningScene addLoadingLineWithString:@"2"];
 }
 - (void)startMainScene{
-    MainScene *mainScene = [MainScene sceneWithSize:CGSizeMake(1280, 720)];
-    mainScene.scaleMode = SKSceneScaleModeAspectFit;
+    MainScene *mainScene = [MainScene sceneWithSize:CGSizeMake(1152, 720)];
+    mainScene.scaleMode = SKSceneScaleModeResizeFill;
     [self.skView presentScene:mainScene];
     [self.window setAcceptsMouseMovedEvents:YES];
     [self.window makeFirstResponder:self.skView.scene];

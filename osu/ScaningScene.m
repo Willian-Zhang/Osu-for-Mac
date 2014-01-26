@@ -53,7 +53,7 @@
         if (oldNode != nil) {
             [oldNode runAction:groupAction];
             if (oldNode.alpha == 0) {
-                [oldNode removeFromParent];
+                [oldNode runAction:[SKAction removeFromParent]];
             }
         }
     }
