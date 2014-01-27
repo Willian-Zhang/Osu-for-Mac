@@ -14,7 +14,6 @@
     SKTexture *cursortailTexture;
     SKNode *cursor;
     CGPoint lastFrameCursorPosition;
-    SKNode *backgroundCircles;
 }
 - (void)displayDirectorySettings;
 @end

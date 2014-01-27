@@ -52,31 +52,41 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     return self;
 }
 - (void)initBackground{
-    backgroundCircles = [[SKNode alloc] init];
-    SKNode *backgroundCircleGroup = [self childNodeWithName:@"backgroundCircles"];
-    if (backgroundCircleGroup != nil) {
-        backgroundCircles = backgroundCircleGroup;
-    }else{
-        backgroundCircles.name = @"backgroundCircles";
+
+    SKNode *backgroundNodes = [self childNodeWithName:@"backgroundNodes"];
+    
+    NSArray *backgroundNodesArray = [backgroundNodes children];
+    
+    if ([backgroundNodesArray count] == 0) {
+        if (backgroundNodes == nil) {
+            backgroundNodes = [[SKNode alloc] init];
+            [self addChild:backgroundNodes];
+        }
+        backgroundNodes.name = @"backgroundNodes";
+        
+        SKEmitterNode *stars = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"MainStar" ofType:@"sks"]];
+        [stars setParticleTexture:[SKTexture textureWithImageNamed:@"star2"]];
+        stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
+        [backgroundNodes addChild:stars];
+        
+        srand((unsigned)time(0));
+        float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
+        int maxBackgroundCircleNumber = 16;
+        for (int circleCount = 0; circleCount< (int)(skRand(maxBackgroundCircleNumber/2,maxBackgroundCircleNumber)); circleCount++){
+            SKShapeNode *aCircle = [[SKShapeNode alloc] init];
+            CGMutablePathRef theCirclePath = CGPathCreateMutable();
+            CGPathAddArc(theCirclePath, NULL, 0, 0, skRand(screenLimitScaleWidth * 0.01,screenLimitScaleWidth * 0.3), 0, M_PI * 2, YES);
+            aCircle.fillColor = [SKColor whiteColor];
+            aCircle.lineWidth = 0;
+            aCircle.alpha = 0.1;
+            aCircle.path = theCirclePath;
+            aCircle.zPosition = 10;
+            aCircle.position = CGPointMake(skRand(-self.size.width/2, self.size.width/2), skRand(-self.size.height/2, self.size.height/2));
+            [backgroundNodes addChild:aCircle];
+        }
     }
-    srand((unsigned)time(0));
-    float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-    int maxBackgroundCircleNumber = 16;
-    for (int circleCount = 0; circleCount< (int)(skRand(maxBackgroundCircleNumber/2,maxBackgroundCircleNumber)); circleCount++) {
-        SKShapeNode *aCircle = [[SKShapeNode alloc] init];
-        CGMutablePathRef theCirclePath = CGPathCreateMutable();
-        CGPathAddArc(theCirclePath, NULL, 0, 0, skRand(screenLimitScaleWidth * 0.01,screenLimitScaleWidth * 0.3), 0, M_PI * 2, YES);
-        aCircle.fillColor = [SKColor whiteColor];
-        aCircle.lineWidth = 0;
-        aCircle.alpha = 0.1;
-        aCircle.path = theCirclePath;
-        aCircle.zPosition = 10;
-        aCircle.position = CGPointMake(skRand(-self.size.width/2, self.size.width/2), skRand(-self.size.height/2, self.size.height/2));
-        [backgroundCircles addChild:aCircle];
-    }
-    if (backgroundCircleGroup == nil) {
-        [self addChild:backgroundCircles];
-    }
+    
+
 }
 
 - (void)initCursor{
@@ -98,7 +108,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 - (void)initTheBigOSU{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
 
-    float scaleDuration = 0.3;
+    float scaleDuration = 1;
     float theBigOSUSize = screenLimitScaleWidth * 7/9;
     
     SKTexture *theBigOSUTexture = [SKTexture textureWithImageNamed:@"theBigOSU"];
@@ -178,9 +188,9 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     }
 }
 - (void)resizeBackground{
-    SKNode *backgroundCircleGroup = [self childNodeWithName:@"backgroundCircles"];
-    if (backgroundCircleGroup != nil) {
-        [backgroundCircleGroup removeAllChildren];
+    SKNode *backgroundNodesNode = [self childNodeWithName:@"backgroundNodes"];
+    if (backgroundNodesNode != nil) {
+        [backgroundNodesNode removeAllChildren];
         [self initBackground];
     }
 }

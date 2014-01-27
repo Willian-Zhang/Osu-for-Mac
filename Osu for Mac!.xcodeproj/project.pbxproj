@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
+		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
+		7D351CAC1896557B00FBDA2A /* MianCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MianCircle.sks */; };
+		7D351CAD1896557B00FBDA2A /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAB1896557B00FBDA2A /* bokeh.png */; };
 		7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F7918956E7A00F5AB50 /* SettingsDealer.m */; };
 		7D627F801895929A00F5AB50 /* notify.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D627F7F1895929A00F5AB50 /* notify.wav */; };
 		7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F821895ABBD00F5AB50 /* SKOptionNode.m */; };
@@ -50,6 +53,9 @@
 		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
 		7D2DB148189638CC009F8FBC /* SKMessageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageNode.h; sourceTree = "<group>"; };
 		7D2DB149189638CC009F8FBC /* SKMessageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessageNode.m; sourceTree = "<group>"; };
+		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
+		7D351CAA1896557B00FBDA2A /* MianCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MianCircle.sks; sourceTree = "<group>"; };
+		7D351CAB1896557B00FBDA2A /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		7D627F7818956E7A00F5AB50 /* SettingsDealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDealer.h; sourceTree = "<group>"; };
 		7D627F7918956E7A00F5AB50 /* SettingsDealer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsDealer.m; sourceTree = "<group>"; };
 		7D627F7F1895929A00F5AB50 /* notify.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notify.wav; path = Skin/default/notify.wav; sourceTree = "<group>"; };
@@ -115,8 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				7D627F7C1895924400F5AB50 /* default */,
-				7D6471791892CBDC00BA29F6 /* theBigOSU.png */,
-				7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */,
 				7DFA7E3F18918E7100AB5E4D /* osu! by peppy */,
 			);
 			name = Skin;
@@ -131,6 +135,9 @@
 				7D627F821895ABBD00F5AB50 /* SKOptionNode.m */,
 				7D2DB148189638CC009F8FBC /* SKMessageNode.h */,
 				7D2DB149189638CC009F8FBC /* SKMessageNode.m */,
+				7D351CA6189652FD00FBDA2A /* MainStar.sks */,
+				7D351CAA1896557B00FBDA2A /* MianCircle.sks */,
+				7D351CAB1896557B00FBDA2A /* bokeh.png */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -147,6 +154,8 @@
 		7D627F7C1895924400F5AB50 /* default */ = {
 			isa = PBXGroup;
 			children = (
+				7D6471791892CBDC00BA29F6 /* theBigOSU.png */,
+				7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */,
 				7D627F841895AEC400F5AB50 /* star2.png */,
 				7D627F851895AEC400F5AB50 /* star2@2x.png */,
 				7D627F7F1895929A00F5AB50 /* notify.wav */,
@@ -321,15 +330,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D351CAC1896557B00FBDA2A /* MianCircle.sks in Resources */,
 				7D713209188C3F5000959B80 /* Spaceship.png in Resources */,
 				7D71320B188C3F5000959B80 /* Images.xcassets in Resources */,
 				7D627F801895929A00F5AB50 /* notify.wav in Resources */,
 				7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */,
 				7D627F861895AEC400F5AB50 /* star2.png in Resources */,
 				7D64717B1892CBDC00BA29F6 /* theBigOSU.png in Resources */,
+				7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */,
 				7D7131FF188C3F5000959B80 /* Credits.rtf in Resources */,
 				7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */,
 				7D713201188C3F5000959B80 /* MainMenu.xib in Resources */,
+				7D351CAD1896557B00FBDA2A /* bokeh.png in Resources */,
 				7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */,
 				7D627F871895AEC400F5AB50 /* star2@2x.png in Resources */,
 			);
