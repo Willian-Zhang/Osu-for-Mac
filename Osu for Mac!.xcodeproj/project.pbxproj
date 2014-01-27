@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
+		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
 		7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F7918956E7A00F5AB50 /* SettingsDealer.m */; };
 		7D627F801895929A00F5AB50 /* notify.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D627F7F1895929A00F5AB50 /* notify.wav */; };
 		7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F821895ABBD00F5AB50 /* SKOptionNode.m */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		7D27CB94188DA20900EBF90B /* CustomizedSKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedSKView.h; sourceTree = "<group>"; };
 		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
+		7D2DB148189638CC009F8FBC /* SKMessageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageNode.h; sourceTree = "<group>"; };
+		7D2DB149189638CC009F8FBC /* SKMessageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessageNode.m; sourceTree = "<group>"; };
 		7D627F7818956E7A00F5AB50 /* SettingsDealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDealer.h; sourceTree = "<group>"; };
 		7D627F7918956E7A00F5AB50 /* SettingsDealer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsDealer.m; sourceTree = "<group>"; };
 		7D627F7F1895929A00F5AB50 /* notify.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notify.wav; path = Skin/default/notify.wav; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				7D27CB95188DA20900EBF90B /* CustomizedSKView.m */,
 				7D627F811895ABBD00F5AB50 /* SKOptionNode.h */,
 				7D627F821895ABBD00F5AB50 /* SKOptionNode.m */,
+				7D2DB148189638CC009F8FBC /* SKMessageNode.h */,
+				7D2DB149189638CC009F8FBC /* SKMessageNode.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				7D7131FB188C3F5000959B80 /* main.m in Sources */,
 				7D71322E188C705E00959B80 /* MainScene.m in Sources */,
 				7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */,
+				7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */,
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
 			);

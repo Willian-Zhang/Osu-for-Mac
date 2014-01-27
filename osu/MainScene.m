@@ -7,6 +7,7 @@
 //
 
 #import "MainScene.h"
+#import "SKMessageNode.h"
 
 @implementation MainScene
 
@@ -19,25 +20,19 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 #pragma mark 方法
 
 - (void)displayDirectorySettings{
-    SKNode *message = [[SKNode alloc] init];
-    message.name = @"message";
-    SKNode *messageMask = [self messageNodeWithLines:3];
-    [message addChild:messageMask];
-    [message runAction:[SKAction playSoundFileNamed:@"notify.wav" waitForCompletion:NO]];
-    SKLabelNode *selectLabel = [self labelWithString:@"Select:"];
-    selectLabel.position = CGPointMake(0, 35);
-    SKLabelNode *connectLabel = [self labelWithString:@"Connect with my Windows version Osu!"];
-    connectLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
-    connectLabel.position = CGPointMake(-20, 0);
-    SKLabelNode *newLabel = [self labelWithString:@"Start a brand new Osu for Mac!"];
-    newLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
-    newLabel.position = CGPointMake(-20, -35);
-    [message addChild:newLabel];
-    [message addChild:connectLabel];
-    [message addChild:selectLabel];
+    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
     
-    message.alpha = 0.75;
-    message.zPosition = 30;
+    [message createMessageMaskWithLines:4];
+    [message createMessageLabelWithString:@"Select:" onLine:1];
+    
+    SKLabelNode *connectLabel = [message messageLabelWithString:@"Connect with my Windows version Osu!" onLine:2];
+    connectLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    
+    SKLabelNode *newLabel = [message messageLabelWithString:@"Start a brand new Osu for Mac!" onLine:3];
+    newLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    [message addChild:connectLabel];
+    [message addChild:newLabel];
+
     [self addChild:message];
     
 }
@@ -250,23 +245,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     CGPoint point = CGPointMake(size.width/2, size.height/2);
     return point;
 }
-- (SKNode *)messageNodeWithLines:(int)lineNumber{
-    int height = (35 + 25 * lineNumber + 10*(lineNumber-1)  );
-    
-    SKSpriteNode *blackRect = [SKSpriteNode spriteNodeWithColor:[NSColor blackColor] size:CGSizeMake(self.size.width, height)];
-    blackRect.zPosition = 30;
-    blackRect.position = CGPointZero;
-    blackRect.name = @"messageMask";
-    return blackRect;
-}
-- (SKLabelNode *)labelWithString:(NSString *)aString{
-    SKLabelNode *aLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvitica"];
-    aLabel.text = aString;
-    aLabel.fontSize = 25;
-    aLabel.color = [NSColor whiteColor];
-    aLabel.zPosition = 31;
-    aLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    return aLabel;
-}
+
+
 
 @end

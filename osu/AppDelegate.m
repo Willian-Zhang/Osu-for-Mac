@@ -20,7 +20,8 @@
 {
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount= YES;
-    //self.skView.frameInterval = 1;
+    //self.skView.asynchronous = NO;
+    //self.skView.frameInterval = 100;
     MainScene *mainScene = [self startMainScene];
     SettingsDealer *settings = [[SettingsDealer alloc] init];
     
