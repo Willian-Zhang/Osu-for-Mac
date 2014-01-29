@@ -16,7 +16,7 @@
         initWidth = width;
         fontSize = 25;
         lineSpaceSize = 10;
-        marginSize = 15;
+        marginSize = 12;
         [self runAction:[SKAction playSoundFileNamed:@"notify.wav" waitForCompletion:NO]];
         self.name = @"message";
         self.alpha = 0.9;
@@ -36,7 +36,7 @@
     blackRect.alpha = 0.8;
     return blackRect;
 }
-- (void)createMessageMaskWithLines:(int)lineNumber{
+- (void)addMessageMaskWithLines:(int)lineNumber{
     SKNode *blackRect = [self messageMaskWithLines:lineNumber];
     [self addChild:blackRect];
 }
@@ -52,8 +52,21 @@
     
     return aLabel;
 }
-- (void)createMessageLabelWithString:(NSString *)aString onLine:(int)lineCount{
+- (void)addMessageLabelWithString:(NSString *)aString onLine:(int)lineCount{
     SKLabelNode *aLabel = [self messageLabelWithString:aString onLine:lineCount];
     [self addChild:aLabel];
+}
+- (void)fadeOut{
+    [self fadeOutIn:3];
+}
+- (void)fadeOutNow{
+    [self fadeOutIn:0];
+}
+- (void)fadeOutIn:(float)seconds{
+    [self runAction:[SKAction sequence:@[
+                                         [SKAction waitForDuration:seconds],
+                                         [SKAction fadeOutWithDuration:0.5],
+                                         [SKAction removeFromParent]
+                                         ]]];
 }
 @end

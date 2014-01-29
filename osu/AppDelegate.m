@@ -27,11 +27,17 @@
     
     NSURL *saveDirectory;
     NSURL *loadDirectory;
-    if ([settings isSaveDirectorySet]) {
+    if ([settings isFirstRun]) {
+        [mainScene displayFirstRunSettingsWithCompletion:^(NSInteger result){
+            if (result == FirstRunConfigureSucceed) {
+                
+            }else if (result == FirstRunConfigureFailed){
+                [mainScene displayMessage:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
+            }
+        }];
+    }else{
         saveDirectory = [settings getSaveDirectory];
         loadDirectory = [settings getLoadDirectory];
-    }else{
-        [mainScene displayDirectorySettings];
     }
     //[self selectFolder];
     

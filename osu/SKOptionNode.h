@@ -12,4 +12,6 @@
     BOOL state;
 }
 
+@property BOOL state;
+
 @end

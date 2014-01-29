@@ -9,34 +9,37 @@
 #import "MainScene.h"
 #import "SKMessageNode.h"
 
+
 @implementation MainScene
 
-static inline CGFloat skRandf() {
-    return rand() / (CGFloat) RAND_MAX;
-}
-static inline CGFloat skRand(CGFloat low, CGFloat high) {
-    return skRandf() * (high - low) + low;
-}
 #pragma mark 方法
 
-- (void)displayDirectorySettings{
+- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block{
     SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
-    
-    [message createMessageMaskWithLines:4];
-    [message createMessageLabelWithString:@"Select:" onLine:1];
-    
-    SKLabelNode *connectLabel = [message messageLabelWithString:@"Connect with my Windows version Osu!" onLine:2];
-    connectLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
-    
-    SKLabelNode *newLabel = [message messageLabelWithString:@"Start a brand new Osu for Mac!" onLine:3];
-    newLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
-    [message addChild:connectLabel];
-    [message addChild:newLabel];
 
+    
+    [message addMessageMaskWithLines:1];
+    [message addMessageLabelWithString:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice") onLine:1];
+//    SKLabelNode *connectLabel = [message messageLabelWithString:NSLocalizedString(@"Connect with my Windows version Osu!", @"Connect with Windows Osu!")  onLine:2];
+//    SKLabelNode *newLabel = [message messageLabelWithString:NSLocalizedString(@"Start a brand new Osu for Mac!", @"Start new Osu!") onLine:3];
     [self addChild:message];
-    
+    [message fadeOut];
+    [self runAction:[SKAction sequence:@[
+                                         [SKAction waitForDuration:1],
+                                         [SKAction runBlock:^(void){
+        firstRunController = [[FirstRunWindowController alloc] initWithWindowNibName:@"FirstRunWindow"];
+        [firstRunController showWindow:self];
+        [firstRunController showRelativeToRect:message.frame ofView:self.view preferredEdge:NSMinYEdge completion:block];
+                                                                    }]
+                                         ]]];
 }
-
+- (void)displayMessage:(NSString *)messageString{
+    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
+    [message addMessageMaskWithLines:1];
+    [message addMessageLabelWithString:messageString onLine:1];
+    [self addChild:message];
+    [message fadeOut];
+}
 #pragma mark 初始化
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -52,39 +55,32 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     return self;
 }
 - (void)initBackground{
-
-    SKNode *backgroundNodes = [self childNodeWithName:@"backgroundNodes"];
     
-    NSArray *backgroundNodesArray = [backgroundNodes children];
+    SKEmitterNode *stars = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"MainStar" ofType:@"sks"]];
+    [stars setParticleTexture:[SKTexture textureWithImageNamed:@"star2"]];
+    stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
+    stars.name = @"backgroundStars";
+    [self addChild:stars];
     
-    if ([backgroundNodesArray count] == 0) {
-        if (backgroundNodes == nil) {
-            backgroundNodes = [[SKNode alloc] init];
-            [self addChild:backgroundNodes];
-        }
-        backgroundNodes.name = @"backgroundNodes";
-        
-        SKEmitterNode *stars = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"MainStar" ofType:@"sks"]];
-        [stars setParticleTexture:[SKTexture textureWithImageNamed:@"star2"]];
-        stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
-        [backgroundNodes addChild:stars];
-        
-        srand((unsigned)time(0));
-        float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-        int maxBackgroundCircleNumber = 16;
-        for (int circleCount = 0; circleCount< (int)(skRand(maxBackgroundCircleNumber/2,maxBackgroundCircleNumber)); circleCount++){
-            SKShapeNode *aCircle = [[SKShapeNode alloc] init];
-            CGMutablePathRef theCirclePath = CGPathCreateMutable();
-            CGPathAddArc(theCirclePath, NULL, 0, 0, skRand(screenLimitScaleWidth * 0.01,screenLimitScaleWidth * 0.3), 0, M_PI * 2, YES);
-            aCircle.fillColor = [SKColor whiteColor];
-            aCircle.lineWidth = 0;
-            aCircle.alpha = 0.1;
-            aCircle.path = theCirclePath;
-            aCircle.zPosition = 10;
-            aCircle.position = CGPointMake(skRand(-self.size.width/2, self.size.width/2), skRand(-self.size.height/2, self.size.height/2));
-            [backgroundNodes addChild:aCircle];
-        }
-    }
+    SKEmitterNode *circles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"MainCircle" ofType:@"sks"]];
+    [circles setParticleTexture:[SKTexture textureWithImageNamed:@"main-background-circle"]];
+    circles.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
+    circles.name = @"backgroundCircles";
+    [self addChild:circles];
+    
+//    SKNode *backgroundNodes = [self childNodeWithName:@"backgroundNodes"];
+//    
+//    NSArray *backgroundNodesArray = [backgroundNodes children];
+//    
+//    if ([backgroundNodesArray count] == 0) {
+//        if (backgroundNodes == nil) {
+//            backgroundNodes = [[SKNode alloc] init];
+//            [self addChild:backgroundNodes];
+//        }
+//        backgroundNodes.name = @"backgroundNodes";
+//        
+//        
+//    }
     
 
 }
@@ -188,11 +184,15 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     }
 }
 - (void)resizeBackground{
-    SKNode *backgroundNodesNode = [self childNodeWithName:@"backgroundNodes"];
-    if (backgroundNodesNode != nil) {
-        [backgroundNodesNode removeAllChildren];
-        [self initBackground];
-    }
+    SKEmitterNode *circles = [self childNodeWithName:@"backgroundCircles"];
+    SKEmitterNode *stars = [self childNodeWithName:@"backgroundStars"];
+    circles.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
+    stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
+//    SKNode *backgroundNodesNode = [self childNodeWithName:@"backgroundNodes"];
+//    if (backgroundNodesNode != nil) {
+//        [backgroundNodesNode removeAllChildren];
+//        [self initBackground];
+//    }
 }
 - (void)resizeTheBigOSU:(CGSize)oldSize{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];

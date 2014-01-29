@@ -17,8 +17,11 @@
 }
 - (id)initWithWidth:(float)width;
 - (SKNode *)messageMaskWithLines:(int)lineNumber;
-- (void)createMessageMaskWithLines:(int)lineNumber;
+- (void)addMessageMaskWithLines:(int)lineNumber;
 - (SKLabelNode *)messageLabelWithString:(NSString *)aString onLine:(int)lineCount;
-- (void)createMessageLabelWithString:(NSString *)aString onLine:(int)lineCount;
+- (void)addMessageLabelWithString:(NSString *)aString onLine:(int)lineCount;
 
+- (void)fadeOut;
+- (void)fadeOutNow;
+- (void)fadeOutIn:(float)seconds;
 @end

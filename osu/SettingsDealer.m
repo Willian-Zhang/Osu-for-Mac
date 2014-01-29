@@ -19,9 +19,9 @@
     return self;
 }
 
-- (BOOL)isSaveDirectorySet{
-    if ([defaults URLForKey:@"Save Directory"] == nil) {
-        return NO;
+- (BOOL)isFirstRun{
+    if ([defaults boolForKey:@"First Configured"] != 0) {
+        return ![defaults boolForKey:@"First Configured"];
     }
     return YES;
 }

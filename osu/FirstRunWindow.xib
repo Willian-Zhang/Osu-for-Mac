@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FirstRunWindowController">
+            <connections>
+                <outlet property="cancelButtonOutlet" destination="iqz-V4-PpY" id="bRn-d9-9XI"/>
+                <outlet property="firstRunPopover" destination="5UF-iE-xjN" id="qPi-rR-QVE"/>
+                <outlet property="firstRunView" destination="dGl-mo-aI5" id="AaP-gR-ewp"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <viewController title="First Time Settings" nibName="FirstRunWindow" id="nmO-Zj-7z7" userLabel="First Run Popover View Controller">
+            <connections>
+                <outlet property="view" destination="dGl-mo-aI5" id="gyY-df-vfm"/>
+            </connections>
+        </viewController>
+        <popover id="5UF-iE-xjN" userLabel="First Run Popover">
+            <connections>
+                <outlet property="contentViewController" destination="nmO-Zj-7z7" id="gXO-dC-gH1"/>
+            </connections>
+        </popover>
+        <customView id="dGl-mo-aI5" userLabel="First Run View">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="245"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iqz-V4-PpY">
+                    <rect key="frame" x="157" y="18" width="93" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="93" id="2A0-Bw-CPW"/>
+                        <constraint firstAttribute="height" constant="22" id="g4N-LJ-gzB"/>
+                    </constraints>
+                    <buttonCell key="cell" type="roundTextured" title="Not yet" bezelStyle="texturedRounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ryB-34-2fJ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="cancelButtonPushed:" target="-2" id="1g7-gH-uX5"/>
+                    </connections>
+                </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3d-wT-841">
+                    <rect key="frame" x="72" y="127" width="262" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FKp-vX-tak">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vkz-Nd-RoX">
+                    <rect key="frame" x="72" y="60" width="262" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UoL-xO-Plj">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mR-9r-vwR">
+                    <rect key="frame" x="18" y="197" width="371" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Select the mode you like:" usesSingleLineMode="YES" id="EVO-Ly-NoP">
+                        <font key="font" metaFont="system" size="16"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iqz-V4-PpY" secondAttribute="bottom" constant="20" id="FaY-w0-JSJ"/>
+                <constraint firstAttribute="centerX" secondItem="iqz-V4-PpY" secondAttribute="centerX" id="qtl-8h-pAU"/>
+            </constraints>
+        </customView>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="dNK-In-Tc3" userLabel="Useless Window - Window">
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="dKa-2f-rzO">
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+        </window>
+        <pagecontroller nibName="FirstRunWindow" id="UsZ-He-oVz"/>
+    </objects>
+</document>

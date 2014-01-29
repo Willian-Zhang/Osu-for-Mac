@@ -7,13 +7,21 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
+#import "FirstRunWindowController.h"
+enum{
+    FirstRunConfigureFailed  = ConfigureFailed,
+    FirstRunConfigureSucceed = ConfigureSucceed
+};
 @interface MainScene : SKScene{
     CGSize sceneSize;
     SKTexture *cursorTexture;
     SKTexture *cursortailTexture;
     SKNode *cursor;
     CGPoint lastFrameCursorPosition;
+    
+    FirstRunWindowController *firstRunController;
 }
-- (void)displayDirectorySettings;
+- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block;
+- (void)displayMessage:(NSString *)messageString;
+
 @end

@@ -12,7 +12,7 @@
     NSUserDefaults *defaults;
 }
 
-- (BOOL)isSaveDirectorySet;
+- (BOOL)isFirstRun;
 - (NSURL *)getSaveDirectory;
 - (NSURL *)getLoadDirectory;
 @end

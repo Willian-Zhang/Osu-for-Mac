@@ -9,6 +9,7 @@
 #import "SKOptionNode.h"
 
 @implementation SKOptionNode
+@synthesize state;
 
 - (id)initWithOff
 {
