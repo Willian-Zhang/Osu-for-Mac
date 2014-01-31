@@ -20,8 +20,7 @@
     
     [message addMessageMaskWithLines:1];
     [message addMessageLabelWithString:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice") onLine:1];
-//    SKLabelNode *connectLabel = [message messageLabelWithString:NSLocalizedString(@"Connect with my Windows version Osu!", @"Connect with Windows Osu!")  onLine:2];
-//    SKLabelNode *newLabel = [message messageLabelWithString:NSLocalizedString(@"Start a brand new Osu for Mac!", @"Start new Osu!") onLine:3];
+
     [self addChild:message];
     [message fadeOut];
     [self runAction:[SKAction sequence:@[
@@ -47,9 +46,13 @@
         sceneSize = size;
         [self setAnchorPoint:CGPointMake(0.5, 0.5)];
         self.backgroundColor = [SKColor colorWithRed:0.08 green:0.46 blue:0.98 alpha:1.0];
+        
+        theBigOSUFraction = (6.0 / 9.0);
+        theBigOSUMouseHoverFraction = 1;
         [self initCursor];
         [self initTheBigOSU];
         [self initBackground];
+        
         
     }
     return self;
@@ -102,10 +105,12 @@
     lastFrameCursorPosition = CGPointZero;
 }
 - (void)initTheBigOSU{
+    
+    
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
 
     float scaleDuration = 1;
-    float theBigOSUSize = screenLimitScaleWidth * 7/9;
+    float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
     
     SKTexture *theBigOSUTexture = [SKTexture textureWithImageNamed:@"theBigOSU"];
     SKSpriteNode *theBigOSU = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
@@ -122,7 +127,7 @@
                      ]];
     SKAction *createShadow =[SKAction runBlock:^(void){
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-        float theBigOSUSize = screenLimitScaleWidth * 7/9;
+        float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
         SKSpriteNode *theBigOSUShadow = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
         float originalShadowAlpha = 0.6;
         theBigOSUShadow.alpha = originalShadowAlpha;
@@ -169,7 +174,7 @@
   
     [theBigOSU runAction:theOSUAction];
 }
-#pragma mark 响应事件
+#pragma mark 响应事件 - Resize
 - (void)didChangeSize:(CGSize)oldSize{
     sceneSize = self.scene.size;
     [self resizeTheBigOSU:oldSize];
@@ -184,8 +189,8 @@
     }
 }
 - (void)resizeBackground{
-    SKEmitterNode *circles = [self childNodeWithName:@"backgroundCircles"];
-    SKEmitterNode *stars = [self childNodeWithName:@"backgroundStars"];
+    SKEmitterNode *circles =(SKEmitterNode *)([self childNodeWithName:@"backgroundCircles"]);
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
     circles.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
     stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
 //    SKNode *backgroundNodesNode = [self childNodeWithName:@"backgroundNodes"];
@@ -196,31 +201,35 @@
 }
 - (void)resizeTheBigOSU:(CGSize)oldSize{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-    float theBigOSUSize = screenLimitScaleWidth * 7 / 9;
+    float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
     
     SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0]];
 }
-- (void)pressed{
+#pragma mark 响应事件 - 主要
+- (void)showMainMenu{
+    float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
+    float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
+    
+    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
+    
+    [theBigOSU runAction:[SKAction group:@[
+                                           [SKAction moveToX:-theBigOSUSize*0.2 duration:0.4],
+                                           [SKAction playSoundFileNamed:@"menuhit.wav" waitForCompletion:NO]
+                                           ]]];
+}
+- (void)pressed:(NSPoint )position{
     [cursor runAction:[SKAction scaleTo:1.3 duration:0.1]];
+    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
+    if ([theBigOSU containsPoint:position]) {
+        [self showMainMenu];
+    }
 }
-- (void)mouseDown:(NSEvent *)theEvent{
-    cursor.position = [theEvent locationInNode:self];
-    [self.view.window makeFirstResponder:self.view.scene];
-    [self pressed];
-}
-- (void)mouseUp:(NSEvent *)theEvent{
-    cursor.position = [theEvent locationInNode:self];
-    [cursor runAction:[SKAction scaleTo:1 duration:0.1]];
-}
-- (void)mouseDragged:(NSEvent *)theEvent{
-    [self mouseMoved:theEvent];
-}
-- (void)mouseMoved:(NSEvent *)theEvent{
-    CGPoint thisFrameCursorPosition = [theEvent locationInNode:self];
+- (void)mouseStyleUpdate{
+    CGPoint thisFrameCursorPosition = [self convertPointFromView:self.view.window.mouseLocationOutsideOfEventStream];
     cursor.position = thisFrameCursorPosition;
     
-    int tailDensity = 5;
+    int tailDensity = 4;
     
     int deltaX = thisFrameCursorPosition.x - lastFrameCursorPosition.x;
     int deltaY = thisFrameCursorPosition.y - lastFrameCursorPosition.y;
@@ -236,11 +245,45 @@
         SKAction *deleteItself = [SKAction removeFromParent];
         [cursortail runAction:[SKAction sequence:@[fadeToNone, deleteItself]]];
     }
-  
-    
     lastFrameCursorPosition = thisFrameCursorPosition;
 }
+- (void)hoverDetect{
+    CGPoint thisFrameCursorPosition = [self convertPointFromView:self.view.window.mouseLocationOutsideOfEventStream];
+    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
+    BOOL currentState = [theBigOSU containsPoint:thisFrameCursorPosition];
+    if (currentState == YES & theBigOSUMouseHoverFraction == 1) {
+        theBigOSUMouseHoverFraction = 1.1;
+        float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
+        float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
+        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.1]];
+    }else if(currentState == NO & theBigOSUMouseHoverFraction > 1.02){
+        theBigOSUMouseHoverFraction = 1;
+        float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
+        float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
+        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.1]];
+    }
+}
+#pragma mark 响应事件 - 系统
+- (void)mouseDown:(NSEvent *)theEvent{
+    //[self.view.window makeFirstResponder:self.view.scene];
+    [self pressed:[theEvent locationInNode:self]];
+}
+- (void)mouseUp:(NSEvent *)theEvent{
+
+    [cursor runAction:[SKAction scaleTo:1 duration:0.1]];
+}
+- (void)mouseDragged:(NSEvent *)theEvent{
+
+    
+}
+- (void)mouseMoved:(NSEvent *)theEvent{
+
+    
+
+}
 - (void)update:(CFTimeInterval)currentTime {
+    [self mouseStyleUpdate];
+    [self hoverDetect];
     /* Called before each frame is rendered */
 }
 #pragma mark functions

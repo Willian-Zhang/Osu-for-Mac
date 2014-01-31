@@ -13,6 +13,10 @@
 }
 
 - (BOOL)isFirstRun;
+- (void)setFirstConfigured;
 - (NSURL *)getSaveDirectory;
 - (NSURL *)getLoadDirectory;
+- (void)setLoadDirectory:(NSURL *)loadURL;
+- (void)setSaveDirectory:(NSURL *)saveURL;
+
 @end

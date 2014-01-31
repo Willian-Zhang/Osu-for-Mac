@@ -18,7 +18,8 @@ enum{
     SKTexture *cursortailTexture;
     SKNode *cursor;
     CGPoint lastFrameCursorPosition;
-    
+    float theBigOSUFraction;
+    float theBigOSUMouseHoverFraction;
     FirstRunWindowController *firstRunController;
 }
 - (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block;
