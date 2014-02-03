@@ -12,6 +12,10 @@
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
 		7D351CAC1896557B00FBDA2A /* MainCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MainCircle.sks */; };
 		7D3FDD41189C327E003A9BE8 /* menuhit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D3FDD40189C327E003A9BE8 /* menuhit.wav */; };
+		7D5BB0E8189D3DB300EDBA9F /* SingleSongSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0E7189D3DB300EDBA9F /* SingleSongSelectScene.m */; };
+		7D5BB0EB189D534900EDBA9F /* BTBinaryStreamReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0EA189D534900EDBA9F /* BTBinaryStreamReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-format"; }; };
+		7D5BB0EE189D53A600EDBA9F /* WinOsuInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */; };
+		7D5BB0F7189D5B0300EDBA9F /* BTBinaryStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0F5189D5B0300EDBA9F /* BTBinaryStreamWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-format"; }; };
 		7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F7918956E7A00F5AB50 /* SettingsDealer.m */; };
 		7D627F801895929A00F5AB50 /* notify.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D627F7F1895929A00F5AB50 /* notify.wav */; };
 		7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F821895ABBD00F5AB50 /* SKOptionNode.m */; };
@@ -19,6 +23,7 @@
 		7D627F871895AEC400F5AB50 /* star2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D627F851895AEC400F5AB50 /* star2@2x.png */; };
 		7D64717B1892CBDC00BA29F6 /* theBigOSU.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6471791892CBDC00BA29F6 /* theBigOSU.png */; };
 		7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */; };
+		7D6C864E189E6606004AF862 /* SKSceneWithAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */; };
 		7D7131ED188C3F5000959B80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EC188C3F5000959B80 /* Cocoa.framework */; };
 		7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EE188C3F5000959B80 /* SpriteKit.framework */; };
 		7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D7131F7188C3F5000959B80 /* InfoPlist.strings */; };
@@ -60,6 +65,16 @@
 		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
 		7D351CAA1896557B00FBDA2A /* MainCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainCircle.sks; sourceTree = "<group>"; };
 		7D3FDD40189C327E003A9BE8 /* menuhit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = menuhit.wav; path = Skin/default/menuhit.wav; sourceTree = "<group>"; };
+		7D5BB0E6189D3DB300EDBA9F /* SingleSongSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSongSelectScene.h; sourceTree = "<group>"; };
+		7D5BB0E7189D3DB300EDBA9F /* SingleSongSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSongSelectScene.m; sourceTree = "<group>"; };
+		7D5BB0E9189D534900EDBA9F /* BTBinaryStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBinaryStreamReader.h; sourceTree = "<group>"; };
+		7D5BB0EA189D534900EDBA9F /* BTBinaryStreamReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBinaryStreamReader.m; sourceTree = "<group>"; };
+		7D5BB0EC189D53A600EDBA9F /* WinOsuInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinOsuInterpreter.h; sourceTree = "<group>"; };
+		7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinOsuInterpreter.m; sourceTree = "<group>"; };
+		7D5BB0F1189D54D400EDBA9F /* BTBinaryToolsErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTBinaryToolsErrors.h; sourceTree = "<group>"; };
+		7D5BB0F4189D5B0300EDBA9F /* BTBinaryStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBinaryStreamWriter.h; sourceTree = "<group>"; };
+		7D5BB0F5189D5B0300EDBA9F /* BTBinaryStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBinaryStreamWriter.m; sourceTree = "<group>"; };
+		7D5BB0F6189D5B0300EDBA9F /* BTBinaryTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBinaryTools.h; sourceTree = "<group>"; };
 		7D627F7818956E7A00F5AB50 /* SettingsDealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDealer.h; sourceTree = "<group>"; };
 		7D627F7918956E7A00F5AB50 /* SettingsDealer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsDealer.m; sourceTree = "<group>"; };
 		7D627F7F1895929A00F5AB50 /* notify.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notify.wav; path = Skin/default/notify.wav; sourceTree = "<group>"; };
@@ -69,6 +84,8 @@
 		7D627F851895AEC400F5AB50 /* star2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star2@2x.png"; path = "Skin/default/star2@2x.png"; sourceTree = "<group>"; };
 		7D6471791892CBDC00BA29F6 /* theBigOSU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theBigOSU.png; sourceTree = "<group>"; };
 		7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "theBigOSU@2x.png"; sourceTree = "<group>"; };
+		7D6C864C189E6606004AF862 /* SKSceneWithAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSceneWithAdditions.h; sourceTree = "<group>"; };
+		7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSceneWithAdditions.m; sourceTree = "<group>"; };
 		7D7131E9188C3F5000959B80 /* Osu for Mac!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Osu for Mac!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7131EC188C3F5000959B80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7D7131EE188C3F5000959B80 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -146,10 +163,33 @@
 		7D27CB93188DA1DB00EBF90B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D6C864C189E6606004AF862 /* SKSceneWithAdditions.h */,
+				7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */,
 				7DC3F5441899074200DED2C7 /* Nodes */,
 				7DC3F54C18998B7200DED2C7 /* Custom Views */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		7D5BB0EF189D548C00EDBA9F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				7D5BB0F0189D549F00EDBA9F /* BTBinary */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		7D5BB0F0189D549F00EDBA9F /* BTBinary */ = {
+			isa = PBXGroup;
+			children = (
+				7D5BB0E9189D534900EDBA9F /* BTBinaryStreamReader.h */,
+				7D5BB0EA189D534900EDBA9F /* BTBinaryStreamReader.m */,
+				7D5BB0F4189D5B0300EDBA9F /* BTBinaryStreamWriter.h */,
+				7D5BB0F5189D5B0300EDBA9F /* BTBinaryStreamWriter.m */,
+				7D5BB0F6189D5B0300EDBA9F /* BTBinaryTools.h */,
+				7D5BB0F1189D54D400EDBA9F /* BTBinaryToolsErrors.h */,
+			);
+			name = BTBinary;
 			sourceTree = "<group>";
 		};
 		7D627F7B18956E8200F5AB50 /* Model */ = {
@@ -157,6 +197,8 @@
 			children = (
 				7D627F7818956E7A00F5AB50 /* SettingsDealer.h */,
 				7D627F7918956E7A00F5AB50 /* SettingsDealer.m */,
+				7D5BB0EC189D53A600EDBA9F /* WinOsuInterpreter.h */,
+				7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,6 +280,7 @@
 		7D7131F5188C3F5000959B80 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7D5BB0EF189D548C00EDBA9F /* Library */,
 				7DA94D221896794B00F67EC4 /* Localizable.strings */,
 				7D27CB8B188D97AF00EBF90B /* Skin */,
 				7D7131F6188C3F5000959B80 /* Osu for Mac!-Info.plist */,
@@ -276,6 +319,8 @@
 				7DFA7E3D18918D5B00AB5E4D /* ScaningScene.m */,
 				7D71322C188C705E00959B80 /* MainScene.h */,
 				7D71322D188C705E00959B80 /* MainScene.m */,
+				7D5BB0E6189D3DB300EDBA9F /* SingleSongSelectScene.h */,
+				7D5BB0E7189D3DB300EDBA9F /* SingleSongSelectScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -356,6 +401,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Willian-Zhang";
 				TargetAttributes = {
+					7D7131E8188C3F5000959B80 = {
+						DevelopmentTeam = GTSVFJED6E;
+					};
 					7D71320F188C3F5000959B80 = {
 						TestTargetID = 7D7131E8188C3F5000959B80;
 					};
@@ -423,10 +471,15 @@
 			files = (
 				7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */,
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
+				7D5BB0E8189D3DB300EDBA9F /* SingleSongSelectScene.m in Sources */,
+				7D5BB0F7189D5B0300EDBA9F /* BTBinaryStreamWriter.m in Sources */,
+				7D5BB0EE189D53A600EDBA9F /* WinOsuInterpreter.m in Sources */,
 				7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */,
 				7D7131FB188C3F5000959B80 /* main.m in Sources */,
 				7D71322E188C705E00959B80 /* MainScene.m in Sources */,
+				7D6C864E189E6606004AF862 /* SKSceneWithAdditions.m in Sources */,
 				7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */,
+				7D5BB0EB189D534900EDBA9F /* BTBinaryStreamReader.m in Sources */,
 				7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */,
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */,
@@ -568,11 +621,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "osu/Osu for Mac!-Prefix.pch";
 				INFOPLIST_FILE = "osu/Osu for Mac!-Info.plist";
 				PRODUCT_NAME = "Osu for Mac!";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -582,11 +638,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "osu/Osu for Mac!-Prefix.pch";
 				INFOPLIST_FILE = "osu/Osu for Mac!-Info.plist";
 				PRODUCT_NAME = "Osu for Mac!";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};

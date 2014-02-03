@@ -8,7 +8,7 @@
 
 #import "MainScene.h"
 #import "SKMessageNode.h"
-
+#import "SingleSongSelectScene.h"
 
 @implementation MainScene
 
@@ -32,13 +32,7 @@
                                                                     }]
                                          ]]];
 }
-- (void)displayMessage:(NSString *)messageString{
-    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
-    [message addMessageMaskWithLines:1];
-    [message addMessageLabelWithString:messageString onLine:1];
-    [self addChild:message];
-    [message fadeOut];
-}
+
 #pragma mark 初始化
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -49,7 +43,7 @@
         
         theBigOSUFraction = (6.0 / 9.0);
         theBigOSUMouseHoverFraction = 1;
-        [self initCursor];
+
         [self initTheBigOSU];
         [self initBackground];
         
@@ -70,40 +64,9 @@
     circles.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
     circles.name = @"backgroundCircles";
     [self addChild:circles];
-    
-//    SKNode *backgroundNodes = [self childNodeWithName:@"backgroundNodes"];
-//    
-//    NSArray *backgroundNodesArray = [backgroundNodes children];
-//    
-//    if ([backgroundNodesArray count] == 0) {
-//        if (backgroundNodes == nil) {
-//            backgroundNodes = [[SKNode alloc] init];
-//            [self addChild:backgroundNodes];
-//        }
-//        backgroundNodes.name = @"backgroundNodes";
-//        
-//        
-//    }
-    
-
 }
 
-- (void)initCursor{
-    NSString *pathToCursorImage = [[NSBundle mainBundle] pathForResource:@"cursor@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
-    cursorTexture = [SKTexture textureWithImageNamed:pathToCursorImage];
-    //CGPoint location = [theEvent locationInNode:self];
-    cursor = [SKSpriteNode spriteNodeWithTexture:cursorTexture];
-    cursor.position = CGPointZero;
-    cursor.zPosition = 300;
-    SKAction *rotationForOnce = [SKAction rotateByAngle:-M_PI duration:10];
-    [cursor runAction:[SKAction repeatActionForever:rotationForOnce]];
-    [self addChild:cursor];
-    
-    NSString *pathToCursortailImage = [[NSBundle mainBundle] pathForResource:@"cursortrail@2x" ofType:@"png" inDirectory:@"osu! by peppy"];
-    cursortailTexture = [SKTexture textureWithImageNamed:pathToCursortailImage];
-    
-    lastFrameCursorPosition = CGPointZero;
-}
+
 - (void)initTheBigOSU{
     
     
@@ -127,7 +90,7 @@
                      ]];
     SKAction *createShadow =[SKAction runBlock:^(void){
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-        float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
+        float theBigOSUSize = screenLimitScaleWidth *  theBigOSUFraction * theBigOSUMouseHoverFraction;
         SKSpriteNode *theBigOSUShadow = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
         float originalShadowAlpha = 0.6;
         theBigOSUShadow.alpha = originalShadowAlpha;
@@ -137,6 +100,7 @@
         [self addChild:theBigOSUShadow];
         [theBigOSUShadow runAction:theShadowAction];
     }];
+    createShadow.timingMode = SKActionTimingEaseOut;
     
     SKAction *theWaveAction = [SKAction sequence:@[
                     [SKAction group:@[
@@ -147,7 +111,7 @@
                     ]];
     SKAction *createWave = [SKAction runBlock:^(void){
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-        float theBigOSUSize = screenLimitScaleWidth * 7/9;
+        float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
         SKShapeNode *theBigWave = [[SKShapeNode alloc] init];
         CGMutablePathRef theBigWavePath = CGPathCreateMutable();
         CGPathAddArc(theBigWavePath, NULL, 0, 0, theBigOSUSize/2, 0, M_PI * 2, YES);
@@ -155,13 +119,17 @@
         
         theBigWave.lineWidth = 0;
         theBigWave.alpha = 0.3;
-        theBigWave.path = theBigWavePath;
         theBigWave.zPosition = 15;
         theBigWave.position = theBigOSU.position;
         theBigWave.name = @"theBigWave";
+        theBigWave.path = theBigWavePath;
+        
         [self addChild:theBigWave];
+        CGPathRelease(theBigWavePath);
+        
         [theBigWave runAction:theWaveAction];
     }];
+    
     SKAction *theOSUAction =[SKAction repeatActionForever:[SKAction sequence:@[
                 [SKAction scaleTo:0.96  duration:scaleDuration],
                 [SKAction group:@[
@@ -171,23 +139,18 @@
                                    ]]
                  ]] ];
     [self addChild:theBigOSU];
-  
+    
+    theOSUAction.timingMode = SKActionTimingEaseOut;
     [theBigOSU runAction:theOSUAction];
 }
 #pragma mark 响应事件 - Resize
 - (void)didChangeSize:(CGSize)oldSize{
+    [super didChangeSize:oldSize];
     sceneSize = self.scene.size;
     [self resizeTheBigOSU:oldSize];
     [self resizeBackground];
-    [self resizeMessage];
 }
-- (void)resizeMessage{
-    SKNode *message = [self childNodeWithName:@"message"];
-    if (message != nil) {
-        SKNode *messageMask = [message childNodeWithName:@"messageMask"];
-        [messageMask runAction:[SKAction resizeToWidth:self.size.width duration:0]];
-    }
-}
+
 - (void)resizeBackground{
     SKEmitterNode *circles =(SKEmitterNode *)([self childNodeWithName:@"backgroundCircles"]);
     SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
@@ -213,42 +176,30 @@
     
     SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     
+    SKAction *moveLeft = [SKAction moveToX:-theBigOSUSize*0.2 duration:0.2 ];
+    moveLeft.timingMode =SKActionTimingEaseOut;
     [theBigOSU runAction:[SKAction group:@[
-                                           [SKAction moveToX:-theBigOSUSize*0.2 duration:0.4],
-                                           [SKAction playSoundFileNamed:@"menuhit.wav" waitForCompletion:NO]
+                                           moveLeft,
+                                           [SKAction playSoundFileNamed:@"menuhit.wav" waitForCompletion:NO],
+                                           [SKAction sequence:@[
+                                                                [SKAction waitForDuration:1],
+                                                                [SKAction runBlock:^(void){
+        SingleSongSelectScene *soloScene = [SingleSongSelectScene sceneWithSize:self.view.window.frame.size];
+        [self.view presentScene:soloScene];
+    }]]]
                                            ]]];
 }
-- (void)pressed:(NSPoint )position{
-    [cursor runAction:[SKAction scaleTo:1.3 duration:0.1]];
+- (void)leftDown:(NSEvent *)theEvent{
+    [super leftDown:theEvent];
     SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
-    if ([theBigOSU containsPoint:position]) {
+    if ([theBigOSU containsPoint:[super locationInScene]]) {
         [self showMainMenu];
     }
 }
-- (void)mouseStyleUpdate{
-    CGPoint thisFrameCursorPosition = [self convertPointFromView:self.view.window.mouseLocationOutsideOfEventStream];
-    cursor.position = thisFrameCursorPosition;
-    
-    int tailDensity = 4;
-    
-    int deltaX = thisFrameCursorPosition.x - lastFrameCursorPosition.x;
-    int deltaY = thisFrameCursorPosition.y - lastFrameCursorPosition.y;
-    for (int count = 0; count < tailDensity; count++) {
-        CGPoint thisCursortailPosition = CGPointMake(thisFrameCursorPosition.x - (deltaX * count / tailDensity), thisFrameCursorPosition.y - (deltaY * count / tailDensity));
-        
-        SKSpriteNode *cursortail = [SKSpriteNode spriteNodeWithTexture:cursortailTexture];
-        cursortail.position = thisCursortailPosition;
-        cursortail.zPosition = 298;
-        [self addChild:cursortail];
-        
-        SKAction *fadeToNone = [SKAction fadeAlphaTo:0 duration:0.1];
-        SKAction *deleteItself = [SKAction removeFromParent];
-        [cursortail runAction:[SKAction sequence:@[fadeToNone, deleteItself]]];
-    }
-    lastFrameCursorPosition = thisFrameCursorPosition;
-}
-- (void)hoverDetect{
-    CGPoint thisFrameCursorPosition = [self convertPointFromView:self.view.window.mouseLocationOutsideOfEventStream];
+
+
+- (void)overDetect{
+    CGPoint thisFrameCursorPosition = [super locationInScene];
     SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     BOOL currentState = [theBigOSU containsPoint:thisFrameCursorPosition];
     if (currentState == YES & theBigOSUMouseHoverFraction == 1) {
@@ -264,28 +215,11 @@
     }
 }
 #pragma mark 响应事件 - 系统
-- (void)mouseDown:(NSEvent *)theEvent{
-    //[self.view.window makeFirstResponder:self.view.scene];
-    [self pressed:[theEvent locationInNode:self]];
+- (void)update:(NSTimeInterval)currentTime{
+    [self overDetect];
 }
-- (void)mouseUp:(NSEvent *)theEvent{
 
-    [cursor runAction:[SKAction scaleTo:1 duration:0.1]];
-}
-- (void)mouseDragged:(NSEvent *)theEvent{
 
-    
-}
-- (void)mouseMoved:(NSEvent *)theEvent{
-
-    
-
-}
-- (void)update:(CFTimeInterval)currentTime {
-    [self mouseStyleUpdate];
-    [self hoverDetect];
-    /* Called before each frame is rendered */
-}
 #pragma mark functions
 - (float)limitScaleWidthForSize:(CGSize )size{
     float limitScaleWidth = size.height;
@@ -294,11 +228,5 @@
     }
     return limitScaleWidth;
 }
-- (CGPoint)centerPointForSize:(CGSize )size{
-    CGPoint point = CGPointMake(size.width/2, size.height/2);
-    return point;
-}
-
-
 
 @end

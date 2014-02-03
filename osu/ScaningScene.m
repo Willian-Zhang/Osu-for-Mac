@@ -7,36 +7,50 @@
 //
 
 #import "ScaningScene.h"
+#import "SettingsDealer.h"
 
 @implementation ScaningScene
+
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
-        
         self.backgroundColor = [SKColor colorWithRed:0 green:0 blue:0 alpha:1];
-        loadingLabelNumberCount = 0;
-        SKLabelNode *loadingLabel = [self loadingLabelWithString:@"Scaning Files..."];
-        [self addChild:loadingLabel];
+        
+        SKNode *loadingLabelGroup = [[SKNode alloc] init];
+        loadingLabelGroup.name = @"loadingLabelGroup";
+        [self addChild:loadingLabelGroup];
+        SKLabelNode *loadingLabel = [self loadingLabelWithString:NSLocalizedString(@"Scaning Files...", @"Scaning Files Label")];
+        [loadingLabelGroup addChild:loadingLabel];
+        
     }
     return self;
 }
+
+
+#pragma mark Logics
+- (void)loadAllBeatmaps{
+    NSURL *loadURL = [[[SettingsDealer alloc] init] getLoadDirectory];
+    NSURL *dbURL = [loadURL URLByAppendingPathComponent:@"osu!.db" isDirectory:NO];
+
+    
+}
+
+
+
+
+#pragma mark 视图
 - (void)addLoadingLineWithString:(NSString *)aString{
     [self moveupLabelArray];
     SKLabelNode *loadingLabel = [self loadingLabelWithString:[NSString stringWithFormat:@"Loading %@ ...",aString]];
-    [self addChild:loadingLabel];
+    SKNode *loadingLabelGroup = [self childNodeWithName:@"loadingLabelGroup"];
+    [loadingLabelGroup addChild:loadingLabel];
 }
 - (void)CompleteLoading{
     [self moveupLabelArray];
     SKLabelNode *loadingLabel = [self loadingLabelWithString:@"All loads completed!"];
     [self addChild:loadingLabel];
 }
-/*
- * loadingLabelWithString 存在计数自增
- */
 - (SKLabelNode *)loadingLabelWithString:(NSString *)label{
-    loadingLabelNumberCount++;
     SKLabelNode *loadingLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvitica"];
-    loadingLabel.name =[NSString stringWithFormat:@"%@%d",@"loadingLabel",loadingLabelNumberCount] ;
     loadingLabel.text = label;
     loadingLabel.fontSize = 25;
     loadingLabel.position = CGPointMake(CGRectGetMidX(self.frame),
@@ -44,22 +58,23 @@
     return loadingLabel;
 }
 - (void)moveupLabelArray{
-    SKAction *moveUp  = [SKAction moveByX:0 y:30 duration:0.5];
-    SKAction *fadeSome = [SKAction fadeAlphaBy:-0.15 duration:0.5];
-    SKAction *groupAction = [SKAction group:@[moveUp,fadeSome]];
+    SKNode *loadingLabelGroup = [self childNodeWithName:@"loadingLabelGroup"];
+    SKAction *moveUpAction = [SKAction group:@[
+                                              [SKAction moveByX:0 y:30 duration:0.5],
+                                              [SKAction fadeAlphaBy:-0.15 duration:0.5]
+                                              ]];
+    [loadingLabelGroup runAction:moveUpAction];
     
-    for (int count = 1; count <= loadingLabelNumberCount; count++) {
-        SKNode *oldNode = [self childNodeWithName:[NSString stringWithFormat:@"%@%d",@"loadingLabel",count]];
+    for (SKNode *oldNode in [loadingLabelGroup children]) {
         if (oldNode != nil) {
-            [oldNode runAction:groupAction];
             if (oldNode.alpha == 0) {
                 [oldNode runAction:[SKAction removeFromParent]];
             }
         }
     }
 }
-- (void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
-}
+
+#pragma mark 响应事件 - 系统
+
 
 @end

@@ -25,8 +25,6 @@
     MainScene *mainScene = [self startMainScene];
     SettingsDealer *settings = [[SettingsDealer alloc] init];
     
-    NSURL *saveDirectory;
-    NSURL *loadDirectory;
     if ([settings isFirstRun]) {
         [mainScene displayFirstRunSettingsWithCompletion:^(NSInteger result){
             if (result == FirstRunConfigureSucceed) {
@@ -36,11 +34,9 @@
             }
         }];
     }else{
-        saveDirectory = [settings getSaveDirectory];
-        loadDirectory = [settings getLoadDirectory];
-    }
-    //[self selectFolder];
-    
+
+        
+    }    
 }
 - (void)startScaningScene{
     ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1152, 720)];

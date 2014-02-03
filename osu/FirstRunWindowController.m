@@ -163,5 +163,6 @@
 }
 
 - (IBAction)firstConfigueDifferentDone:(NSButton *)sender {
+    
 }
 @end

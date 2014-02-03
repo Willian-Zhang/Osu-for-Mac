@@ -7,11 +7,17 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SKSceneWithAdditions.h"
 
-@interface ScaningScene : SKScene{
-    int loadingLabelNumberCount;
+typedef void(^scaningCompletion)();
+
+@interface ScaningScene : SKSceneWithAdditions{
+    scaningCompletion runCompletionBlock;
 }
 
--(void)addLoadingLineWithString:(NSString *)aString;
 
+
+- (void)addLoadingLineWithString:(NSString *)aString;
+- (void)CompleteLoading;
+- (void)loadAllBeatmaps;
 @end
