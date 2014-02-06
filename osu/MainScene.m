@@ -7,8 +7,13 @@
 //
 
 #import "MainScene.h"
+
+#import "AppDelegate.h"
+#import "GlobalMusicPlayer.h"
+
 #import "SKMessageNode.h"
 #import "SingleSongSelectScene.h"
+#import "SettingsDealer.h"
 
 @implementation MainScene
 
@@ -32,6 +37,10 @@
                                                                     }]
                                          ]]];
 }
+- (void)didFinishPlayingABeatmap{
+    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
+    [appDelegate.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
+}
 
 #pragma mark 初始化
 - (id)initWithSize:(CGSize)size {
@@ -47,9 +56,14 @@
         [self initTheBigOSU];
         [self initBackground];
         
-        
     }
     return self;
+}
+- (void)didMoveToView:(SKView *)view{
+    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
+    [appDelegate.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
+    [appDelegate.globalMusicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
+    [appDelegate.globalMusicPlayer recieveFinishPlaying:^(void){[self didFinishPlayingABeatmap];}];
 }
 - (void)initBackground{
     
@@ -184,8 +198,10 @@
                                            [SKAction sequence:@[
                                                                 [SKAction waitForDuration:1],
                                                                 [SKAction runBlock:^(void){
-        SingleSongSelectScene *soloScene = [SingleSongSelectScene sceneWithSize:self.view.window.frame.size];
-        [self.view presentScene:soloScene];
+        if ([[[SettingsDealer alloc] init] firstConfigured]) {
+            SingleSongSelectScene *soloScene = [SingleSongSelectScene sceneWithSize:self.view.window.frame.size];
+            [self.view presentScene:soloScene transition:[SKTransition crossFadeWithDuration:1]];
+        }
     }]]]
                                            ]]];
 }

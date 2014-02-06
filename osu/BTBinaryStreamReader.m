@@ -1,3 +1,11 @@
+//
+//  BTBinaryStreamReader.h
+//  Osu for Mac!
+//
+//  Modified by Willian on 14-2-5.
+//  Copyright (c) 2014年 Willian-Zhang. All possible rights reserved.
+//
+
 #import "BTBinaryStreamReader.h"
 #import "BTBinaryToolsErrors.h"
 
@@ -172,4 +180,39 @@ GENERATE_METHOD(Double, double, uint64_t)
     return result;
 }
 
+- (NSString *)readStringByWillian{
+    //Willian
+    NSInteger stringPrefix = (int)([self readInt8]);
+    if (stringPrefix == 0x0b) {
+        NSUInteger readLength = (UInt8)([self readInt8]);
+        if (readLength == 0x00) {
+            return @"";
+        }
+        if (readLength >= 0x80) {
+            NSUInteger readLengthMore = readLength;
+            for (int count = 0 ; readLengthMore >= 0x80; count++) { //循环仅保证 不经过 与 经过一次 安全
+                readLengthMore = (UInt8)([self readInt8]);
+                readLength += (readLengthMore << (7* (count+1) )) - 0x80 * (count+1);
+            }
+        }
+        return [self readStringWithEncoding:NSUTF8StringEncoding andLength:readLength];
+    }else if (stringPrefix == 0x00){
+        return nil;
+    }
+    return nil;
+}
+- (NSDate *)readDateByInt64{
+    //Willian
+    int64_t dateInt = [self readInt64];
+    NSTimeInterval intervalSecond = dateInt/10000000;
+    NSDate *date = [NSDate dateWithTimeInterval:intervalSecond sinceDate:[NSDate dateWithString:@"0001-01-01 00:00:00 +0000"]];
+    return date;
+}
+- (NSDate *)readDateByInt32{
+    int32_t dateInt = [self readInt32];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    NSDate *date = [dateFormatter dateFromString:[NSString stringWithFormat:@"%lld",dateInt]];
+    return date;
+}
 @end

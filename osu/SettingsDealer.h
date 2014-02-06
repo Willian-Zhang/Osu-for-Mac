@@ -12,11 +12,11 @@
     NSUserDefaults *defaults;
 }
 
-- (BOOL)isFirstRun;
-- (void)setFirstConfigured;
-- (NSURL *)getSaveDirectory;
-- (NSURL *)getLoadDirectory;
-- (void)setLoadDirectory:(NSURL *)loadURL;
-- (void)setSaveDirectory:(NSURL *)saveURL;
+@property (readwrite) BOOL windowsConnected;
+@property (readwrite) BOOL firstConfigured;
+@property (readwrite, nonatomic, retain) NSURL *loadDirectory;
+@property (readwrite, nonatomic, retain) NSURL *saveDirectory;
+
+
 
 @end

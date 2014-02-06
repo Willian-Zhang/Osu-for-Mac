@@ -1,3 +1,11 @@
+//
+//  BTBinaryStreamReader.h
+//  Osu for Mac!
+//
+//  Modified by Willian on 14-2-5.
+//  Copyright (c) 2014年 Willian-Zhang. All possible rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 @interface BTBinaryStreamReader : NSObject
@@ -34,5 +42,8 @@
  as part of the encoding, e.g. NSUTF16BigEndianStringEncoding.
  */
 -(NSString*)readStringWithEncoding:(NSStringEncoding)stringEncoding andLength:(NSUInteger)bytesToRead;
+- (NSString *)readStringByWillian;
+- (NSDate *)readDateByInt64;
+- (NSDate *)readDateByInt32;
 
 @end

@@ -7,25 +7,41 @@
 //
 
 #import "AppDelegate.h"
-#import "MyScene.h"
+
+#import <SpriteKit/SpriteKit.h>
+
+#import "GlobalMusicPlayer.h"
+#import "SKSceneWithAdditions.h"
+#import "ImportedOsuDB.h"
+
 #import "ScaningScene.h"
 #import "MainScene.h"
 #import "SettingsDealer.h"
+#import "ApplicationSupport.h"
+
 
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize appSupport;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+
+    appSupport = [[ApplicationSupport alloc] init];
+    self.globalMusicPlayer = [[GlobalMusicPlayer alloc] init];
+    
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount= YES;
     //self.skView.asynchronous = NO;
     //self.skView.frameInterval = 100;
-    MainScene *mainScene = [self startMainScene];
-    SettingsDealer *settings = [[SettingsDealer alloc] init];
     
-    if ([settings isFirstRun]) {
+    
+
+    
+    SettingsDealer *settings = [[SettingsDealer alloc] init];
+    if (![settings firstConfigured]) {
+        MainScene *mainScene = [self startMainScene];
         [mainScene displayFirstRunSettingsWithCompletion:^(NSInteger result){
             if (result == FirstRunConfigureSucceed) {
                 
@@ -34,17 +50,9 @@
             }
         }];
     }else{
-
-        
+        [self initBGM];
+        MainScene *mainScene = [self startMainScene];
     }    
-}
-- (void)startScaningScene{
-    ScaningScene *scaningScene = [ScaningScene sceneWithSize:CGSizeMake(1152, 720)];
-    scaningScene.scaleMode = SKSceneScaleModeResizeFill;
-    [self.skView presentScene:scaningScene];
-    
-    [scaningScene addLoadingLineWithString:@"1"];
-    [scaningScene addLoadingLineWithString:@"2"];
 }
 - (MainScene *)startMainScene{
     MainScene *mainScene = [MainScene sceneWithSize:CGSizeMake(1152, 720)];
@@ -55,29 +63,33 @@
     return mainScene;
 }
 
-- (void)persentSelectorScene{
-    SKScene *scene = [MyScene sceneWithSize:CGSizeMake(1280, 720)];
-    scene.scaleMode = SKSceneScaleModeAspectFit;
-    
-    [self.skView presentScene:scene];
-    
-}
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
-    return YES;
+- (void)initBGM{
+    if (![appSupport isDatabaseExist]) {
+        [(SKSceneWithAdditions *)(self.skView.scene) displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
+    }else{
+        if (![appSupport isCurrentDatabaseUpToDate]) {
+            [(SKSceneWithAdditions *)(self.skView.scene) displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
+        }else{
+            
+            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
+            [self.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
+            [self.globalMusicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
+            [self.globalMusicPlayer playRandomInSet:importedDB.importedBeatmaps];
+                                
+        }
+    }
 }
 
-#pragma mark settings
-- (NSString *)applicationSupportFolder {
-    
-    NSString *applicationSupportFolder = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    if ( [paths count] == 0 ) {
-        NSRunAlertPanel(@"Alert", @"Can't find application support folder", @"Quit", nil, nil);
-        [[NSApplication sharedApplication] terminate:self];
-    } else {
-        applicationSupportFolder = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Osu for Mac!"];
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    NSError *error;
+    if (appSupport.managedObjectContext != nil) {
+        //hasChanges方法是检查是否有未保存的上下文更改，如果有，则执行save方法保存上下文
+        if ([appSupport.managedObjectContext hasChanges] && ![appSupport.managedObjectContext save:&error]) {
+            NSLog(@"Error: %@,%@",error,[error userInfo]);
+            abort();
+        }  
     }
-    return applicationSupportFolder;
+    return YES;
 }
 
 @end

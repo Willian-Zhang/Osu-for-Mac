@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D1846B718A1210C00818CCD /* OFM-Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */; };
+		7D1846BA18A12BD600818CCD /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1846B918A12BD600818CCD /* Beatmap.m */; };
+		7D1846BB18A12C1C00818CCD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131F2188C3F5000959B80 /* CoreData.framework */; };
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
@@ -24,6 +27,7 @@
 		7D64717B1892CBDC00BA29F6 /* theBigOSU.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6471791892CBDC00BA29F6 /* theBigOSU.png */; };
 		7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */; };
 		7D6C864E189E6606004AF862 /* SKSceneWithAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */; };
+		7D6C8659189F7C39004AF862 /* ApplicationSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C8658189F7C39004AF862 /* ApplicationSupport.m */; };
 		7D7131ED188C3F5000959B80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EC188C3F5000959B80 /* Cocoa.framework */; };
 		7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131EE188C3F5000959B80 /* SpriteKit.framework */; };
 		7D7131F9188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D7131F7188C3F5000959B80 /* InfoPlist.strings */; };
@@ -37,14 +41,17 @@
 		7D71321B188C3F5000959B80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D713219188C3F5000959B80 /* InfoPlist.strings */; };
 		7D71321D188C3F5000959B80 /* osuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71321C188C3F5000959B80 /* osuTests.m */; };
 		7D71322E188C705E00959B80 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71322D188C705E00959B80 /* MainScene.m */; };
+		7D7DBB4518A3FADC008D3DEF /* GlobalMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBB4418A3FADC008D3DEF /* GlobalMusicPlayer.m */; };
 		7D93C1431897FF2A00B20DD3 /* main-background-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1411897FF2A00B20DD3 /* main-background-circle.png */; };
 		7D93C1441897FF2A00B20DD3 /* main-background-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1421897FF2A00B20DD3 /* main-background-circle@2x.png */; };
 		7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DA94D221896794B00F67EC4 /* Localizable.strings */; };
+		7DB9722518A25EEF00C9B598 /* ImportedOsuDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */; };
 		7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */; };
 		7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F5481899293A00DED2C7 /* MainMenu.xib */; };
 		7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */; };
 		7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA7E3D18918D5B00AB5E4D /* ScaningScene.m */; };
 		7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */ = {isa = PBXBuildFile; fileRef = 7DFA7E3F18918E7100AB5E4D /* osu! by peppy */; };
+		7DFEAAAB18A0032400870EBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFEAAAA18A0032400870EBD /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D1846B618A1210C00818CCD /* OFM-Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OFM-Database.xcdatamodel"; sourceTree = "<group>"; };
+		7D1846B818A12BD600818CCD /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beatmap.h; sourceTree = "<group>"; };
+		7D1846B918A12BD600818CCD /* Beatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Beatmap.m; sourceTree = "<group>"; };
 		7D27CB94188DA20900EBF90B /* CustomizedSKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedSKView.h; sourceTree = "<group>"; };
 		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
 		7D2DB148189638CC009F8FBC /* SKMessageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageNode.h; sourceTree = "<group>"; };
@@ -86,6 +96,8 @@
 		7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "theBigOSU@2x.png"; sourceTree = "<group>"; };
 		7D6C864C189E6606004AF862 /* SKSceneWithAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSceneWithAdditions.h; sourceTree = "<group>"; };
 		7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSceneWithAdditions.m; sourceTree = "<group>"; };
+		7D6C8657189F7C39004AF862 /* ApplicationSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSupport.h; sourceTree = "<group>"; };
+		7D6C8658189F7C39004AF862 /* ApplicationSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSupport.m; sourceTree = "<group>"; };
 		7D7131E9188C3F5000959B80 /* Osu for Mac!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Osu for Mac!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7131EC188C3F5000959B80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7D7131EE188C3F5000959B80 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -109,6 +121,8 @@
 		7D71321C188C3F5000959B80 /* osuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = osuTests.m; sourceTree = "<group>"; };
 		7D71322C188C705E00959B80 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		7D71322D188C705E00959B80 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		7D7DBB4318A3FADC008D3DEF /* GlobalMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMusicPlayer.h; sourceTree = "<group>"; };
+		7D7DBB4418A3FADC008D3DEF /* GlobalMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMusicPlayer.m; sourceTree = "<group>"; };
 		7D93C1411897FF2A00B20DD3 /* main-background-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-background-circle.png"; sourceTree = "<group>"; };
 		7D93C1421897FF2A00B20DD3 /* main-background-circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-background-circle@2x.png"; sourceTree = "<group>"; };
 		7DA94D1718966C4100F67EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -120,6 +134,8 @@
 		7DA94D2C18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7DA94D2D18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
 		7DA94D2E18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7DB9722318A25EEF00C9B598 /* ImportedOsuDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportedOsuDB.h; sourceTree = "<group>"; };
+		7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportedOsuDB.m; sourceTree = "<group>"; };
 		7DC3F5451899077F00DED2C7 /* FirstRunWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstRunWindowController.h; sourceTree = "<group>"; };
 		7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunWindowController.m; sourceTree = "<group>"; };
 		7DC3F5481899293A00DED2C7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -127,6 +143,7 @@
 		7DFA7E3C18918D5B00AB5E4D /* ScaningScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaningScene.h; sourceTree = "<group>"; };
 		7DFA7E3D18918D5B00AB5E4D /* ScaningScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaningScene.m; sourceTree = "<group>"; };
 		7DFA7E3F18918E7100AB5E4D /* osu! by peppy */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "osu! by peppy"; path = "Skin/osu! by peppy"; sourceTree = "<group>"; };
+		7DFEAAAA18A0032400870EBD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D1846BB18A12C1C00818CCD /* CoreData.framework in Frameworks */,
+				7DFEAAAB18A0032400870EBD /* AVFoundation.framework in Frameworks */,
 				7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */,
 				7D7131ED188C3F5000959B80 /* Cocoa.framework in Frameworks */,
 			);
@@ -199,6 +218,9 @@
 				7D627F7918956E7A00F5AB50 /* SettingsDealer.m */,
 				7D5BB0EC189D53A600EDBA9F /* WinOsuInterpreter.h */,
 				7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */,
+				7D6C8657189F7C39004AF862 /* ApplicationSupport.h */,
+				7D6C8658189F7C39004AF862 /* ApplicationSupport.m */,
+				7D6C8653189F45C4004AF862 /* Object */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -218,6 +240,18 @@
 				7D627F7F1895929A00F5AB50 /* notify.wav */,
 			);
 			name = default;
+			sourceTree = "<group>";
+		};
+		7D6C8653189F45C4004AF862 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				7DB9722318A25EEF00C9B598 /* ImportedOsuDB.h */,
+				7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */,
+				7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */,
+				7D1846B818A12BD600818CCD /* Beatmap.h */,
+				7D1846B918A12BD600818CCD /* Beatmap.m */,
+			);
+			name = Object;
 			sourceTree = "<group>";
 		};
 		7D7131E0188C3F5000959B80 = {
@@ -242,6 +276,7 @@
 		7D7131EB188C3F5000959B80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7DFEAAAA18A0032400870EBD /* AVFoundation.framework */,
 				7D7131EC188C3F5000959B80 /* Cocoa.framework */,
 				7D7131EE188C3F5000959B80 /* SpriteKit.framework */,
 				7D713211188C3F5000959B80 /* XCTest.framework */,
@@ -267,6 +302,8 @@
 				7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */,
 				7D713207188C3F5000959B80 /* AppDelegate.h */,
 				7D713205188C3F5000959B80 /* AppDelegate.m */,
+				7D7DBB4318A3FADC008D3DEF /* GlobalMusicPlayer.h */,
+				7D7DBB4418A3FADC008D3DEF /* GlobalMusicPlayer.m */,
 				7DE5EA76189A7454008A76DD /* Controller */,
 				7D27CB93188DA1DB00EBF90B /* View */,
 				7DC3F5431899042A00DED2C7 /* Scenes */,
@@ -479,10 +516,15 @@
 				7D71322E188C705E00959B80 /* MainScene.m in Sources */,
 				7D6C864E189E6606004AF862 /* SKSceneWithAdditions.m in Sources */,
 				7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */,
+				7D1846B718A1210C00818CCD /* OFM-Database.xcdatamodeld in Sources */,
 				7D5BB0EB189D534900EDBA9F /* BTBinaryStreamReader.m in Sources */,
+				7D6C8659189F7C39004AF862 /* ApplicationSupport.m in Sources */,
+				7D7DBB4518A3FADC008D3DEF /* GlobalMusicPlayer.m in Sources */,
 				7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */,
+				7DB9722518A25EEF00C9B598 /* ImportedOsuDB.m in Sources */,
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */,
+				7D1846BA18A12BD600818CCD /* Beatmap.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,6 +764,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D1846B618A1210C00818CCD /* OFM-Database.xcdatamodel */,
+			);
+			currentVersion = 7D1846B618A1210C00818CCD /* OFM-Database.xcdatamodel */;
+			path = "OFM-Database.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7D7131E1188C3F5000959B80 /* Project object */;
 }

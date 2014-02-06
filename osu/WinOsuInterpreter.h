@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WinOsuInterpreter : NSObject
+
+typedef void(^WinImportingBlock)(NSString *);
+
+
+@interface WinOsuInterpreter : NSObject{
+    WinImportingBlock Importing;
+}
+
 
 - (BOOL)importDatabaseFromWindowsVersionOsuDB:(NSURL *)databaseURL;
-
+- (BOOL)importDatabaseFromWindowsVersionOsuDB:(NSURL *)databaseURL withReport:(WinImportingBlock)reportBlock;
 @end

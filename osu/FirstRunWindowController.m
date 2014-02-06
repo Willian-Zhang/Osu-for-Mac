@@ -72,7 +72,7 @@
 
 #pragma mark changes
 - (void)updateReadBox{
-    NSURL *readDir = [[[SettingsDealer alloc] init] getLoadDirectory];
+    NSURL *readDir = [[[SettingsDealer alloc] init] loadDirectory];
     NSString *readDirStr = [readDir relativePath];
     [self.windowsDirectoryReadBox setStringValue:readDirStr];
     [self.windowsDirectoryBox setStringValue:readDirStr];
@@ -87,6 +87,7 @@
 - (void)selectFolder{
 
 }
+#pragma mark function
 - (BOOL)checkWritingPermissionForURL:(NSURL *)theURL{
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *filePath = [theURL URLByAppendingPathComponent:@"osu-for-mac-permission-check.osu"];
@@ -95,6 +96,14 @@
         if ([fileManager removeItemAtURL:filePath error:nil]) {
             return YES;
         }
+    }
+    return NO;
+}
+- (BOOL)checkIsValidDirectoryForURL:(NSURL *)theURL{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *songDirPath = [theURL URLByAppendingPathComponent:@"Songs" isDirectory:YES];
+    if ([fileManager fileExistsAtPath:[songDirPath path] isDirectory:nil]) {
+        return YES;
     }
     return NO;
 }
@@ -155,9 +164,9 @@
 
 - (IBAction)firstConfigueDone:(NSButton *)sender {
     SettingsDealer *settings = [[SettingsDealer alloc] init];
-    NSURL *readDir = [settings getLoadDirectory];
+    NSURL *readDir = [settings loadDirectory];
     [settings setSaveDirectory:readDir];
-    [settings setFirstConfigured];
+    [settings setFirstConfigured:YES];
     [self.firstRunPopover performClose:sender];
     blockKeeped(ConfigureSucceed);
 }

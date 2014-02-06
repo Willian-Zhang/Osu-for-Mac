@@ -7,11 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <SpriteKit/SpriteKit.h>
+
+@class SKView;
+
+@class ApplicationSupport;
+@class GlobalMusicPlayer;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet SKView *skView;
+@property (retain) ApplicationSupport *appSupport;
+@property (retain) GlobalMusicPlayer *globalMusicPlayer;
 
 @end

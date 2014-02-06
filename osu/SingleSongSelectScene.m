@@ -9,29 +9,53 @@
 #import "SingleSongSelectScene.h"
 #import "SettingsDealer.h"
 #import "ScaningScene.h"
+#import "AppDelegate.h"
+#import "ApplicationSupport.h"
 
 @implementation SingleSongSelectScene
 - (id)initWithSize:(CGSize)size
 {
     self = [super initWithSize:size];
     if (self) {
-        loadSongsDirectory = [[[[SettingsDealer alloc] init] getLoadDirectory] URLByAppendingPathComponent:@"Songs"];
-
+        self.backgroundColor = [SKColor blackColor];
+        loadSongsDirectory = [[[SettingsDealer alloc] init] loadDirectory];
+        AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
+        appSupport = [appDelegate appSupport];
     }
     return self;
 }
 - (void)didMoveToView:(SKView *)view{
     [super didMoveToView:view];
     if (view == self.view) {
-        if (![self isBeatmapListUpToDate]) {
+        if (![self loadDatabaseIfExist]) {
             ScaningScene *scaningScene = [ScaningScene sceneWithSize:view.frame.size];
             [self.view presentScene:scaningScene];
-            [scaningScene loadAllBeatmaps];
+            [scaningScene loadAllBeatmaps:^(void){
+                //osuDB = [ApplicationSupport getDatabase];
+                [self.view presentScene:self transition:[SKTransition crossFadeWithDuration:0.5]];
+                [self initiate];
+            }];
+        }else{
+            [self initiate];
         }
     }
 }
-- (BOOL)isBeatmapListUpToDate{
-    return NO;
+- (BOOL)loadDatabaseIfExist{
+    if (osuDB == nil) {
+        if (![appSupport isDatabaseExist]) {
+            return NO;
+        }
+        //Adds
+    }
+    return YES;
+}
+- (void)initiate{
+
+    
+}
+
+- (NSDictionary *)beatmapDicAtIndex:(NSInteger)index{
+    return [(NSArray *)[osuDB objectForKey:@"beatmapArray"] objectAtIndex:index];
 }
 
 @end

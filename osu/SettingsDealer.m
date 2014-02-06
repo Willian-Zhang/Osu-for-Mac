@@ -19,31 +19,46 @@
     return self;
 }
 
-- (BOOL)isFirstRun{
-    //[defaults removeObjectForKey:@"First Configured"];
+@synthesize firstConfigured = _firstConfigured;
+- (void)setFirstConfigured:(BOOL)firstConfigured{
+    [defaults setBool:firstConfigured forKey:@"First Configured"];
+}
+- (BOOL)firstConfigured{
     if ([defaults objectForKey:@"First Configured"] != nil) {
         if ([defaults boolForKey:@"First Configured"]) {
-            return NO;
+            return YES;
         }
     }
-    return YES;
+    return NO;
 }
-- (void)setFirstConfigured{
-    [defaults setBool:YES forKey:@"First Configured"];
-    [defaults synchronize];
+
+@synthesize windowsConnected = _windowsConnected;
+- (void)setWindowsConnected:(BOOL)windowsConnected{
+    [defaults setBool:windowsConnected forKey:@"Windows Connected"];
 }
-- (NSURL *)getSaveDirectory{
-    return [defaults URLForKey:@"Save Directory"];
+- (BOOL)windowsConnected{
+    if ([defaults objectForKey:@"Windows Connected"] != nil) {
+        if ([defaults boolForKey:@"Windows Connected"]) {
+            return YES;
+        }
+    }
+    return NO;
 }
-- (NSURL *)getLoadDirectory{
+
+@synthesize loadDirectory = _loadDirectory;
+- (NSURL *)loadDirectory{
     return [defaults URLForKey:@"Load Directory"];
 }
-- (void)setLoadDirectory:(NSURL *)loadURL{
-    [defaults setURL:loadURL forKey:@"Load Directory"];
-    [defaults synchronize];
+- (void)setLoadDirectory:(NSURL *)loadDirectory{
+    [defaults setURL:loadDirectory forKey:@"Load Directory"];
 }
-- (void)setSaveDirectory:(NSURL *)saveURL{
-    [defaults setURL:saveURL forKey:@"Save Directory"];
-    [defaults synchronize];
+
+@synthesize saveDirectory = _saveDirectory;
+- (NSURL *)saveDirectory{
+    return [defaults URLForKey:@"Save Directory"];
+
+}
+-(void)setSaveDirectory:(NSURL *)saveDirectory{
+    [defaults setURL:saveDirectory forKey:@"Save Directory"];
 }
 @end
