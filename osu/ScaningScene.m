@@ -8,7 +8,6 @@
 
 #import "ScaningScene.h"
 #import "SettingsDealer.h"
-#import "WinOsuInterpreter.h"
 #import "AppDelegate.h"
 #import "ApplicationSupport.h"
 

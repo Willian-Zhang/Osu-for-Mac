@@ -2,7 +2,7 @@
 //  ImportedOsuDB.h
 //  Osu for Mac!
 //
-//  Created by Willian on 14-2-5.
+//  Created by Willian on 14-2-8.
 //  Copyright (c) 2014年 Willian-Zhang. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * numOfBeatmaps;
 @property (nonatomic, retain) NSNumber * numOfMapSets;
 @property (nonatomic, retain) NSString * username;
+@property (nonatomic, retain) NSString * dir;
 @property (nonatomic, retain) NSSet *importedBeatmaps;
 @end
 

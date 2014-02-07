@@ -14,6 +14,8 @@
 @synthesize playMode;
 @synthesize endMode;
 
+@synthesize mapPlaying;
+
 - (id)init
 {
     self = [super init];
@@ -26,8 +28,11 @@
     }
     return self;
 }
-- (void)recieveFinishPlaying:(FinishPlaying )senderBlock{
-    finishPlaying = senderBlock;
+- (void)recieveWillEndPlaying:(GlobalMusicPlayerWillEndPlaying)willEndPlaying
+                DidEndPlaying:(GlobalMusicPlayerDidEndPlaying)didEndPlaying
+{
+    DoWillEndPlaying = willEndPlaying;
+    DoDidEndPlaying  = didEndPlaying;
 }
 - (void)playRandomInSet:(NSSet *)beatmapSet{
     NSInteger maxBeatmapNumber = beatmapSet.count;
@@ -56,9 +61,10 @@
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    if (finishPlaying != nil) {
-        finishPlaying();
+    if (DoWillEndPlaying != nil) {
+        DoWillEndPlaying(mapPlaying);
     }
+    //!-Add codes below -!//
     
     if (      self.endMode == GlobalMusicPlayerEndModeRandom) {
         [self playRandomInSet:importBeatmapSet];
@@ -66,6 +72,11 @@
         [self playBeatmap:mapPlaying];
     }else if (self.endMode == GlobalMusicPlayerEndModeStop){
         
+    }
+    
+    //!-Add codes behind -!//
+    if (DoDidEndPlaying != nil) {
+        DoDidEndPlaying(mapPlaying);
     }
 }
 @end

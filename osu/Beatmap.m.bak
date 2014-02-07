@@ -2,64 +2,66 @@
 //  Beatmap.m
 //  Osu for Mac!
 //
-//  Created by Willian on 14-2-4.
+//  Created by Willian on 14-2-8.
 //  Copyright (c) 2014年 Willian-Zhang. All rights reserved.
 //
 
 #import "Beatmap.h"
+#import "ImportedOsuDB.h"
 #import "BTBinaryStreamReader.h"
 
 @implementation Beatmap
 
+@dynamic ar;
 @dynamic artist;
 @dynamic artistU;
-@dynamic title;
-@dynamic titleU;
+@dynamic audioOffset;
+@dynamic beatmapId;
+@dynamic beatmapSetId;
+@dynamic bgDim;
+@dynamic circles;
+@dynamic circleSize;
 @dynamic creator;
 @dynamic difficulty;
-@dynamic mp3;
-@dynamic osuHash;
-@dynamic file;
-@dynamic state;
-@dynamic circles;
-@dynamic sliders;
-@dynamic spinners;
-@dynamic lastEdit;
-@dynamic ar;
-@dynamic circleSize;
-@dynamic hpDR;
-@dynamic od;
-@dynamic sliderMulti;
-@dynamic drainingTime;
-@dynamic totalTime;
-@dynamic previewTime;
-@dynamic beatmapSetId;
-@dynamic beatmapId;
-@dynamic threadID;
-@dynamic ratings;
-@dynamic offset;
-@dynamic stackLeniency;
-@dynamic mode;
-@dynamic source;
-@dynamic tags;
-@dynamic audioOffset;
-@dynamic letterbox;
-@dynamic played;
-@dynamic lastPlayed;
-@dynamic isOSZ2;
 @dynamic dir;
-@dynamic lastSync;
 @dynamic disableHitSounds;
-@dynamic disableSkin;
 @dynamic disableSB;
-@dynamic possiblyBgDimSwitch;
-@dynamic bgDim;
+@dynamic disableSkin;
+@dynamic drainingTime;
 @dynamic endSkip;
-@dynamic timmingPoints;
+@dynamic file;
+@dynamic hpDR;
+@dynamic isOSZ2;
+@dynamic lastEdit;
+@dynamic lastPlayed;
+@dynamic lastSync;
+@dynamic letterbox;
+@dynamic mode;
+@dynamic mp3;
+@dynamic od;
+@dynamic offset;
+@dynamic osuHash;
+@dynamic played;
+@dynamic possiblyBgDimSwitch;
+@dynamic previewTime;
+@dynamic ratings;
+@dynamic sliderMulti;
+@dynamic sliders;
+@dynamic source;
+@dynamic spinners;
+@dynamic stackLeniency;
+@dynamic state;
+@dynamic tags;
+@dynamic threadID;
 @dynamic timmingPointContents;
+@dynamic timmingPoints;
+@dynamic title;
+@dynamic titleU;
+@dynamic totalTime;
+@dynamic dbSource;
 
 
-- (Beatmap *)importTo:(Beatmap *)beatmap Using:(BTBinaryStreamReader *)reader withEndSkip:(NSUInteger )endSkip{    
+- (Beatmap *)importTo:(Beatmap *)beatmap Using:(BTBinaryStreamReader *)reader withEndSkip:(NSUInteger )endSkip{
     [beatmap setArtist:                                 [reader readStringByWillian]];
     [beatmap setArtistU:                                [reader readStringByWillian]];// possibly nil
     [beatmap setTitle:                                  [reader readStringByWillian]];
@@ -92,7 +94,7 @@
     
     [beatmap setBeatmapId:[NSNumber numberWithInt:              [reader readInt32]]];
     [beatmap setBeatmapSetId:[NSNumber numberWithInt:           [reader readInt32]]];
-    
+
     [beatmap setThreadID:[NSNumber numberWithInt:               [reader readInt32]]];
     [beatmap setRatings:[NSNumber numberWithInt:                [reader readInt32]]];
     [beatmap setOffset:[NSNumber numberWithInt:                 [reader readInt16]]];;
@@ -103,13 +105,6 @@
     [beatmap setAudioOffset:[NSNumber numberWithInt:            [reader readInt16]]];
     [beatmap setLetterbox:                                      [reader readStringByWillian]];
     [beatmap setPlayed:[NSNumber numberWithInt:                 [reader readInt8]]];//BOOL
-//    if ([beatmap.title isEqualToString:@"Six Trillion Years and Overnight Story"]) {
-//        NSInteger inttt = [reader readInt8];
-//        NSLog(@"Lteerbox:%@ , Played: %ld",beatmap.letterbox,(long)inttt);
-//        
-//    }else{
-//        [reader readInt8];
-//    }
     [beatmap setLastPlayed:                                     [reader readDateByInt64]];
     [beatmap setIsOSZ2:[NSNumber numberWithInt:                 [reader readInt8]]];//BOOL
     [beatmap setDir:[                                           [reader readStringByWillian] stringByReplacingOccurrencesOfString:@"\\" withString:@"/"]];
@@ -123,7 +118,5 @@
     
     return beatmap;
 }
-
-
 
 @end

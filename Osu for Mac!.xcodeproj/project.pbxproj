@@ -8,16 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		7D1846B718A1210C00818CCD /* OFM-Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */; };
-		7D1846BA18A12BD600818CCD /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1846B918A12BD600818CCD /* Beatmap.m */; };
 		7D1846BB18A12C1C00818CCD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7131F2188C3F5000959B80 /* CoreData.framework */; };
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
+		7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */; };
+		7D30775918A5410500F2A740 /* nextMusicButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D30775718A5410500F2A740 /* nextMusicButton.png */; };
+		7D30775A18A5410500F2A740 /* nextMusicButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D30775818A5410500F2A740 /* nextMusicButton@2x.png */; };
+		7D30776018A55A6500F2A740 /* ImportedOsuDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30775F18A55A6500F2A740 /* ImportedOsuDB.m */; };
+		7D30776318A56BFB00F2A740 /* TimingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30776218A56BFB00F2A740 /* TimingPoint.m */; };
+		7D30776918A56C5800F2A740 /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30776818A56C5800F2A740 /* Beatmap.m */; };
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
 		7D351CAC1896557B00FBDA2A /* MainCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MainCircle.sks */; };
 		7D3FDD41189C327E003A9BE8 /* menuhit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D3FDD40189C327E003A9BE8 /* menuhit.wav */; };
 		7D5BB0E8189D3DB300EDBA9F /* SingleSongSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0E7189D3DB300EDBA9F /* SingleSongSelectScene.m */; };
 		7D5BB0EB189D534900EDBA9F /* BTBinaryStreamReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0EA189D534900EDBA9F /* BTBinaryStreamReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-format"; }; };
-		7D5BB0EE189D53A600EDBA9F /* WinOsuInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */; };
 		7D5BB0F7189D5B0300EDBA9F /* BTBinaryStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BB0F5189D5B0300EDBA9F /* BTBinaryStreamWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-format"; }; };
 		7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D627F7918956E7A00F5AB50 /* SettingsDealer.m */; };
 		7D627F801895929A00F5AB50 /* notify.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D627F7F1895929A00F5AB50 /* notify.wav */; };
@@ -45,7 +49,6 @@
 		7D93C1431897FF2A00B20DD3 /* main-background-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1411897FF2A00B20DD3 /* main-background-circle.png */; };
 		7D93C1441897FF2A00B20DD3 /* main-background-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1421897FF2A00B20DD3 /* main-background-circle@2x.png */; };
 		7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DA94D221896794B00F67EC4 /* Localizable.strings */; };
-		7DB9722518A25EEF00C9B598 /* ImportedOsuDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */; };
 		7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */; };
 		7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F5481899293A00DED2C7 /* MainMenu.xib */; };
 		7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */; };
@@ -66,12 +69,20 @@
 
 /* Begin PBXFileReference section */
 		7D1846B618A1210C00818CCD /* OFM-Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "OFM-Database.xcdatamodel"; sourceTree = "<group>"; };
-		7D1846B818A12BD600818CCD /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beatmap.h; sourceTree = "<group>"; };
-		7D1846B918A12BD600818CCD /* Beatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Beatmap.m; sourceTree = "<group>"; };
 		7D27CB94188DA20900EBF90B /* CustomizedSKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedSKView.h; sourceTree = "<group>"; };
 		7D27CB95188DA20900EBF90B /* CustomizedSKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedSKView.m; sourceTree = "<group>"; };
 		7D2DB148189638CC009F8FBC /* SKMessageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageNode.h; sourceTree = "<group>"; };
 		7D2DB149189638CC009F8FBC /* SKMessageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessageNode.m; sourceTree = "<group>"; };
+		7D30775418A5367C00F2A740 /* SKMusicPlayerControllerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMusicPlayerControllerNode.h; sourceTree = "<group>"; };
+		7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMusicPlayerControllerNode.m; sourceTree = "<group>"; };
+		7D30775718A5410500F2A740 /* nextMusicButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextMusicButton.png; sourceTree = "<group>"; };
+		7D30775818A5410500F2A740 /* nextMusicButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextMusicButton@2x.png"; sourceTree = "<group>"; };
+		7D30775E18A55A6500F2A740 /* ImportedOsuDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportedOsuDB.h; sourceTree = "<group>"; };
+		7D30775F18A55A6500F2A740 /* ImportedOsuDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportedOsuDB.m; sourceTree = "<group>"; };
+		7D30776118A56BFB00F2A740 /* TimingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingPoint.h; sourceTree = "<group>"; };
+		7D30776218A56BFB00F2A740 /* TimingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingPoint.m; sourceTree = "<group>"; };
+		7D30776718A56C5800F2A740 /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Beatmap.h; path = ../Beatmap.h; sourceTree = "<group>"; };
+		7D30776818A56C5800F2A740 /* Beatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Beatmap.m; path = ../Beatmap.m; sourceTree = "<group>"; };
 		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
 		7D351CAA1896557B00FBDA2A /* MainCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainCircle.sks; sourceTree = "<group>"; };
 		7D3FDD40189C327E003A9BE8 /* menuhit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = menuhit.wav; path = Skin/default/menuhit.wav; sourceTree = "<group>"; };
@@ -79,8 +90,6 @@
 		7D5BB0E7189D3DB300EDBA9F /* SingleSongSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSongSelectScene.m; sourceTree = "<group>"; };
 		7D5BB0E9189D534900EDBA9F /* BTBinaryStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBinaryStreamReader.h; sourceTree = "<group>"; };
 		7D5BB0EA189D534900EDBA9F /* BTBinaryStreamReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBinaryStreamReader.m; sourceTree = "<group>"; };
-		7D5BB0EC189D53A600EDBA9F /* WinOsuInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinOsuInterpreter.h; sourceTree = "<group>"; };
-		7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinOsuInterpreter.m; sourceTree = "<group>"; };
 		7D5BB0F1189D54D400EDBA9F /* BTBinaryToolsErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTBinaryToolsErrors.h; sourceTree = "<group>"; };
 		7D5BB0F4189D5B0300EDBA9F /* BTBinaryStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBinaryStreamWriter.h; sourceTree = "<group>"; };
 		7D5BB0F5189D5B0300EDBA9F /* BTBinaryStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBinaryStreamWriter.m; sourceTree = "<group>"; };
@@ -134,8 +143,6 @@
 		7DA94D2C18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7DA94D2D18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
 		7DA94D2E18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7DB9722318A25EEF00C9B598 /* ImportedOsuDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportedOsuDB.h; sourceTree = "<group>"; };
-		7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportedOsuDB.m; sourceTree = "<group>"; };
 		7DC3F5451899077F00DED2C7 /* FirstRunWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstRunWindowController.h; sourceTree = "<group>"; };
 		7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunWindowController.m; sourceTree = "<group>"; };
 		7DC3F5481899293A00DED2C7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -216,8 +223,6 @@
 			children = (
 				7D627F7818956E7A00F5AB50 /* SettingsDealer.h */,
 				7D627F7918956E7A00F5AB50 /* SettingsDealer.m */,
-				7D5BB0EC189D53A600EDBA9F /* WinOsuInterpreter.h */,
-				7D5BB0ED189D53A600EDBA9F /* WinOsuInterpreter.m */,
 				7D6C8657189F7C39004AF862 /* ApplicationSupport.h */,
 				7D6C8658189F7C39004AF862 /* ApplicationSupport.m */,
 				7D6C8653189F45C4004AF862 /* Object */,
@@ -228,6 +233,8 @@
 		7D627F7C1895924400F5AB50 /* default */ = {
 			isa = PBXGroup;
 			children = (
+				7D30775718A5410500F2A740 /* nextMusicButton.png */,
+				7D30775818A5410500F2A740 /* nextMusicButton@2x.png */,
 				7D351CA6189652FD00FBDA2A /* MainStar.sks */,
 				7D351CAA1896557B00FBDA2A /* MainCircle.sks */,
 				7D93C1411897FF2A00B20DD3 /* main-background-circle.png */,
@@ -245,11 +252,13 @@
 		7D6C8653189F45C4004AF862 /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				7DB9722318A25EEF00C9B598 /* ImportedOsuDB.h */,
-				7DB9722418A25EEF00C9B598 /* ImportedOsuDB.m */,
 				7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */,
-				7D1846B818A12BD600818CCD /* Beatmap.h */,
-				7D1846B918A12BD600818CCD /* Beatmap.m */,
+				7D30776718A56C5800F2A740 /* Beatmap.h */,
+				7D30776818A56C5800F2A740 /* Beatmap.m */,
+				7D30776118A56BFB00F2A740 /* TimingPoint.h */,
+				7D30776218A56BFB00F2A740 /* TimingPoint.m */,
+				7D30775E18A55A6500F2A740 /* ImportedOsuDB.h */,
+				7D30775F18A55A6500F2A740 /* ImportedOsuDB.m */,
 			);
 			name = Object;
 			sourceTree = "<group>";
@@ -365,6 +374,8 @@
 		7DC3F5441899074200DED2C7 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				7D30775418A5367C00F2A740 /* SKMusicPlayerControllerNode.h */,
+				7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */,
 				7D627F811895ABBD00F5AB50 /* SKOptionNode.h */,
 				7D627F821895ABBD00F5AB50 /* SKOptionNode.m */,
 				7D2DB148189638CC009F8FBC /* SKMessageNode.h */,
@@ -481,10 +492,12 @@
 				7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */,
 				7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */,
 				7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */,
+				7D30775918A5410500F2A740 /* nextMusicButton.png in Resources */,
 				7D7131FF188C3F5000959B80 /* Credits.rtf in Resources */,
 				7D93C1431897FF2A00B20DD3 /* main-background-circle.png in Resources */,
 				7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */,
 				7D93C1441897FF2A00B20DD3 /* main-background-circle@2x.png in Resources */,
+				7D30775A18A5410500F2A740 /* nextMusicButton@2x.png in Resources */,
 				7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */,
 				7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */,
 				7D627F871895AEC400F5AB50 /* star2@2x.png in Resources */,
@@ -506,11 +519,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D30776918A56C5800F2A740 /* Beatmap.m in Sources */,
 				7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */,
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
+				7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */,
 				7D5BB0E8189D3DB300EDBA9F /* SingleSongSelectScene.m in Sources */,
 				7D5BB0F7189D5B0300EDBA9F /* BTBinaryStreamWriter.m in Sources */,
-				7D5BB0EE189D53A600EDBA9F /* WinOsuInterpreter.m in Sources */,
 				7D627F7A18956E7A00F5AB50 /* SettingsDealer.m in Sources */,
 				7D7131FB188C3F5000959B80 /* main.m in Sources */,
 				7D71322E188C705E00959B80 /* MainScene.m in Sources */,
@@ -521,11 +535,11 @@
 				7D6C8659189F7C39004AF862 /* ApplicationSupport.m in Sources */,
 				7D7DBB4518A3FADC008D3DEF /* GlobalMusicPlayer.m in Sources */,
 				7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */,
-				7DB9722518A25EEF00C9B598 /* ImportedOsuDB.m in Sources */,
+				7D30776318A56BFB00F2A740 /* TimingPoint.m in Sources */,
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */,
-				7D1846BA18A12BD600818CCD /* Beatmap.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
+				7D30776018A55A6500F2A740 /* ImportedOsuDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

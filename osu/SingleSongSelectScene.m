@@ -11,6 +11,8 @@
 #import "ScaningScene.h"
 #import "AppDelegate.h"
 #import "ApplicationSupport.h"
+#import "GlobalMusicPlayer.h"
+#import "Beatmap.h"
 
 @implementation SingleSongSelectScene
 - (id)initWithSize:(CGSize)size
@@ -19,8 +21,6 @@
     if (self) {
         self.backgroundColor = [SKColor blackColor];
         loadSongsDirectory = [[[SettingsDealer alloc] init] loadDirectory];
-        AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
-        appSupport = [appDelegate appSupport];
     }
     return self;
 }
@@ -40,8 +40,15 @@
         }
     }
 }
+- (void)initBackgroundImage{
+    //super.musicPlayer.mapPlaying.dbSource
+}
+- (void)loadBackgroundImage{
+    
+}
 - (BOOL)loadDatabaseIfExist{
     if (osuDB == nil) {
+        ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
         if (![appSupport isDatabaseExist]) {
             return NO;
         }

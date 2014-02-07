@@ -8,16 +8,22 @@
 
 #import "SKSceneWithAdditions.h"
 #import "SKMessageNode.h"
+#import "AppDelegate.h"
+#import "GlobalMusicPlayer.h"
+#import "Beatmap.h"
 
 @implementation SKSceneWithAdditions
 
 @synthesize cursor;
 @synthesize cursortailTexture;
 @synthesize lastFrameCursorPosition;
+@synthesize musicPlayer;
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self initCursor];
+        [self initGlobalMusicPlayerController];
+        musicPlayer = [(AppDelegate *)[[NSApplication sharedApplication] delegate] globalMusicPlayer];
     }
     return self;
 }
@@ -63,6 +69,8 @@
     lastFrameCursorPosition = thisFrameCursorPosition;
 }
 #pragma mark 方法
+
+
 - (void)displayMessage:(NSString *)messageString{
     SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
     [message addMessageMaskWithLines:1];
@@ -70,7 +78,40 @@
     [self addChild:message];
     [message fadeOut];
 }
+@synthesize leftMargin;
+@synthesize rightMargin;
+@synthesize topMargin;
+@synthesize bottomMargin;
+- (float)leftMargin{
+    float width = self.frame.size.width;
+    return width *(1 - self.anchorPoint.x);
+}
+- (float)rightMargin{
+    float width = self.frame.size.width;
+    return width *(self.anchorPoint.x - 1);
+}
+- (float)topMargin{
+    float height = self.frame.size.height;
+    return height *(self.anchorPoint.y - 1);
+}
+- (float)bottomMargin{
+    float height = self.frame.size.height;
+    return height *(1 - self.anchorPoint.y);
+}
 #pragma mark 统一事件
+- (void)initGlobalMusicPlayerController{
+    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
+    [appDelegate.globalMusicPlayer recieveWillEndPlaying:^(Beatmap *beatmap){[self willMusicEndPlaying:beatmap];}
+                                           DidEndPlaying:^(Beatmap *beatmap){[self didMusicEndPlaying:beatmap];}];
+}
+
+- (void)willMusicEndPlaying:(Beatmap *)beatmap{
+    
+}
+
+- (void)didMusicEndPlaying:(Beatmap *)beatmap{
+    
+}
 - (void)leftDown:(NSEvent *)theEvent{
     [self.cursor runAction:[SKAction scaleTo:1.3 duration:0.1]];
 }

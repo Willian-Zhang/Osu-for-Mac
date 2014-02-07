@@ -50,8 +50,8 @@
             }
         }];
     }else{
-        [self initBGM];
         MainScene *mainScene = [self startMainScene];
+        [mainScene initBGM];
     }    
 }
 - (MainScene *)startMainScene{
@@ -63,22 +63,7 @@
     return mainScene;
 }
 
-- (void)initBGM{
-    if (![appSupport isDatabaseExist]) {
-        [(SKSceneWithAdditions *)(self.skView.scene) displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
-    }else{
-        if (![appSupport isCurrentDatabaseUpToDate]) {
-            [(SKSceneWithAdditions *)(self.skView.scene) displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
-        }else{
-            
-            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
-            [self.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
-            [self.globalMusicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
-            [self.globalMusicPlayer playRandomInSet:importedDB.importedBeatmaps];
-                                
-        }
-    }
-}
+
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     NSError *error;

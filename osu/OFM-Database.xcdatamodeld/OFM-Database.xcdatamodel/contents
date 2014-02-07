@@ -9,8 +9,8 @@
         <attribute name="beatmapSetId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="bgDim" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="circles" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="circleSize" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="creator" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cs" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dir" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="disableHitSounds" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -19,7 +19,7 @@
         <attribute name="drainingTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="endSkip" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hpDR" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="hp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="isOSZ2" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastEdit" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="lastPlayed" optional="YES" attributeType="Date" syncable="YES"/>
@@ -42,14 +42,15 @@
         <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="threadID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="timmingPointContents" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="timmingPoints" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timmingPointNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleU" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="dbSource" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImportedOsuDB" inverseName="importedBeatmaps" inverseEntity="ImportedOsuDB" syncable="YES"/>
+        <relationship name="dbSource" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImportedOsuDB" inverseName="importedBeatmaps" inverseEntity="ImportedOsuDB" syncable="YES"/>
+        <relationship name="timingPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingPoint" inverseName="beatmap" inverseEntity="TimingPoint" syncable="YES"/>
     </entity>
     <entity name="ImportedOsuDB" representedClassName="ImportedOsuDB" syncable="YES">
+        <attribute name="dir" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastImport" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="lastLogin" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="numOfBeatmaps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -57,8 +58,16 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="importedBeatmaps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="dbSource" inverseEntity="Beatmap" syncable="YES"/>
     </entity>
+    <entity name="TimingPoint" representedClassName="TimingPoint" syncable="YES">
+        <attribute name="bps" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="bpsMutiplier" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="keyTiming" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="offset" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="beatmap" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="timingPoints" inverseEntity="Beatmap" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Beatmap" positionX="160" positionY="192" width="128" height="735"/>
-        <element name="ImportedOsuDB" positionX="457" positionY="846" width="128" height="133"/>
+        <element name="Beatmap" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ImportedOsuDB" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TimingPoint" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

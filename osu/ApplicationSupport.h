@@ -14,13 +14,11 @@
 @interface ApplicationSupport : NSObject
 
 - (BOOL)isDatabaseExist;
-- (BOOL)isCurrentDatabaseUpToDate;
+- (BOOL)isCurrentDatabaseUpToDateToDatabaseOfURL:(NSURL *)databaseURL;
 - (ImportedOsuDB *)getLatestImportedOsuDB;
 - (BOOL)updateWindowsDatabaseOfURL:(NSURL *)databaseURL;
 - (BOOL)importWindowsDatabaseOfURL:(NSURL *)databaseURL;
 
-
-+ (NSString *)applicationSupportFolder;
 
 #pragma Core Data
 //数据模型对象

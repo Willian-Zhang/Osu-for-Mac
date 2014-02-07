@@ -15,15 +15,17 @@ enum{
     FirstRunConfigureSucceed = ConfigureSucceed
 };
 
+@class SKMusicPlayerControllerNode;
+
 @interface MainScene : SKSceneWithAdditions{
     CGSize sceneSize;
-   
-    
-    //CGPoint lastFrameCursorPosition;
     float theBigOSUFraction;
     float theBigOSUMouseHoverFraction;
     FirstRunWindowController *firstRunController;
+    
+    SKMusicPlayerControllerNode *musicControllerNode;
 }
+- (void)initBGM;
 - (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block;
 
 @end

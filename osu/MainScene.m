@@ -9,7 +9,11 @@
 #import "MainScene.h"
 
 #import "AppDelegate.h"
+#import "ApplicationSupport.h"
+#import "ImportedOsuDB.h"
+
 #import "GlobalMusicPlayer.h"
+#import "SKMusicPlayerControllerNode.h"
 
 #import "SKMessageNode.h"
 #import "SingleSongSelectScene.h"
@@ -37,10 +41,6 @@
                                                                     }]
                                          ]]];
 }
-- (void)didFinishPlayingABeatmap{
-    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
-    [appDelegate.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
-}
 
 #pragma mark 初始化
 - (id)initWithSize:(CGSize)size {
@@ -55,15 +55,15 @@
 
         [self initTheBigOSU];
         [self initBackground];
-        
+        musicControllerNode = [[SKMusicPlayerControllerNode alloc] init:self];
+        musicControllerNode.zPosition = 50;
     }
     return self;
 }
+// called when inited
 - (void)didMoveToView:(SKView *)view{
-    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
-    [appDelegate.globalMusicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
-    [appDelegate.globalMusicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
-    [appDelegate.globalMusicPlayer recieveFinishPlaying:^(void){[self didFinishPlayingABeatmap];}];
+    [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
+    [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
 }
 - (void)initBackground{
     
@@ -80,7 +80,25 @@
     [self addChild:circles];
 }
 
-
+- (void)initBGM{
+    ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
+    SettingsDealer *settings = [[SettingsDealer alloc] init];
+    if (![appSupport isDatabaseExist]) {
+        [self displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
+    }else{
+        if (![appSupport isCurrentDatabaseUpToDateToDatabaseOfURL:
+              [[settings loadDirectory] URLByAppendingPathComponent:@"osu!.db" isDirectory:NO]]) {
+            [self displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
+        }else{
+            
+            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
+            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
+            [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
+            [super.musicPlayer playRandomInSet:importedDB.importedBeatmaps];
+            
+        }
+    }
+}
 - (void)initTheBigOSU{
     
     
@@ -184,6 +202,9 @@
     [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0]];
 }
 #pragma mark 响应事件 - 主要
+- (void)didMusicEndPlaying:(Beatmap *)beatmap{
+    
+}
 - (void)showMainMenu{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
     float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;

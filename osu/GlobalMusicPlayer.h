@@ -18,8 +18,11 @@ typedef NS_ENUM(NSInteger, GlobalMusicPlayerEndMode) {
     GlobalMusicPlayerEndModeRandom              = 2
     
 };
-typedef void(^FinishPlaying)();
+
 @class Beatmap;
+
+typedef void(^GlobalMusicPlayerWillEndPlaying)(Beatmap *);
+typedef void(^GlobalMusicPlayerDidEndPlaying)(Beatmap *);
 
 @interface GlobalMusicPlayer : AVAudioPlayer <AVAudioPlayerDelegate> {
     AVAudioPlayer *player;
@@ -27,14 +30,17 @@ typedef void(^FinishPlaying)();
     NSURL *saveSongsDir;
     NSSet *importBeatmapSet;
     Beatmap *mapPlaying;
-    FinishPlaying finishPlaying;
+    GlobalMusicPlayerWillEndPlaying DoWillEndPlaying;
+    GlobalMusicPlayerDidEndPlaying  DoDidEndPlaying;
 }
 
+@property Beatmap *mapPlaying;
 @property GlobalMusicPlayerMode playMode;
 @property GlobalMusicPlayerEndMode endMode;
 
 - (void)playRandomInSet:(NSSet *)beatmapSet;
 - (void)playBeatmap:(Beatmap *)beatmap;
-- (void)recieveFinishPlaying:(FinishPlaying )senderBlock;
+- (void)recieveWillEndPlaying:(GlobalMusicPlayerWillEndPlaying)willEndPlaying
+                DidEndPlaying:(GlobalMusicPlayerDidEndPlaying)didEndPlaying;
 
 @end

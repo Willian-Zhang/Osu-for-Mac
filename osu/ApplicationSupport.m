@@ -47,13 +47,26 @@
         return YES;
     }
 }
-- (BOOL)isCurrentDatabaseUpToDate{
+
+- (BOOL)isCurrentDatabaseUpToDateToDatabaseOfURL:(NSURL *)databaseURL{
     ImportedOsuDB *osuBD = [self getLatestImportedOsuDB];
-    //osuBD.lastImport =
+
+    CFByteOrder byteOrder = CFByteOrderLittleEndian;
+    NSData *data = [[NSData alloc] initWithContentsOfURL:databaseURL];
+    BTBinaryStreamReader *reader = [[BTBinaryStreamReader alloc] initWithData:data andSourceByteOrder:byteOrder];
+    
+    if (![osuBD.lastImport laterDate:[reader readDateByInt32]]) {// last Login
+        return NO;
+    }
+    if (osuBD.numOfMapSets != [NSNumber numberWithInt:[reader readInt32]]) {
+        
+        return NO;
+    }
     return YES;
 }
+
 - (ImportedOsuDB *)getLatestImportedOsuDB{
-    NSFetchRequest *fetch =  [[NSFetchRequest alloc] init]; 
+    NSFetchRequest *fetch =  [[NSFetchRequest alloc] init];
     NSEntityDescription *osuDBType = [NSEntityDescription entityForName:@"ImportedOsuDB" inManagedObjectContext:self.managedObjectContext];
     [fetch setEntity:osuDBType];
     [fetch setSortDescriptors:[[NSArray alloc]initWithObjects:
@@ -62,13 +75,15 @@
     ImportedOsuDB *osuBD  = [dbArray objectAtIndex:0];
     return osuBD;
 }
+
 - (BOOL)updateWindowsDatabaseOfURL:(NSURL *)databaseURL{
     
     return false;
 }
+
 - (BOOL)importWindowsDatabaseOfURL:(NSURL *)databaseURL{
     ImportedOsuDB *osuDB = [NSEntityDescription insertNewObjectForEntityForName:@"ImportedOsuDB" inManagedObjectContext:self.managedObjectContext];
-    
+
     NSMutableSet *beatmapSet;
     
     CFByteOrder byteOrder = CFByteOrderLittleEndian;
@@ -111,25 +126,6 @@
     }
     return false;
 }
-
-+ (NSString *)applicationSupportFolder {
-    
-    NSString *applicationSupportFolder = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    if ( [paths count] == 0 ) {
-        NSRunAlertPanel(@"Alert", @"Can't find application support folder", @"Quit", nil, nil);
-        [[NSApplication sharedApplication] terminate:self];
-    } else {
-        applicationSupportFolder = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Osu for Mac!"];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:applicationSupportFolder isDirectory:nil]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:applicationSupportFolder withIntermediateDirectories:NO attributes:nil error:nil];
-        
-    }
-    return applicationSupportFolder;
-}
-
-
 
 
 

@@ -2,7 +2,7 @@
 //  ImportedOsuDB.m
 //  Osu for Mac!
 //
-//  Created by Willian on 14-2-5.
+//  Created by Willian on 14-2-8.
 //  Copyright (c) 2014年 Willian-Zhang. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @dynamic numOfBeatmaps;
 @dynamic numOfMapSets;
 @dynamic username;
+@dynamic dir;
 @dynamic importedBeatmaps;
 
 @end
