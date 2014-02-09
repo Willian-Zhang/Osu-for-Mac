@@ -12,6 +12,8 @@
 #import "ApplicationSupport.h"
 #import "ImportedOsuDB.h"
 
+#import "Beatmap.h"
+#import "TimingPoint.h"
 #import "GlobalMusicPlayer.h"
 #import "SKMusicPlayerControllerNode.h"
 
@@ -21,32 +23,12 @@
 
 @implementation MainScene
 
-#pragma mark 方法
 
-- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block{
-    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
-
-    
-    [message addMessageMaskWithLines:1];
-    [message addMessageLabelWithString:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice") onLine:1];
-
-    [self addChild:message];
-    [message fadeOut];
-    [self runAction:[SKAction sequence:@[
-                                         [SKAction waitForDuration:1],
-                                         [SKAction runBlock:^(void){
-        firstRunController = [[FirstRunWindowController alloc] initWithWindowNibName:@"FirstRunWindow"];
-        [firstRunController showWindow:self];
-        [firstRunController showRelativeToRect:message.frame ofView:self.view preferredEdge:NSMinYEdge completion:block];
-                                                                    }]
-                                         ]]];
-}
 
 #pragma mark 初始化
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        sceneSize = size;
         [self setAnchorPoint:CGPointMake(0.5, 0.5)];
         self.backgroundColor = [SKColor colorWithRed:0.08 green:0.46 blue:0.98 alpha:1.0];
         
@@ -80,59 +62,40 @@
     [self addChild:circles];
 }
 
-- (void)initBGM{
-    ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
-    SettingsDealer *settings = [[SettingsDealer alloc] init];
-    if (![appSupport isDatabaseExist]) {
-        [self displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
-    }else{
-        if (![appSupport isCurrentDatabaseUpToDateToDatabaseOfURL:
-              [[settings loadDirectory] URLByAppendingPathComponent:@"osu!.db" isDirectory:NO]]) {
-            [self displayMessage:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
-        }else{
-            
-            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
-            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
-            [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
-            [super.musicPlayer playRandomInSet:importedDB.importedBeatmaps];
-            
-        }
-    }
-}
+
 - (void)initTheBigOSU{
     
     
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
 
-    float scaleDuration = 1;
+    float theBigOSUSpeed = 1;
     float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
     
     SKTexture *theBigOSUTexture = [SKTexture textureWithImageNamed:@"theBigOSU"];
-    SKSpriteNode *theBigOSU = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
+    theBigOSU = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
     theBigOSU.zPosition = 20;
-    theBigOSU.position = CGPointMake(0, self.size.height * 0.04266 );
-    theBigOSU.name = @"theBigOSU";
+    theBigOSU.position = CGPointMake(0, self.size.height * 0.04266 );//移高偏移
     
     SKAction *theShadowAction = [SKAction sequence:@[
+                     [SKAction scaleTo:1.01 duration:0],
                      [SKAction group:@[
-                                       [SKAction scaleTo:1.04 duration:scaleDuration],
-                                       [SKAction fadeOutWithDuration:scaleDuration]
+                                       [SKAction scaleTo:1.05 duration:theBigOSUSpeed],
+                                       [SKAction fadeOutWithDuration:theBigOSUSpeed]
                                        ]],
                      [SKAction removeFromParent]
                      ]];
-    SKAction *createShadow =[SKAction runBlock:^(void){
+   SKAction *createShadow =[SKAction runBlock:^(void){
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
         float theBigOSUSize = screenLimitScaleWidth *  theBigOSUFraction * theBigOSUMouseHoverFraction;
-        SKSpriteNode *theBigOSUShadow = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
+        theBigOSUShadow = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:CGSizeMake(theBigOSUSize, theBigOSUSize)];
         float originalShadowAlpha = 0.6;
         theBigOSUShadow.alpha = originalShadowAlpha;
-        theBigOSUShadow.zPosition = 21;
-        theBigOSUShadow.position = theBigOSU.position;
-        theBigOSUShadow.name = @"theBigOSUShadow";
-        [self addChild:theBigOSUShadow];
+        theBigOSUShadow.zPosition = 10;
+        theBigOSUShadow.position = CGPointZero;//theBigOSU.position;
+        [theBigOSU addChild:theBigOSUShadow];
         [theBigOSUShadow runAction:theShadowAction];
     }];
-    createShadow.timingMode = SKActionTimingEaseOut;
+
     
     SKAction *theWaveAction = [SKAction sequence:@[
                     [SKAction group:@[
@@ -151,9 +114,9 @@
         
         theBigWave.lineWidth = 0;
         theBigWave.alpha = 0.3;
-        theBigWave.zPosition = 15;
+        theBigWave.zPosition = 5;
         theBigWave.position = theBigOSU.position;
-        theBigWave.name = @"theBigWave";
+        //theBigWave.name = @"theBigWave";
         theBigWave.path = theBigWavePath;
         
         [self addChild:theBigWave];
@@ -162,8 +125,8 @@
         [theBigWave runAction:theWaveAction];
     }];
     
-    SKAction *theOSUAction =[SKAction repeatActionForever:[SKAction sequence:@[
-                [SKAction scaleTo:0.96  duration:scaleDuration],
+    theBigOSUAction =[SKAction repeatActionForever:[SKAction sequence:@[
+                [SKAction scaleTo:0.96  duration:theBigOSUSpeed],
                 [SKAction group:@[
                                    [SKAction scaleTo:1 duration:0],
                                    createShadow,
@@ -171,14 +134,55 @@
                                    ]]
                  ]] ];
     [self addChild:theBigOSU];
+    [theBigOSU runAction:theBigOSUAction];
+}
+#pragma mark 方法
+- (void)initBGM{
+    ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
+    SettingsDealer *settings = [[SettingsDealer alloc] init];
+    if (![appSupport isDatabaseExist]) {
+        [self displayWarning:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
+    }else{
+        if (![appSupport isCurrentDatabaseUpToDateToDatabaseOfURL:
+              [[settings loadDirectory] URLByAppendingPathComponent:@"osu!.db" isDirectory:NO]]) {
+            [self displayWarning:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
+        }else{
+            
+            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
+            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
+            [super.musicPlayer playRandomInSet:importedDB.importedBeatmaps];
+            
+            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
+            [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
+            
+            
+            [self didMusicEndPlaying:super.musicPlayer.mapPlaying];
+            
+            
+        }
+    }
+}
+- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block{
+    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
     
-    theOSUAction.timingMode = SKActionTimingEaseOut;
-    [theBigOSU runAction:theOSUAction];
+    
+    [message addMessageMaskWithLines:1];
+    [message addMessageLabelWithString:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice") onLine:1];
+    
+    [self addChild:message];
+    [message fadeOut];
+    [self runAction:[SKAction sequence:@[
+                                         [SKAction waitForDuration:1],
+                                         [SKAction runBlock:^(void){
+        firstRunController = [[FirstRunWindowController alloc] initWithWindowNibName:@"FirstRunWindow"];
+        [firstRunController showWindow:self];
+        [firstRunController showRelativeToRect:message.frame ofView:self.view preferredEdge:NSMinYEdge completion:block];
+    }]
+                                         ]]];
 }
 #pragma mark 响应事件 - Resize
 - (void)didChangeSize:(CGSize)oldSize{
     [super didChangeSize:oldSize];
-    sceneSize = self.scene.size;
     [self resizeTheBigOSU:oldSize];
     [self resizeBackground];
 }
@@ -198,18 +202,39 @@
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
     float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
     
-    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0]];
 }
 #pragma mark 响应事件 - 主要
+- (void)willMusicEndPlaying:(Beatmap *)beatmap{
+    [theBigOSU runAction:[SKAction speedTo:1 duration:0]];
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
+    stars.particleBirthRate = 2;
+}
 - (void)didMusicEndPlaying:(Beatmap *)beatmap{
+    [self didMusicMeetKeyTimingPoint:super.musicPlayer.mapPlaying];
+    [self displayMessage:[NSString stringWithFormat:@"%@ - %@",beatmap.beatmapSetId, beatmap.title]];
+
+}
+- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap{
+    [theBigOSU removeAllActions];
+    float theBigOSUSpeed = [[[beatmap.timingPointsKeySorted objectAtIndex:[super.musicPlayer referanceIndexInKeyTimingPoints]] bps] floatValue];
+    float nextTiming = [super.musicPlayer timeToNextBeat];
+    [theBigOSU runAction:[SKAction sequence:@[
+                                              [SKAction waitForDuration:nextTiming],
+                                              theBigOSUAction
+                                              ]]
+     ];
+    theBigOSU.speed = theBigOSUSpeed;
+    NSLog(@"Speed: %f",theBigOSU.speed);
     
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
+    stars.particleBirthRate = theBigOSUSpeed * 10;
+
 }
 - (void)showMainMenu{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
     float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
     
-    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     
     SKAction *moveLeft = [SKAction moveToX:-theBigOSUSize*0.2 duration:0.2 ];
     moveLeft.timingMode =SKActionTimingEaseOut;
@@ -228,7 +253,7 @@
 }
 - (void)leftDown:(NSEvent *)theEvent{
     [super leftDown:theEvent];
-    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
+
     if ([theBigOSU containsPoint:[super locationInScene]]) {
         [self showMainMenu];
     }
@@ -237,18 +262,17 @@
 
 - (void)overDetect{
     CGPoint thisFrameCursorPosition = [super locationInScene];
-    SKNode *theBigOSU = [self childNodeWithName:@"theBigOSU"];
     BOOL currentState = [theBigOSU containsPoint:thisFrameCursorPosition];
     if (currentState == YES & theBigOSUMouseHoverFraction == 1) {
         theBigOSUMouseHoverFraction = 1.1;
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
         float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
-        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.1]];
+        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.4]];
     }else if(currentState == NO & theBigOSUMouseHoverFraction > 1.02){
         theBigOSUMouseHoverFraction = 1;
         float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
         float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
-        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.1]];
+        [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.4]];
     }
 }
 #pragma mark 响应事件 - 系统

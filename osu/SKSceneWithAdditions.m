@@ -70,7 +70,14 @@
 }
 #pragma mark 方法
 
-
+- (void)displayWarning:(NSString *)messageString{
+    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
+    [message addMessageMaskWithLines:1];
+    [message addMessageLabelWithString:messageString onLine:1];
+    [self addChild:message];
+    [message playSound];
+    [message fadeOut];
+}
 - (void)displayMessage:(NSString *)messageString{
     SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
     [message addMessageMaskWithLines:1];
@@ -103,6 +110,14 @@
     AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
     [appDelegate.globalMusicPlayer recieveWillEndPlaying:^(Beatmap *beatmap){[self willMusicEndPlaying:beatmap];}
                                            DidEndPlaying:^(Beatmap *beatmap){[self didMusicEndPlaying:beatmap];}];
+    [appDelegate.globalMusicPlayer recieveMeetTimingPoint:^(Beatmap *beatmap){[self didMusicMeetTimingPoint:beatmap];}
+                                                 KeyPoint:^(Beatmap *beatmap){[self didMusicMeetKeyTimingPoint:beatmap];}];
+}
+- (void)didMusicMeetTimingPoint:(Beatmap *)beatmap{
+    
+}
+- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap{
+    
 }
 
 - (void)willMusicEndPlaying:(Beatmap *)beatmap{

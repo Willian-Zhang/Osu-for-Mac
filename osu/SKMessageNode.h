@@ -21,6 +21,7 @@
 - (SKLabelNode *)messageLabelWithString:(NSString *)aString onLine:(int)lineCount;
 - (void)addMessageLabelWithString:(NSString *)aString onLine:(int)lineCount;
 
+- (void)playSound;
 - (void)fadeOut;
 - (void)fadeOutNow;
 - (void)fadeOutIn:(float)seconds;

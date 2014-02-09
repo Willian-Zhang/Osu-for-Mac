@@ -18,9 +18,13 @@ enum{
 @class SKMusicPlayerControllerNode;
 
 @interface MainScene : SKSceneWithAdditions{
-    CGSize sceneSize;
     float theBigOSUFraction;
     float theBigOSUMouseHoverFraction;
+    
+    SKSpriteNode  *theBigOSU;
+    SKAction      *theBigOSUAction;
+    SKSpriteNode  *theBigOSUShadow;
+    
     FirstRunWindowController *firstRunController;
     
     SKMusicPlayerControllerNode *musicControllerNode;

@@ -28,6 +28,7 @@
  不要忘记在覆写前运行super.
  */
 - (void)displayMessage:(NSString *)messageString;
+- (void)displayWarning:(NSString *)messageString;
 /**
  Don't forget to call super when overide.
  不要忘记在覆写前运行super.
@@ -40,6 +41,11 @@
 - (void)leftUp:(NSEvent *)theEvent;
 - (CGPoint)locationInScene;
 
+
+
+
+- (void)didMusicMeetTimingPoint:(Beatmap *)beatmap;
+- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap;
 /**
  Override this to perform Global Music Player Event, called when one music ends play.
  覆写此以提供提供Global Music Player事件, 将在一首歌曲播放完成后执行.

@@ -17,14 +17,15 @@
         fontSize = 25;
         lineSpaceSize = 10;
         marginSize = 12;
-        [self runAction:[SKAction playSoundFileNamed:@"notify.wav" waitForCompletion:NO]];
         self.name = @"message";
         self.alpha = 0.9;
         self.zPosition = 30;
     }
     return self;
 }
-
+- (void)playSound{
+    [self runAction:[SKAction playSoundFileNamed:@"notify.wav" waitForCompletion:NO]];
+}
 - (SKNode *)messageMaskWithLines:(int)lineNumber{
     _lineNumber = lineNumber;
     int height = 2 * marginSize + fontSize * lineNumber + lineSpaceSize * ( lineNumber - 1 )  ;

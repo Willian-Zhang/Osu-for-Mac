@@ -55,7 +55,7 @@
 @dynamic state;
 @dynamic tags;
 @dynamic threadID;
-@dynamic timmingPointNumber;
+@dynamic timingPointNumber;
 @dynamic title;
 @dynamic titleU;
 @dynamic totalTime;
@@ -93,7 +93,7 @@
     
     int timingPointNumber =                             [reader readInt32];
     
-    [beatmap setTimmingPointNumber:[NSNumber numberWithInt:     timingPointNumber]];
+    [beatmap setTimingPointNumber:[NSNumber numberWithInt:     timingPointNumber]];
     if (timingPointNumber > 0) {
         NSMutableSet *timingPointsSet = [[NSMutableSet alloc] initWithCapacity:timingPointNumber];
         for (int pointCount = 0; pointCount<timingPointNumber; pointCount++) {
@@ -133,5 +133,16 @@
     return beatmap;
 }
 
+@synthesize timingPointsSorted;
+- (NSArray *)timingPointsSorted{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"offset" ascending:YES];
+    NSArray *sortArray = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    return [self.timingPoints  sortedArrayUsingDescriptors:sortArray];
+}
+@synthesize timingPointsKeySorted;
+- (NSArray *)timingPointsKeySorted{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyTiming = YES"];
+    return [[self timingPointsSorted] filteredArrayUsingPredicate:predicate];
+}
 
 @end

@@ -62,7 +62,9 @@
 }
 
 - (NSDictionary *)beatmapDicAtIndex:(NSInteger)index{
+    
     return [(NSArray *)[osuDB objectForKey:@"beatmapArray"] objectAtIndex:index];
+    
 }
 
 @end

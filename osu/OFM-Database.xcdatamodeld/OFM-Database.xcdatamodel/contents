@@ -42,7 +42,7 @@
         <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="threadID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="timmingPointNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timingPointNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleU" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -66,8 +66,8 @@
         <relationship name="beatmap" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="timingPoints" inverseEntity="Beatmap" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Beatmap" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ImportedOsuDB" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="TimingPoint" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Beatmap" positionX="0" positionY="0" width="128" height="750"/>
+        <element name="ImportedOsuDB" positionX="-315" positionY="-159" width="128" height="150"/>
+        <element name="TimingPoint" positionX="205" positionY="612" width="128" height="120"/>
     </elements>
 </model>

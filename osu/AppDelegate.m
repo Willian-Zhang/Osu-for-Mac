@@ -46,7 +46,7 @@
             if (result == FirstRunConfigureSucceed) {
                 
             }else if (result == FirstRunConfigureFailed){
-                [mainScene displayMessage:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
+                [mainScene displayWarning:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
             }
         }];
     }else{

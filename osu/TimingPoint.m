@@ -27,10 +27,9 @@
         float mutiplier = -100.0 / badBPM;
         [timingPoint setBpsMutiplier:[NSNumber numberWithFloat:mutiplier]];
     }
-    [timingPoint setOffset:[NSNumber numberWithFloat:       [reader readDouble]]];
+    [timingPoint setOffset:[NSNumber numberWithFloat:       [reader readDouble] * 0.001]];
     [timingPoint setKeyTiming:[NSNumber numberWithInt:      [reader readInt8]]];
     return timingPoint;
-    
 }
 
 @end

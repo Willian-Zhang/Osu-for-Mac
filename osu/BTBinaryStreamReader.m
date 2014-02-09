@@ -213,6 +213,7 @@ GENERATE_METHOD(Double, double, uint64_t)
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSDate *date = [dateFormatter dateFromString:[NSString stringWithFormat:@"%lld",dateInt]];
+    [dateFormatter release];
     return date;
 }
 @end

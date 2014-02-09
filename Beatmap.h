@@ -54,12 +54,15 @@
 @property (nonatomic, retain) NSNumber * state;
 @property (nonatomic, retain) NSString * tags;
 @property (nonatomic, retain) NSNumber * threadID;
-@property (nonatomic, retain) NSNumber * timmingPointNumber;
+@property (nonatomic, retain) NSNumber * timingPointNumber;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * titleU;
 @property (nonatomic, retain) NSNumber * totalTime;
 @property (nonatomic, retain) NSSet *dbSource;
 @property (nonatomic, retain) NSSet *timingPoints;
+
+@property (nonatomic,readonly) NSArray *timingPointsSorted;//Added
+@property (nonatomic,readonly) NSArray *timingPointsKeySorted;//Added
 @end
 
 @class BTBinaryStreamReader;
