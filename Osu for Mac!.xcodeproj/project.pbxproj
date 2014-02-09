@@ -16,7 +16,6 @@
 		7D30775A18A5410500F2A740 /* nextMusicButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D30775818A5410500F2A740 /* nextMusicButton@2x.png */; };
 		7D30776018A55A6500F2A740 /* ImportedOsuDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30775F18A55A6500F2A740 /* ImportedOsuDB.m */; };
 		7D30776318A56BFB00F2A740 /* TimingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30776218A56BFB00F2A740 /* TimingPoint.m */; };
-		7D30776918A56C5800F2A740 /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30776818A56C5800F2A740 /* Beatmap.m */; };
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
 		7D351CAC1896557B00FBDA2A /* MainCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MainCircle.sks */; };
 		7D3FDD41189C327E003A9BE8 /* menuhit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D3FDD40189C327E003A9BE8 /* menuhit.wav */; };
@@ -48,10 +47,12 @@
 		7D7DBB4518A3FADC008D3DEF /* GlobalMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBB4418A3FADC008D3DEF /* GlobalMusicPlayer.m */; };
 		7D93C1431897FF2A00B20DD3 /* main-background-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1411897FF2A00B20DD3 /* main-background-circle.png */; };
 		7D93C1441897FF2A00B20DD3 /* main-background-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93C1421897FF2A00B20DD3 /* main-background-circle@2x.png */; };
+		7D9EC32418A7C83A00854242 /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9EC32318A7C83A00854242 /* Beatmap.m */; };
 		7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DA94D221896794B00F67EC4 /* Localizable.strings */; };
 		7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */; };
 		7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F5481899293A00DED2C7 /* MainMenu.xib */; };
 		7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */; };
+		7DCB703B18A7D37400C7362F /* INI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCB703618A7D32D00C7362F /* INI.framework */; };
 		7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA7E3D18918D5B00AB5E4D /* ScaningScene.m */; };
 		7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */ = {isa = PBXBuildFile; fileRef = 7DFA7E3F18918E7100AB5E4D /* osu! by peppy */; };
 		7DFEAAAB18A0032400870EBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFEAAAA18A0032400870EBD /* AVFoundation.framework */; };
@@ -64,6 +65,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7D7131E8188C3F5000959B80;
 			remoteInfo = osu;
+		};
+		7DCB703518A7D32D00C7362F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = INI.framework;
+		};
+		7DCB703718A7D32D00C7362F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB41D1A911CAF3DB0018876A;
+			remoteInfo = ini;
+		};
+		7DCB703918A7D36F00C7362F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = INI.framework;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,8 +103,6 @@
 		7D30775F18A55A6500F2A740 /* ImportedOsuDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportedOsuDB.m; sourceTree = "<group>"; };
 		7D30776118A56BFB00F2A740 /* TimingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingPoint.h; sourceTree = "<group>"; };
 		7D30776218A56BFB00F2A740 /* TimingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingPoint.m; sourceTree = "<group>"; };
-		7D30776718A56C5800F2A740 /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Beatmap.h; path = ../Beatmap.h; sourceTree = "<group>"; };
-		7D30776818A56C5800F2A740 /* Beatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Beatmap.m; path = ../Beatmap.m; sourceTree = "<group>"; };
 		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
 		7D351CAA1896557B00FBDA2A /* MainCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainCircle.sks; sourceTree = "<group>"; };
 		7D3FDD40189C327E003A9BE8 /* menuhit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = menuhit.wav; path = Skin/default/menuhit.wav; sourceTree = "<group>"; };
@@ -134,6 +154,8 @@
 		7D7DBB4418A3FADC008D3DEF /* GlobalMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMusicPlayer.m; sourceTree = "<group>"; };
 		7D93C1411897FF2A00B20DD3 /* main-background-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-background-circle.png"; sourceTree = "<group>"; };
 		7D93C1421897FF2A00B20DD3 /* main-background-circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-background-circle@2x.png"; sourceTree = "<group>"; };
+		7D9EC32218A7C83A00854242 /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beatmap.h; sourceTree = "<group>"; };
+		7D9EC32318A7C83A00854242 /* Beatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Beatmap.m; sourceTree = "<group>"; };
 		7DA94D1718966C4100F67EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7DA94D1818966C4100F67EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
 		7DA94D1918966C4100F67EC4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -147,6 +169,7 @@
 		7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunWindowController.m; sourceTree = "<group>"; };
 		7DC3F5481899293A00DED2C7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstRunWindow.xib; sourceTree = "<group>"; };
+		7DCB703018A7D32C00C7362F /* INI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = INI.xcodeproj; path = "../../../Libraries/INI.framework-master/INI.xcodeproj"; sourceTree = "<group>"; };
 		7DFA7E3C18918D5B00AB5E4D /* ScaningScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaningScene.h; sourceTree = "<group>"; };
 		7DFA7E3D18918D5B00AB5E4D /* ScaningScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaningScene.m; sourceTree = "<group>"; };
 		7DFA7E3F18918E7100AB5E4D /* osu! by peppy */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "osu! by peppy"; path = "Skin/osu! by peppy"; sourceTree = "<group>"; };
@@ -158,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DCB703B18A7D37400C7362F /* INI.framework in Frameworks */,
 				7D1846BB18A12C1C00818CCD /* CoreData.framework in Frameworks */,
 				7DFEAAAB18A0032400870EBD /* AVFoundation.framework in Frameworks */,
 				7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */,
@@ -200,6 +224,7 @@
 		7D5BB0EF189D548C00EDBA9F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				7DCB703018A7D32C00C7362F /* INI.xcodeproj */,
 				7D5BB0F0189D549F00EDBA9F /* BTBinary */,
 			);
 			name = Library;
@@ -253,8 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				7D1846B518A1210C00818CCD /* OFM-Database.xcdatamodeld */,
-				7D30776718A56C5800F2A740 /* Beatmap.h */,
-				7D30776818A56C5800F2A740 /* Beatmap.m */,
+				7D9EC32218A7C83A00854242 /* Beatmap.h */,
+				7D9EC32318A7C83A00854242 /* Beatmap.m */,
 				7D30776118A56BFB00F2A740 /* TimingPoint.h */,
 				7D30776218A56BFB00F2A740 /* TimingPoint.m */,
 				7D30775E18A55A6500F2A740 /* ImportedOsuDB.h */,
@@ -393,6 +418,15 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
+		7DCB703118A7D32C00C7362F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DCB703618A7D32D00C7362F /* INI.framework */,
+				7DCB703818A7D32D00C7362F /* ini */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7DE5EA76189A7454008A76DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +450,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7DCB703A18A7D36F00C7362F /* PBXTargetDependency */,
 			);
 			name = "Osu for Mac!";
 			productName = osu;
@@ -469,6 +504,12 @@
 			mainGroup = 7D7131E0188C3F5000959B80;
 			productRefGroup = 7D7131EA188C3F5000959B80 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7DCB703118A7D32C00C7362F /* Products */;
+					ProjectRef = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7D7131E8188C3F5000959B80 /* Osu for Mac! */,
@@ -476,6 +517,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7DCB703618A7D32D00C7362F /* INI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = INI.framework;
+			remoteRef = 7DCB703518A7D32D00C7362F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7DCB703818A7D32D00C7362F /* ini */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = ini;
+			remoteRef = 7DCB703718A7D32D00C7362F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7D7131E7188C3F5000959B80 /* Resources */ = {
@@ -519,7 +577,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D30776918A56C5800F2A740 /* Beatmap.m in Sources */,
 				7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */,
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
 				7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */,
@@ -539,6 +596,7 @@
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
+				7D9EC32418A7C83A00854242 /* Beatmap.m in Sources */,
 				7D30776018A55A6500F2A740 /* ImportedOsuDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +616,11 @@
 			isa = PBXTargetDependency;
 			target = 7D7131E8188C3F5000959B80 /* Osu for Mac! */;
 			targetProxy = 7D713214188C3F5000959B80 /* PBXContainerItemProxy */;
+		};
+		7DCB703A18A7D36F00C7362F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = INI.framework;
+			targetProxy = 7DCB703918A7D36F00C7362F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

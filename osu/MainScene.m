@@ -225,7 +225,7 @@
                                               ]]
      ];
     theBigOSU.speed = theBigOSUSpeed;
-    NSLog(@"Speed: %f",theBigOSU.speed);
+    //NSLog(@"Speed: %f",theBigOSU.speed);
     
     SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
     stars.particleBirthRate = theBigOSUSpeed * 10;
