@@ -200,9 +200,7 @@
                                          [SKAction runBlock:^(void){
         firstRunController = [[FirstRunWindowController alloc] initWithWindowNibName:@"FirstRunWindow"];
         [firstRunController showWindow:self];
-        [firstRunController showRelativeToRect:CGRectMake(self.view.frame.origin.x,
-                                                          self.view.frame.origin.y - self.view.frame.size.height + 15,
-                                                          self.view.frame.size.width,30)
+        [firstRunController showRelativeToRect:self.view.frame
                                         ofView:self.view preferredEdge:NSMinYEdge completion:block];
     }]
                                          ]]];

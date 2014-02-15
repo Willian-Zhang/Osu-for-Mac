@@ -26,6 +26,8 @@
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
 		7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */; };
+		7D34382F18AFE58900620D2B /* INIEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382C18AFE58900620D2B /* INIEntry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D34383018AFE58900620D2B /* INIFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382E18AFE58900620D2B /* INIFile.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
 		7D351CAC1896557B00FBDA2A /* MainCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MainCircle.sks */; };
 		7D3FDD41189C327E003A9BE8 /* menuhit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D3FDD40189C327E003A9BE8 /* menuhit.wav */; };
@@ -67,7 +69,6 @@
 		7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */; };
 		7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F5481899293A00DED2C7 /* MainMenu.xib */; };
 		7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */; };
-		7DCB703B18A7D37400C7362F /* INI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCB703618A7D32D00C7362F /* INI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7DCB703E18A7D41E00C7362F /* OsuFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB703D18A7D41E00C7362F /* OsuFile.m */; };
 		7DCB704F18A7F66700C7362F /* Beatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB704E18A7F66700C7362F /* Beatmap.m */; };
 		7DCB705218A7F66800C7362F /* OsuDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB705118A7F66800C7362F /* OsuDB.m */; };
@@ -84,27 +85,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7D7131E8188C3F5000959B80;
 			remoteInfo = osu;
-		};
-		7DCB703518A7D32D00C7362F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = INI.framework;
-		};
-		7DCB703718A7D32D00C7362F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB41D1A911CAF3DB0018876A;
-			remoteInfo = ini;
-		};
-		7DCB703918A7D36F00C7362F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = INI.framework;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -130,6 +110,11 @@
 		7D2DB149189638CC009F8FBC /* SKMessageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessageNode.m; sourceTree = "<group>"; };
 		7D30775418A5367C00F2A740 /* SKMusicPlayerControllerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMusicPlayerControllerNode.h; sourceTree = "<group>"; };
 		7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKMusicPlayerControllerNode.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D34382A18AFE58900620D2B /* INI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INI.h; sourceTree = "<group>"; };
+		7D34382B18AFE58900620D2B /* INIEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INIEntry.h; sourceTree = "<group>"; };
+		7D34382C18AFE58900620D2B /* INIEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INIEntry.m; sourceTree = "<group>"; };
+		7D34382D18AFE58900620D2B /* INIFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INIFile.h; sourceTree = "<group>"; };
+		7D34382E18AFE58900620D2B /* INIFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INIFile.m; sourceTree = "<group>"; };
 		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
 		7D351CAA1896557B00FBDA2A /* MainCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainCircle.sks; sourceTree = "<group>"; };
 		7D3FDD40189C327E003A9BE8 /* menuhit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = menuhit.wav; path = Skin/default/menuhit.wav; sourceTree = "<group>"; };
@@ -204,7 +189,6 @@
 		7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunWindowController.m; sourceTree = "<group>"; };
 		7DC3F5481899293A00DED2C7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstRunWindow.xib; sourceTree = "<group>"; };
-		7DCB703018A7D32C00C7362F /* INI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = INI.xcodeproj; path = "../../../Libraries/INI.framework-master/INI.xcodeproj"; sourceTree = "<group>"; };
 		7DCB703C18A7D41E00C7362F /* OsuFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsuFile.h; sourceTree = "<group>"; };
 		7DCB703D18A7D41E00C7362F /* OsuFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsuFile.m; sourceTree = "<group>"; };
 		7DCB704D18A7F66700C7362F /* Beatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beatmap.h; sourceTree = "<group>"; };
@@ -224,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DCB703B18A7D37400C7362F /* INI.framework in Frameworks */,
 				7D1846BB18A12C1C00818CCD /* CoreData.framework in Frameworks */,
 				7DFEAAAB18A0032400870EBD /* AVFoundation.framework in Frameworks */,
 				7D7131EF188C3F5000959B80 /* SpriteKit.framework in Frameworks */,
@@ -265,10 +248,22 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		7D34382918AFE56E00620D2B /* INI.framework */ = {
+			isa = PBXGroup;
+			children = (
+				7D34382A18AFE58900620D2B /* INI.h */,
+				7D34382B18AFE58900620D2B /* INIEntry.h */,
+				7D34382C18AFE58900620D2B /* INIEntry.m */,
+				7D34382D18AFE58900620D2B /* INIFile.h */,
+				7D34382E18AFE58900620D2B /* INIFile.m */,
+			);
+			name = INI.framework;
+			sourceTree = "<group>";
+		};
 		7D5BB0EF189D548C00EDBA9F /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				7DCB703018A7D32C00C7362F /* INI.xcodeproj */,
+				7D34382918AFE56E00620D2B /* INI.framework */,
 				7D5BB0F0189D549F00EDBA9F /* BTBinary */,
 			);
 			name = Library;
@@ -511,15 +506,6 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
-		7DCB703118A7D32C00C7362F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7DCB703618A7D32D00C7362F /* INI.framework */,
-				7DCB703818A7D32D00C7362F /* ini */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7DCB704618A7F29A00C7362F /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,7 +543,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7DCB703A18A7D36F00C7362F /* PBXTargetDependency */,
 			);
 			name = "Osu for Mac!";
 			productName = osu;
@@ -611,12 +596,6 @@
 			mainGroup = 7D7131E0188C3F5000959B80;
 			productRefGroup = 7D7131EA188C3F5000959B80 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7DCB703118A7D32C00C7362F /* Products */;
-					ProjectRef = 7DCB703018A7D32C00C7362F /* INI.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				7D7131E8188C3F5000959B80 /* Osu for Mac! */,
@@ -624,23 +603,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7DCB703618A7D32D00C7362F /* INI.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = INI.framework;
-			remoteRef = 7DCB703518A7D32D00C7362F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7DCB703818A7D32D00C7362F /* ini */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = ini;
-			remoteRef = 7DCB703718A7D32D00C7362F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7D7131E7188C3F5000959B80 /* Resources */ = {
@@ -698,6 +660,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D34383018AFE58900620D2B /* INIFile.m in Sources */,
 				7DFA7E3E18918D5B00AB5E4D /* ScaningScene.m in Sources */,
 				7D713203188C3F5000959B80 /* MyScene.m in Sources */,
 				7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */,
@@ -713,6 +676,7 @@
 				7D5BB0EB189D534900EDBA9F /* BTBinaryStreamReader.m in Sources */,
 				7D6C8659189F7C39004AF862 /* ApplicationSupport.m in Sources */,
 				7DCB703E18A7D41E00C7362F /* OsuFile.m in Sources */,
+				7D34382F18AFE58900620D2B /* INIEntry.m in Sources */,
 				7D7DBB4518A3FADC008D3DEF /* GlobalMusicPlayer.m in Sources */,
 				7DCB705218A7F66800C7362F /* OsuDB.m in Sources */,
 				7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */,
@@ -742,11 +706,6 @@
 			isa = PBXTargetDependency;
 			target = 7D7131E8188C3F5000959B80 /* Osu for Mac! */;
 			targetProxy = 7D713214188C3F5000959B80 /* PBXContainerItemProxy */;
-		};
-		7DCB703A18A7D36F00C7362F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = INI.framework;
-			targetProxy = 7DCB703918A7D36F00C7362F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -869,6 +828,10 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Willian/Documents/MyDocuments/Mac\\ Programming/Osu\\ for\\ Mac!/osu",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "osu/Osu for Mac!-Prefix.pch";
 				INFOPLIST_FILE = "osu/Osu for Mac!-Info.plist";
@@ -886,6 +849,10 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Willian/Documents/MyDocuments/Mac\\ Programming/Osu\\ for\\ Mac!/osu",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "osu/Osu for Mac!-Prefix.pch";
 				INFOPLIST_FILE = "osu/Osu for Mac!-Info.plist";
