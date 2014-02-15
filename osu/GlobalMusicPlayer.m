@@ -165,13 +165,18 @@
     if ([eventDelegate respondsToSelector:@selector(GMPwillEndPlaying:)]) {
         [eventDelegate GMPwillEndPlaying:mapPlaying];
     }
+    //!-Add codes below -!//
+    [timingTimerSet enumerateObjectsUsingBlock:^(NSTimer *timer,BOOL *stop){
+        [timer invalidate];
+    }];
+    [timingTimerSet removeAllObjects];
     [player stop];
     if (modeDelegate.GMPEndMode == GlobalMusicPlayerEndModeRandom) {
         [self playRandom];
     }else if (modeDelegate.GMPEndMode == GlobalMusicPlayerEndModeAgain){
         [self playBeatmap:mapPlaying];
     }
-    //
+    //!-Add codes behind -!//
     if ([eventDelegate respondsToSelector:@selector(GMPdidEndPlayingAndPlays:)]) {
         [eventDelegate GMPdidEndPlayingAndPlays:mapPlaying];
     }
