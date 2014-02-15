@@ -38,15 +38,14 @@
 
         [self initTheBigOSU];
         [self initBackground];
-        musicControllerNode = [[SKMusicPlayerControllerNode alloc] init];
-        musicControllerNode.zPosition = 50;
-        musicControllerNode.position = CGPointMake([super rightMargin], [super topMargin]);
-        [self addChild:musicControllerNode];
-        [self.view.window makeFirstResponder:musicControllerNode];
+        [self initMusicController];
     }
     return self;
 }
 // called when inited
+- (void)willMoveFromView:(SKView *)view{
+    NSLog(@"%@",[view.scene.class description]);
+}
 - (void)didMoveToView:(SKView *)view{
     [self setGMPStartMode:GlobalMusicPlayerStartModeFromBegin];
     [self setGMPEndMode:GlobalMusicPlayerEndModeRandom];
@@ -65,7 +64,12 @@
     circles.name = @"backgroundCircles";
     [self addChild:circles];
 }
-
+- (void)initMusicController{
+    musicControllerNode = [[SKMusicPlayerControllerNode alloc] initWithScene:self];
+    musicControllerNode.zPosition = 50;
+    musicControllerNode.position = CGPointMake([super rightMargin], [super topMargin]);
+    [self addChild:musicControllerNode];
+}
 
 - (void)initTheBigOSU{
     
@@ -153,6 +157,7 @@
         [super.GMP playRandom];
         [self setGMPStartMode:GlobalMusicPlayerStartModeFromBegin];
         [self synchronizePopingWithRythemOf:super.GMP.mapPlaying];
+        [musicControllerNode updateNowPlaying:super.GMP.mapPlaying.title];
     }
 }
 - (void)synchronizePopingWithRythemOf:(Beatmap *)beatmap{
@@ -207,8 +212,11 @@
     [super didChangeSize:oldSize];
     [self resizeTheBigOSU:oldSize];
     [self resizeBackground];
+    [self resizeMusicController];
 }
-
+- (void)resizeMusicController{
+    musicControllerNode.position = CGPointMake([super rightMargin], [super topMargin]);
+}
 - (void)resizeBackground{
     SKEmitterNode *circles =(SKEmitterNode *)([self childNodeWithName:@"backgroundCircles"]);
     SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
@@ -234,7 +242,7 @@
     if (![beatmap indexOfKeyTimingPointsAt:super.GMP.currentTime] == 0) {
         [self synchronizePopingWithRythemOf:beatmap];
     }
-    [self displayMessage:[NSString stringWithFormat:@"%@ - %@",beatmap.beatmapSetId, beatmap.title]]; // For Debug!!
+    [musicControllerNode updateNowPlaying:beatmap.title];
 }
 
 - (void)showMainMenu{

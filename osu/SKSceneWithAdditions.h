@@ -13,11 +13,23 @@
 @class Beatmap;
 @class GlobalMusicPlayer;
 
-@interface SKSceneWithAdditions : SKScene <GMPEventDelegate, GMPModeDelegate, AppSupportReportEventDelegate>
+static const uint32_t cursorCategory    =  0x1 << 0;
+static const uint32_t buttonCategory    =  0x1 << 1;
+static const uint32_t hitObjectCategory =  0x1 << 2;
+
+@protocol SKNodeMouseOverEvents <NSObject>
+@optional
+- (void)didMouseEnter;
+- (void)didMouseExit;
+@end
+@interface SKSceneWithAdditions : SKScene <GMPEventDelegate, GMPModeDelegate, AppSupportReportEventDelegate, SKPhysicsContactDelegate>{
+    NSMutableSet *contactSet;
+}
 
 @property (nonatomic ) CGPoint lastFrameCursorPosition;
 @property (nonatomic , retain) SKNode *cursor;
 @property (nonatomic , retain) SKTexture *cursortailTexture;
+- (void)addContact:(SKNode *)node;
 
 @property (readonly) float leftMargin;
 @property (readonly) float rightMargin;

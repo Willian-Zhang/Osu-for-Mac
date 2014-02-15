@@ -17,22 +17,20 @@
     if (self) {
         SKTexture *nextButtonTexture = [SKTexture textureWithImageNamed:@"editor-button-ff"];
         [self addChild:[SKSpriteNode spriteNodeWithTexture:nextButtonTexture]];
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
-
 -(void)mouseDown:(NSEvent *)theEvent{
     AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
     GlobalMusicPlayer *GMP = appDelegate.globalMusicPlayer;
     [GMP next];
 }
--(void)mouseMoved:(NSEvent *)theEvent{
-    [self runAction:[SKAction scaleTo:1.2 duration:0.2]];
+- (void)didMouseEnter{
+    [self runAction:[SKAction scaleTo:1.2 duration:0.1]];
 }
--(void)mouseEntered:(NSEvent *)theEvent{
-    [self runAction:[SKAction scaleTo:1.2 duration:0.2]];
+- (void)didMouseExit{
+    [self runAction:[SKAction scaleTo:1 duration:0.1]];
 }
--(void)mouseExited:(NSEvent *)theEvent{
-    [self runAction:[SKAction scaleTo:1 duration:0.2]];
-}
+
 @end

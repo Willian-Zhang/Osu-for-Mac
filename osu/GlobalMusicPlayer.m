@@ -147,6 +147,10 @@
         [eventDelegate GMPwillEndPlaying:mapPlaying];
     }
     //!-Add codes below -!//
+    [timingTimerSet enumerateObjectsUsingBlock:^(NSTimer *timer,BOOL *stop){
+        [timer invalidate];
+    }];
+    [timingTimerSet removeAllObjects];
     GlobalMusicPlayerEndMode endMode =  [modeDelegate GMPEndMode];
     if       (endMode == GlobalMusicPlayerEndModeRandom) {
         [self playRandom];

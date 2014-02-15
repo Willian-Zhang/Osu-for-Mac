@@ -22,6 +22,8 @@
 @synthesize GMPStartMode;
 @synthesize GMPEndMode;
 
+
+
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self initCursor];
@@ -29,6 +31,9 @@
         [GMP setModeDelegate:self];
         [GMP setEventDelegate:self];
         [[(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport] setReportDelegate:self];
+        contactSet = [[NSMutableSet alloc] init];
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
     }
     return self;
 }
@@ -42,6 +47,11 @@
     cursor = [SKSpriteNode spriteNodeWithTexture:cursorTexture];
     cursor.position = CGPointZero;
     cursor.zPosition = 300;
+    cursor.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:1];
+    cursor.physicsBody.dynamic = YES;
+    cursor.physicsBody.categoryBitMask = cursorCategory;
+    cursor.physicsBody.contactTestBitMask = buttonCategory;
+    //cursor.physicsBody.collisionBitMask = (buttonCategory|hitObjectCategory);
     SKAction *rotationForOnce = [SKAction rotateByAngle:-M_PI duration:10];
     [cursor runAction:[SKAction repeatActionForever:rotationForOnce]];
     [self addChild:cursor];
@@ -96,6 +106,11 @@
     [self addChild:message];
     [message fadeOut];
 }
+- (void)addContact:(SKNode<SKNodeMouseOverEvents> *)node{
+    node.physicsBody.contactTestBitMask ^= cursorCategory;
+    [contactSet addObject:node];
+}
+
 @synthesize leftMargin;
 @synthesize rightMargin;
 @synthesize topMargin;
@@ -136,6 +151,32 @@
     }
 }
 #pragma mark 系统事件
+- (void)didBeginContact:(SKPhysicsContact *)contact{
+    //NSLog(@"A:%@ B:%@",contact.bodyA.node.className,contact.bodyB.node.className);//uncomment this to debug mouse events
+    //B for Cursor
+    if (contact.bodyB.node == cursor) {
+        for (SKNode<SKNodeMouseOverEvents> *node in contactSet) {
+            if (node == contact.bodyA.node) {
+                if ([node respondsToSelector:@selector(didMouseEnter)]) {
+                    
+                    [node didMouseEnter];
+                }
+            }
+        }
+    }
+}
+- (void)didEndContact:(SKPhysicsContact *)contact{
+    if (contact.bodyA.node == cursor || contact.bodyB.node == cursor) {
+        for (SKNode<SKNodeMouseOverEvents> *node in contactSet) {
+            if (node == contact.bodyA.node || node == contact.bodyB.node ) {
+                if ([node respondsToSelector:@selector(didMouseExit)]) {
+                    [node didMouseExit];
+                }
+            }
+        }
+    }
+}
+
 - (void)didChangeSize:(CGSize)oldSize{
     [self resizeMessage];
 }

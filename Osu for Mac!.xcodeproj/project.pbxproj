@@ -60,6 +60,10 @@
 		7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DA94D221896794B00F67EC4 /* Localizable.strings */; };
 		7DAE23BC18AE313A00B5E3FD /* TheBigOSU.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE23BB18AE313A00B5E3FD /* TheBigOSU.m */; };
 		7DAE23C318AE399F00B5E3FD /* MPCNextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE23C218AE399F00B5E3FD /* MPCNextNode.m */; };
+		7DAEE16718AF69CA0067BD62 /* menu-np.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAEE16518AF69CA0067BD62 /* menu-np.png */; };
+		7DAEE16818AF69CA0067BD62 /* menu-np@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DAEE16618AF69CA0067BD62 /* menu-np@2x.png */; };
+		7DAEE16C18AF6C6D0067BD62 /* MPCNowPlayingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAEE16B18AF6C6D0067BD62 /* MPCNowPlayingNode.m */; };
+		7DAEE16F18AF6D820067BD62 /* MPCInfoNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAEE16E18AF6D820067BD62 /* MPCInfoNode.m */; };
 		7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */; };
 		7DC3F5491899293A00DED2C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F5481899293A00DED2C7 /* MainMenu.xib */; };
 		7DC3F54B18992B6900DED2C7 /* FirstRunWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DC3F54A18992B6900DED2C7 /* FirstRunWindow.xib */; };
@@ -125,7 +129,7 @@
 		7D2DB148189638CC009F8FBC /* SKMessageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageNode.h; sourceTree = "<group>"; };
 		7D2DB149189638CC009F8FBC /* SKMessageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessageNode.m; sourceTree = "<group>"; };
 		7D30775418A5367C00F2A740 /* SKMusicPlayerControllerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMusicPlayerControllerNode.h; sourceTree = "<group>"; };
-		7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMusicPlayerControllerNode.m; sourceTree = "<group>"; };
+		7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKMusicPlayerControllerNode.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D351CA6189652FD00FBDA2A /* MainStar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainStar.sks; path = Skin/default/MainStar.sks; sourceTree = "<group>"; };
 		7D351CAA1896557B00FBDA2A /* MainCircle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainCircle.sks; sourceTree = "<group>"; };
 		7D3FDD40189C327E003A9BE8 /* menuhit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = menuhit.wav; path = Skin/default/menuhit.wav; sourceTree = "<group>"; };
@@ -146,8 +150,8 @@
 		7D627F851895AEC400F5AB50 /* star2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star2@2x.png"; path = "Skin/default/star2@2x.png"; sourceTree = "<group>"; };
 		7D6471791892CBDC00BA29F6 /* theBigOSU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theBigOSU.png; sourceTree = "<group>"; };
 		7D64717A1892CBDC00BA29F6 /* theBigOSU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "theBigOSU@2x.png"; sourceTree = "<group>"; };
-		7D6C864C189E6606004AF862 /* SKSceneWithAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSceneWithAdditions.h; sourceTree = "<group>"; };
-		7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSceneWithAdditions.m; sourceTree = "<group>"; };
+		7D6C864C189E6606004AF862 /* SKSceneWithAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SKSceneWithAdditions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7D6C864D189E6606004AF862 /* SKSceneWithAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKSceneWithAdditions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D6C8657189F7C39004AF862 /* ApplicationSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSupport.h; sourceTree = "<group>"; };
 		7D6C8658189F7C39004AF862 /* ApplicationSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSupport.m; sourceTree = "<group>"; };
 		7D7131E9188C3F5000959B80 /* Osu for Mac!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Osu for Mac!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,8 +192,14 @@
 		7DA94D2E18967E5300F67EC4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7DAE23BA18AE313A00B5E3FD /* TheBigOSU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBigOSU.h; sourceTree = "<group>"; };
 		7DAE23BB18AE313A00B5E3FD /* TheBigOSU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBigOSU.m; sourceTree = "<group>"; };
-		7DAE23C118AE399F00B5E3FD /* MPCNextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCNextNode.h; sourceTree = "<group>"; };
-		7DAE23C218AE399F00B5E3FD /* MPCNextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCNextNode.m; sourceTree = "<group>"; };
+		7DAE23C118AE399F00B5E3FD /* MPCNextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPCNextNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7DAE23C218AE399F00B5E3FD /* MPCNextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPCNextNode.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7DAEE16518AF69CA0067BD62 /* menu-np.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-np.png"; sourceTree = "<group>"; };
+		7DAEE16618AF69CA0067BD62 /* menu-np@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-np@2x.png"; sourceTree = "<group>"; };
+		7DAEE16A18AF6C6D0067BD62 /* MPCNowPlayingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCNowPlayingNode.h; sourceTree = "<group>"; };
+		7DAEE16B18AF6C6D0067BD62 /* MPCNowPlayingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCNowPlayingNode.m; sourceTree = "<group>"; };
+		7DAEE16D18AF6D820067BD62 /* MPCInfoNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCInfoNode.h; sourceTree = "<group>"; };
+		7DAEE16E18AF6D820067BD62 /* MPCInfoNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCInfoNode.m; sourceTree = "<group>"; };
 		7DC3F5451899077F00DED2C7 /* FirstRunWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstRunWindowController.h; sourceTree = "<group>"; };
 		7DC3F5461899077F00DED2C7 /* FirstRunWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunWindowController.m; sourceTree = "<group>"; };
 		7DC3F5481899293A00DED2C7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -292,6 +302,8 @@
 		7D627F7C1895924400F5AB50 /* default.atlas */ = {
 			isa = PBXGroup;
 			children = (
+				7DAEE16518AF69CA0067BD62 /* menu-np.png */,
+				7DAEE16618AF69CA0067BD62 /* menu-np@2x.png */,
 				7D10AD4918AE57FB00E3214A /* editor-button-ff.png */,
 				7D10AD4A18AE57FB00E3214A /* editor-button-ff@2x.png */,
 				7D10AD4B18AE57FB00E3214A /* editor-button-info.png */,
@@ -456,8 +468,12 @@
 			children = (
 				7D30775418A5367C00F2A740 /* SKMusicPlayerControllerNode.h */,
 				7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */,
+				7DAEE16D18AF6D820067BD62 /* MPCInfoNode.h */,
+				7DAEE16E18AF6D820067BD62 /* MPCInfoNode.m */,
 				7DAE23C118AE399F00B5E3FD /* MPCNextNode.h */,
 				7DAE23C218AE399F00B5E3FD /* MPCNextNode.m */,
+				7DAEE16A18AF6C6D0067BD62 /* MPCNowPlayingNode.h */,
+				7DAEE16B18AF6C6D0067BD62 /* MPCNowPlayingNode.m */,
 			);
 			name = "Music Player Controller";
 			sourceTree = "<group>";
@@ -655,12 +671,14 @@
 				7D10AD5E18AE57FB00E3214A /* editor-button-pause@2x.png in Resources */,
 				7D10AD5918AE57FB00E3214A /* editor-button-info.png in Resources */,
 				7D7131FF188C3F5000959B80 /* Credits.rtf in Resources */,
+				7DAEE16818AF69CA0067BD62 /* menu-np@2x.png in Resources */,
 				7D10AD5718AE57FB00E3214A /* editor-button-ff.png in Resources */,
 				7D93C1431897FF2A00B20DD3 /* main-background-circle.png in Resources */,
 				7DFA7E4018918E7100AB5E4D /* osu! by peppy in Resources */,
 				7D93C1441897FF2A00B20DD3 /* main-background-circle@2x.png in Resources */,
 				7DA94D241896794B00F67EC4 /* Localizable.strings in Resources */,
 				7D64717C1892CBDC00BA29F6 /* theBigOSU@2x.png in Resources */,
+				7DAEE16718AF69CA0067BD62 /* menu-np.png in Resources */,
 				7D627F871895AEC400F5AB50 /* star2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,7 +720,9 @@
 				7D627F831895ABBD00F5AB50 /* SKOptionNode.m in Sources */,
 				7DC3F5471899077F00DED2C7 /* FirstRunWindowController.m in Sources */,
 				7D713206188C3F5000959B80 /* AppDelegate.m in Sources */,
+				7DAEE16F18AF6D820067BD62 /* MPCInfoNode.m in Sources */,
 				7DCB705518A7F66800C7362F /* DBTimingPoint.m in Sources */,
+				7DAEE16C18AF6C6D0067BD62 /* MPCNowPlayingNode.m in Sources */,
 				7DAE23BC18AE313A00B5E3FD /* TheBigOSU.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
