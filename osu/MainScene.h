@@ -16,8 +16,11 @@ enum{
 };
 
 @class SKMusicPlayerControllerNode;
+@class TheBigOSU;
 
 @interface MainScene : SKSceneWithAdditions{
+    int menuLevel;
+    
     float theBigOSUFraction;
     float theBigOSUMouseHoverFraction;
     
@@ -30,6 +33,7 @@ enum{
     SKMusicPlayerControllerNode *musicControllerNode;
 }
 - (void)initBGM;
+- (void)displayFirstRun;
 - (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block;
 
 @end

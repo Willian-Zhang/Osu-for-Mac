@@ -13,10 +13,7 @@
 @class ApplicationSupport;
 @interface SingleSongSelectScene : SKSceneWithAdditions{
     NSURL *loadSongsDirectory;
-    NSDictionary *osuDB;
-    NSString *currentBeatmapId;
-    NSString *currentBeatmapSetId;
-    NSInteger currentBeatmapIndex;
+    ApplicationSupport *appSupport;
 }
 
 

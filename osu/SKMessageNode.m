@@ -17,7 +17,6 @@
         fontSize = 25;
         lineSpaceSize = 10;
         marginSize = 12;
-        self.name = @"message";
         self.alpha = 0.9;
         self.zPosition = 30;
     }

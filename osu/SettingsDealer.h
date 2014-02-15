@@ -12,6 +12,7 @@
     NSUserDefaults *defaults;
 }
 
+@property (readwrite) int runBuild;
 @property (readwrite) BOOL windowsConnected;
 @property (readwrite) BOOL firstConfigured;
 @property (readwrite, nonatomic, retain) NSURL *loadDirectory;

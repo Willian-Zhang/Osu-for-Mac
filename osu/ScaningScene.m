@@ -24,65 +24,75 @@
     }
     return self;
 }
+#pragma mark Reports
 
+- (void)appSupportReportStartEvent:(AppSupportReportEvents)event
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        if       (event == AppSupportReportLoadBeatmap) {
+            [self displayMessage:NSLocalizedString(@"Scaning Files...", @"Scaning Files Label")];
+        }else if (event == AppSupportReportUpdateDatabase){
+            [self displayMessage:NSLocalizedString(@"Updates required!", @"AllBeatmapsReady is NO; Updates required Label")];
+        }else if (event == AppSupportReportImport){
+            [self displayMessage: NSLocalizedString(@"Importing Database from Windows version ...", @"Importing Database Label")];
+        }
+    });
+}
+- (void)appSupportReportFinishEvent:(AppSupportReportEvents)event
+{
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+    if       (event == AppSupportReportImport) {
+        [self displayMessage:NSLocalizedString(@"Import Succeed!", @"Load Succeeded Message")];
+    }
+        });
+}
+//- (void)appSupportReportMessgae:(NSString *)message withEvent:(AppSupportReportEvents)event
+//{
+//    
+//}
+- (void)appSupportReportError:(NSString *)errorString withEvent:(AppSupportReportEvents)event
+{
+     dispatch_async(dispatch_get_main_queue(), ^(void){
+    if       (event == AppSupportReportImport) {
+        [self displayMessage:NSLocalizedString(@"Import fialed! Perhaps the Windows Osu! Database was corrupted!", @"Load Fialed Message")];
+    }
+     });
+}
 
 #pragma mark Logics
-- (void)loadAllBeatmaps:(scaningCompletion)completion{
-    if ([appSupport isDatabaseExist]) {
-        
-    }else{
-        NSURL *loadURL = [[[SettingsDealer alloc] init] loadDirectory];
-        NSURL *dbURL = [loadURL URLByAppendingPathComponent:@"osu!.db" isDirectory:NO];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[dbURL path] isDirectory:NO]) {
-            [self importDBFromURL:dbURL completion:completion];
+- (void)makeAllBeatmapsReady:(ScaningCompletion)completionBlock{
+    dispatch_queue_t makeReadyQueue = dispatch_queue_create([@"makeReadyQueue" UTF8String], nil);
+    dispatch_async(makeReadyQueue, ^(void){
+        NSError *error = nil;
+        if (![appSupport makeAllBeatmapsReadyAndReturnError:&error]) {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1],
+                                                     [SKAction runBlock:^(void){ completionBlock(NO); }]]]];
+            });
+        }else if (error != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1],
+                                                     [SKAction runBlock:^(void){ completionBlock(NO); }]]]];
+            });
         }else{
-            [self scanFilesInSongsWithCompletion:completion];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1],
+                                                     [SKAction runBlock:^(void){ completionBlock(YES); }]]]];
+            });
         }
-    }
-}
-- (void)scanFilesInSongsWithCompletion:(scaningCompletion)completion{
-    SKLabelNode *loadingLabel = [self loadingLabelWithString:NSLocalizedString(@"Scaning Files...", @"Scaning Files Label")];
-    [loadingLabelGroup addChild:loadingLabel];
+    });
 }
 
-- (void)importDBFromURL:(NSURL *)dbURL completion:(scaningCompletion)completion{
-    SKLabelNode *loadingLabel = [self loadingLabelWithString:NSLocalizedString(@"Importing Database from Windows version ...", @"Importing Database Label")];
-    [loadingLabelGroup addChild:loadingLabel];
-    
-    //WinOsuInterpreter *winConnector = [[WinOsuInterpreter alloc] init];
-    
-    dispatch_queue_t importQueue = dispatch_queue_create([@"importQueue" UTF8String], nil);
-    dispatch_async(importQueue, ^(void){
-        if ([appSupport importWindowsDatabaseOfURL:dbURL]) {
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self moveupLabelArray];
-                SKLabelNode *loadingLabel = [self loadingLabelWithString:NSLocalizedString(@"Import Succeed!", @"Load Succeeded Message") ];
-                [loadingLabelGroup addChild:loadingLabel];
-                [self runAction:[SKAction sequence:@[
-                                                    [SKAction waitForDuration:1],
-                                                    [SKAction runBlock:             completion]]
-                                 ]];
-                
-            });
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self moveupLabelArray];
-                SKLabelNode *loadingLabel = [self loadingLabelWithString:NSLocalizedString(@"Import fialed! Perhaps the Windows Osu! Database was corrupted!", @"Load Fialed Message") ];
-                [loadingLabelGroup addChild:loadingLabel];
-            });
-        }
-//        [winConnector importDatabaseFromWindowsVersionOsuDB:dbURL withReport:^(NSString *title){
-//            dispatch_async(dispatch_get_main_queue(), ^(void){
-//                [self CompleteLoading];
-//                
-//            });
-//        }];
-    });
-    
-    
-}
 
 #pragma mark 视图
+- (void)displayMessage:(NSString *)messageString{
+    [self moveupLabelArray];
+    SKLabelNode *loadingLabel = [self loadingLabelWithString:messageString];
+    [loadingLabelGroup addChild:loadingLabel];
+}
+- (void)displayWarning:(NSString *)messageString{
+    [self displayMessage:messageString];
+}
 - (void)addLoadingLineWithString:(NSString *)aString{
     [self moveupLabelArray];
     SKLabelNode *loadingLabel = [self loadingLabelWithString:[NSString stringWithFormat:@"Loading %@ ...",aString]];

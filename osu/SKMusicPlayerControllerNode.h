@@ -8,20 +8,20 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@class SKSceneWithAdditions;
+@class MPCNextNode;
 
-@interface SKMusicPlayerControllerNode : SKNode{
-    SKSceneWithAdditions *callerScene;
+@interface SKMusicPlayerControllerNode : SKSpriteNode{
     SKNode *previous;
     SKNode *play;
     SKNode *pause;
     SKNode *stop;
-    SKNode *next;
+    MPCNextNode *next;
     
 }
 
 
-- (id)init:(SKSceneWithAdditions *)sender;
+
+//- (id)init:(SKSceneWithAdditions *)sender;
 
 
 @end

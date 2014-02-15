@@ -2,15 +2,15 @@
 //  Beatmap.h
 //  Osu for Mac!
 //
-//  Created by Willian on 14-2-10.
+//  Created by Willian on 14-2-8.
 //  Copyright (c) 2014年 Willian-Zhang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DBTimingPoint, OsuDB;
-@class BTBinaryStreamReader, OsuFile;//add
+@class ImportedOsuDB, TimingPoint;
+@class OsuFile;
 
 @interface Beatmap : NSManagedObject
 
@@ -22,8 +22,8 @@
 @property (nonatomic, retain) NSNumber * beatmapSetId;
 @property (nonatomic, retain) NSNumber * bgDim;
 @property (nonatomic, retain) NSNumber * circles;
-@property (nonatomic, retain) NSString * creator;
 @property (nonatomic, retain) NSNumber * cs;
+@property (nonatomic, retain) NSString * creator;
 @property (nonatomic, retain) NSString * difficulty;
 @property (nonatomic, retain) NSString * dir;
 @property (nonatomic, retain) NSNumber * disableHitSounds;
@@ -59,29 +59,28 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * titleU;
 @property (nonatomic, retain) NSNumber * totalTime;
-@property (nonatomic, retain) OsuDB *dbSource;
+@property (nonatomic, retain) NSSet *dbSource;
 @property (nonatomic, retain) NSSet *timingPoints;
 
-/*add
- */
-@property (nonatomic, readonly) NSArray *allTimingPointsSorted;
-@property (nonatomic, readonly) NSArray *keyTimingPointsSorted;
-@property (nonatomic, readonly) OsuFile *osuFile;
-@property (nonatomic, readonly) NSURL *mp3URL;
-@property (nonatomic, readonly) NSURL *osuURL;
-
-- (int)indexOfKeyTimingPointsAt:(NSTimeInterval)time;
-- (int)indexOfAllTimingPointsAt:(NSTimeInterval)time;
-- (Beatmap *)importBeatmapUsing:(BTBinaryStreamReader *)reader withEndSkip:(NSUInteger)endSkip;
-/*add
- */
+@property (nonatomic,readonly) NSArray *timingPointsSorted;//Added
+@property (nonatomic,readonly) NSArray *timingPointsKeySorted;//Added
+@property (nonatomic,readonly) OsuFile *osuFile;
 @end
+
+@class BTBinaryStreamReader;
 
 @interface Beatmap (CoreDataGeneratedAccessors)
 
-- (void)addTimingPointsObject:(DBTimingPoint *)value;
-- (void)removeTimingPointsObject:(DBTimingPoint *)value;
+- (void)addDbSourceObject:(ImportedOsuDB *)value;
+- (void)removeDbSourceObject:(ImportedOsuDB *)value;
+- (void)addDbSource:(NSSet *)values;
+- (void)removeDbSource:(NSSet *)values;
+
+- (void)addTimingPointsObject:(TimingPoint *)value;
+- (void)removeTimingPointsObject:(TimingPoint *)value;
 - (void)addTimingPoints:(NSSet *)values;
 - (void)removeTimingPoints:(NSSet *)values;
+
+- (Beatmap *)importTo:(Beatmap *)beatmap Using:(BTBinaryStreamReader *)reader withEndSkip:(NSUInteger )endSkip;
 
 @end

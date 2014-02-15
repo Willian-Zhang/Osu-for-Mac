@@ -7,35 +7,46 @@
 //
 
 #import "SKMusicPlayerControllerNode.h"
-#import "SKSceneWithAdditions.h"
+#import "MPCNextNode.h"
 
-#define buttonSize 50
+#define buttonSize 31
 
 @implementation SKMusicPlayerControllerNode
 
-- (id)init:(SKSceneWithAdditions *)sender
+- (id)init
 {
     self = [super init];
     if (self) {
-        callerScene = sender;
-        [sender addChild:self];
-        [self initNext];
-        [self runAction:[SKAction fadeOutWithDuration:20]];
+        [self addNext];
+        [self setUserInteractionEnabled:YES];
+        
     }
     return self;
 }
-- (void)initNext{
-    SKTexture *nextButtonTexture = [SKTexture textureWithImageNamed:@"nextMusicButton"];
-    next = [SKSpriteNode spriteNodeWithTexture:nextButtonTexture size:CGSizeMake(buttonSize, buttonSize)];
-    next.position = [self buttonPositionForReverseCount:2];
+- (void)addNext{
+    next = [[MPCNextNode alloc] init];
+    next.position = [self buttonPositionForReversedCount:2];
+    next.userInteractionEnabled = YES;
+    //[self.scene.view.window makeFirstResponder:next];
+    //next.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:buttonSize/2];
     [self addChild:next];
 }
-- (CGPoint)buttonPositionForReverseCount:(int)count{
+- (CGPoint)buttonPositionForReversedCount:(int)count{
     int gap = 10;
-    return CGPointMake(callerScene.rightMargin - (buttonSize + gap) * count + buttonSize * 0.5
-                       , callerScene.topMargin - buttonSize * 0.5 - gap);
+    return CGPointMake(- (buttonSize + gap) * count + buttonSize * 0.5,
+                       - buttonSize * 0.5 - gap);
 }
-- (void)resizeMusicController{
+- (void)mouseEntered:(NSEvent *)theEvent{
     
+}
+- (void)mouseDown:(NSEvent *)theEvent{
+    CGPoint location =  [theEvent locationInNode:self];
+    for (SKNode *node in self.children) {
+        if ([node isUserInteractionEnabled]) {
+            if ([node containsPoint:location]) {
+                [node mouseDown:theEvent];
+            }
+        }
+    }
 }
 @end

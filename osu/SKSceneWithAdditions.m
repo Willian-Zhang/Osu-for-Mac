@@ -17,13 +17,18 @@
 @synthesize cursor;
 @synthesize cursortailTexture;
 @synthesize lastFrameCursorPosition;
-@synthesize musicPlayer;
+@synthesize GMP;
+
+@synthesize GMPStartMode;
+@synthesize GMPEndMode;
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self initCursor];
-        [self initGlobalMusicPlayerController];
-        musicPlayer = [(AppDelegate *)[[NSApplication sharedApplication] delegate] globalMusicPlayer];
+        GMP = [(AppDelegate *)[[NSApplication sharedApplication] delegate] globalMusicPlayer];
+        [GMP setModeDelegate:self];
+        [GMP setEventDelegate:self];
+        [[(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport] setReportDelegate:self];
     }
     return self;
 }
@@ -69,7 +74,9 @@
     lastFrameCursorPosition = thisFrameCursorPosition;
 }
 #pragma mark 方法
-
+- (void)errorOccurred:(NSString *)errorString{
+    [self displayWarning:errorString];
+}
 - (void)displayWarning:(NSString *)messageString{
     SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
     [message addMessageMaskWithLines:1];
@@ -79,7 +86,11 @@
     [message fadeOut];
 }
 - (void)displayMessage:(NSString *)messageString{
+    [self enumerateChildNodesWithName:@"message" usingBlock:^(SKNode *message,BOOL *stop ){
+         [message runAction:[SKAction moveByX:0 y:50 duration:0.2]];
+    }];
     SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
+    message.name = @"message";
     [message addMessageMaskWithLines:1];
     [message addMessageLabelWithString:messageString onLine:1];
     [self addChild:message];
@@ -90,43 +101,23 @@
 @synthesize topMargin;
 @synthesize bottomMargin;
 - (float)leftMargin{
-    float width = self.frame.size.width;
-    return width *(1 - self.anchorPoint.x);
-}
-- (float)rightMargin{
-    float width = self.frame.size.width;
+    float width = self.size.width;
     return width *(self.anchorPoint.x - 1);
 }
-- (float)topMargin{
-    float height = self.frame.size.height;
-    return height *(self.anchorPoint.y - 1);
+- (float)rightMargin{
+    float width = self.size.width;
+    return width *(1 - self.anchorPoint.x);
 }
-- (float)bottomMargin{
-    float height = self.frame.size.height;
+- (float)topMargin{
+    float height = self.size.height;
     return height *(1 - self.anchorPoint.y);
 }
+- (float)bottomMargin{
+    float height = self.size.height;
+    return height *(self.anchorPoint.y - 1);
+}
 #pragma mark 统一事件
-- (void)initGlobalMusicPlayerController{
-    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
-    [appDelegate.globalMusicPlayer recieveWillEndPlaying:^(Beatmap *beatmap){[self willMusicEndPlaying:beatmap];}
-                                           DidEndPlaying:^(Beatmap *beatmap){[self didMusicEndPlaying:beatmap];}];
-    [appDelegate.globalMusicPlayer recieveMeetTimingPoint:^(Beatmap *beatmap){[self didMusicMeetTimingPoint:beatmap];}
-                                                 KeyPoint:^(Beatmap *beatmap){[self didMusicMeetKeyTimingPoint:beatmap];}];
-}
-- (void)didMusicMeetTimingPoint:(Beatmap *)beatmap{
-    
-}
-- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap{
-    
-}
 
-- (void)willMusicEndPlaying:(Beatmap *)beatmap{
-    
-}
-
-- (void)didMusicEndPlaying:(Beatmap *)beatmap{
-    
-}
 - (void)leftDown:(NSEvent *)theEvent{
     [self.cursor runAction:[SKAction scaleTo:1.3 duration:0.1]];
 }
@@ -164,10 +155,28 @@
 }
 - (void)mouseDown:(NSEvent *)theEvent{
     [self leftDown:theEvent];
+    CGPoint location =  [theEvent locationInNode:self];
+    for (SKNode *node in self.children) {
+        if ([node isUserInteractionEnabled]) {
+            if ([node containsPoint:location]) {
+                [node mouseDown:theEvent];
+            }
+        }
+    }
 }
 - (void)mouseUp:(NSEvent *)theEvent{
     [self.cursor runAction:[SKAction scaleTo:1 duration:0.1]];
+    
+    CGPoint location =  [theEvent locationInNode:self];
+    for (SKNode *node in self.children) {
+        if ([node isUserInteractionEnabled]) {
+            if ([node containsPoint:location]) {
+                [node mouseUp:theEvent];
+            }
+        }
+    }
 }
+
 
 - (void)didSimulatePhysics{
     [self updateCursor];

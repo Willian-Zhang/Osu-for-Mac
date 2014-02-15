@@ -7,11 +7,13 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GlobalMusicPlayer.h"
+#import "ApplicationSupport.h"
 
 @class Beatmap;
 @class GlobalMusicPlayer;
 
-@interface SKSceneWithAdditions : SKScene
+@interface SKSceneWithAdditions : SKScene <GMPEventDelegate, GMPModeDelegate, AppSupportReportEventDelegate>
 
 @property (nonatomic ) CGPoint lastFrameCursorPosition;
 @property (nonatomic , retain) SKNode *cursor;
@@ -22,7 +24,7 @@
 @property (readonly) float topMargin;
 @property (readonly) float bottomMargin;
 
-@property (readonly, nonatomic) GlobalMusicPlayer *musicPlayer;
+@property (readonly, nonatomic) GlobalMusicPlayer *GMP;
 /**
  Don't forget to call super when overide.
  不要忘记在覆写前运行super.
@@ -41,21 +43,6 @@
 - (void)leftUp:(NSEvent *)theEvent;
 - (CGPoint)locationInScene;
 
-
-
-
-- (void)didMusicMeetTimingPoint:(Beatmap *)beatmap;
-- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap;
-/**
- Override this to perform Global Music Player Event, called when one music ends play.
- 覆写此以提供提供Global Music Player事件, 将在一首歌曲播放完成后执行.
- */
-- (void)willMusicEndPlaying:(Beatmap *)beatmap;
-/**
- Override this to perform Global Music Player Event, called when one music ends play also the player is really to play next.
- 覆写此以提供提供Global Music Player事件, 将在一首歌曲播放完成后,且播放器准备播放下一首时执行.
- */
-- (void)didMusicEndPlaying:(Beatmap *)beatmap;
 /**
  Don't forget to call super when overide.
  不要忘记在覆写前运行super.

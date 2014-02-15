@@ -8,9 +8,9 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-typedef NS_ENUM(NSInteger, GlobalMusicPlayerMode) {
-	GlobalMusicPlayerModeFromBegin          = 0,
-	GlobalMusicPlayerModeFromClimax         = 1
+typedef NS_ENUM(NSInteger, GlobalMusicPlayerStartMode) {
+	GlobalMusicPlayerStartModeFromBegin          = 0,
+	GlobalMusicPlayerStartModeFromClimax         = 1
 };
 typedef NS_ENUM(NSInteger, GlobalMusicPlayerEndMode) {
 	GlobalMusicPlayerEndModeStop                = 0,
@@ -21,36 +21,48 @@ typedef NS_ENUM(NSInteger, GlobalMusicPlayerEndMode) {
 
 @class Beatmap;
 
-typedef void(^GlobalMusicPlayerWillEndPlaying)(Beatmap *);
-typedef void(^GlobalMusicPlayerDidEndPlaying)(Beatmap *);
-typedef void(^GlobalMusicPlayerDidMeetTimingPoint)(Beatmap *);
-typedef void(^GlobalMusicPlayerDidMeetKeyTimingPoint)(Beatmap *);
+@protocol GMPModeDelegate <NSObject>
+@required
+@property (readwrite) GlobalMusicPlayerStartMode GMPStartMode;
+@property (readwrite) GlobalMusicPlayerEndMode   GMPEndMode;
+@end
 
-@interface GlobalMusicPlayer : AVAudioPlayer <AVAudioPlayerDelegate> {
+@protocol GMPEventDelegate <NSObject>
+@required
+- (void)errorOccurred:(NSString *)errorString;
+@optional
+- (void)GMPwillEndPlaying:(Beatmap *)beatmap;
+- (void)GMPdidEndPlayingAndPlays:(Beatmap *)beatmap;
+- (void)GMPdidMeetKeyTimingPointFor:(Beatmap *)beatmap;
+- (void)GMPdidMeetAnyTimingPointFor:(Beatmap *)beatmap;
+@end
+
+@class SettingsDealer;
+@class ApplicationSupport;
+@interface GlobalMusicPlayer : NSObject <AVAudioPlayerDelegate> {
     AVAudioPlayer *player;
-    NSURL *loadSongsDir;
-    NSURL *saveSongsDir;
-    NSSet *importBeatmapSet;
     Beatmap *mapPlaying;
-    GlobalMusicPlayerWillEndPlaying DoWillEndPlaying;
-    GlobalMusicPlayerDidEndPlaying  DoDidEndPlaying;
-    GlobalMusicPlayerDidMeetTimingPoint     DoMeetTimingPoint;
-    GlobalMusicPlayerDidMeetKeyTimingPoint  DoMeetKeyTimingPoint;
+    SettingsDealer *settings;
+    ApplicationSupport *appSupport;
+    NSMutableSet *timingTimerSet;
 }
 
+@property (readwrite) float volume;
 @property Beatmap *mapPlaying;
-@property GlobalMusicPlayerMode playMode;
-@property GlobalMusicPlayerEndMode endMode;
 
-- (NSTimeInterval)timeToNextBeat;
-- (void)playRandomInSet:(NSSet *)beatmapSet;
+@property (weak) id <GMPEventDelegate> eventDelegate;
+@property (weak) id <GMPModeDelegate> modeDelegate;
+
+- (NSTimeInterval)timeIntervalToNextBeat;
+- (void)playRandom;
 - (void)playBeatmap:(Beatmap *)beatmap;
-- (void)recieveWillEndPlaying:(GlobalMusicPlayerWillEndPlaying)willEndPlaying
-                DidEndPlaying:(GlobalMusicPlayerDidEndPlaying)didEndPlaying;
-- (void)recieveMeetTimingPoint:(GlobalMusicPlayerDidMeetTimingPoint)timingPointBlock
-                      KeyPoint:(GlobalMusicPlayerDidMeetKeyTimingPoint)keyTimingPintBlock;
-- (int)currentIndexInKeyTimingPoints;
-- (int)currentIndexInAllTimingPoints;
+
+
+- (void)next;
+
 - (int)referanceIndexInKeyTimingPoints;
 - (int)referanceIndexInAllTimingPoints;
+- (NSTimeInterval)currentTime;
+- (float)currentBps;
+
 @end

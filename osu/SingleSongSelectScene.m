@@ -7,12 +7,14 @@
 //
 
 #import "SingleSongSelectScene.h"
-#import "SettingsDealer.h"
-#import "ScaningScene.h"
+
 #import "AppDelegate.h"
+#import "SettingsDealer.h"
 #import "ApplicationSupport.h"
 #import "GlobalMusicPlayer.h"
+
 #import "Beatmap.h"
+#import "ScaningScene.h"
 
 @implementation SingleSongSelectScene
 - (id)initWithSize:(CGSize)size
@@ -21,19 +23,26 @@
     if (self) {
         self.backgroundColor = [SKColor blackColor];
         loadSongsDirectory = [[[SettingsDealer alloc] init] loadDirectory];
+        appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
     }
     return self;
+}
+- (void)willMoveFromView:(SKView *)view{
+    
 }
 - (void)didMoveToView:(SKView *)view{
     [super didMoveToView:view];
     if (view == self.view) {
-        if (![self loadDatabaseIfExist]) {
+        if (![appSupport isAllBeatmapsReady]) {
             ScaningScene *scaningScene = [ScaningScene sceneWithSize:view.frame.size];
             [self.view presentScene:scaningScene];
-            [scaningScene loadAllBeatmaps:^(void){
-                //osuDB = [ApplicationSupport getDatabase];
-                [self.view presentScene:self transition:[SKTransition crossFadeWithDuration:0.5]];
-                [self initiate];
+            [scaningScene makeAllBeatmapsReady:^(BOOL result){
+                if (result == YES) {
+                    [self.view presentScene:self transition:[SKTransition fadeWithColor:[NSColor blackColor] duration:0.5]];
+                    [self initiate];
+                }else{
+                    
+                }
             }];
         }else{
             [self initiate];
@@ -46,24 +55,8 @@
 - (void)loadBackgroundImage{
     
 }
-- (BOOL)loadDatabaseIfExist{
-    if (osuDB == nil) {
-        ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
-        if (![appSupport isDatabaseExist]) {
-            return NO;
-        }
-        //Adds
-    }
-    return YES;
-}
 - (void)initiate{
 
-    
-}
-
-- (NSDictionary *)beatmapDicAtIndex:(NSInteger)index{
-    
-    return [(NSArray *)[osuDB objectForKey:@"beatmapArray"] objectAtIndex:index];
     
 }
 

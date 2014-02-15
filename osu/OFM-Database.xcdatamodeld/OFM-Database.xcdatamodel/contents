@@ -46,28 +46,32 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleU" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="dbSource" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImportedOsuDB" inverseName="importedBeatmaps" inverseEntity="ImportedOsuDB" syncable="YES"/>
-        <relationship name="timingPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingPoint" inverseName="beatmap" inverseEntity="TimingPoint" syncable="YES"/>
+        <relationship name="dbSource" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OsuDB" inverseName="beatmaps" inverseEntity="OsuDB" syncable="YES"/>
+        <relationship name="timingPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BeatmapTimingPoint" inverseName="beatmap" inverseEntity="BeatmapTimingPoint" syncable="YES"/>
     </entity>
-    <entity name="ImportedOsuDB" representedClassName="ImportedOsuDB" syncable="YES">
-        <attribute name="dir" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastImport" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="lastLogin" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="numOfBeatmaps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="numOfMapSets" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="importedBeatmaps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="dbSource" inverseEntity="Beatmap" syncable="YES"/>
-    </entity>
-    <entity name="TimingPoint" representedClassName="TimingPoint" syncable="YES">
+    <entity name="BeatmapTimingPoint" representedClassName="DBTimingPoint" syncable="YES">
         <attribute name="bps" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="bpsMutiplier" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="keyTiming" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isKeyTiming" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="offset" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="beatmap" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="timingPoints" inverseEntity="Beatmap" syncable="YES"/>
     </entity>
+    <entity name="OsuDB" representedClassName="OsuDB" syncable="YES">
+        <attribute name="dir" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isImported" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isNew" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="lastImport" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastLogin" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="numOfBeatmaps" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="numOfMapSets" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="savable" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="beatmaps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Beatmap" inverseName="dbSource" inverseEntity="Beatmap" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Beatmap" positionX="0" positionY="0" width="128" height="750"/>
-        <element name="ImportedOsuDB" positionX="-315" positionY="-159" width="128" height="150"/>
-        <element name="TimingPoint" positionX="205" positionY="612" width="128" height="120"/>
+        <element name="Beatmap" positionX="-27" positionY="108" width="128" height="748"/>
+        <element name="BeatmapTimingPoint" positionX="225" positionY="269" width="128" height="118"/>
+        <element name="OsuDB" positionX="-290" positionY="162" width="128" height="28"/>
     </elements>
 </model>

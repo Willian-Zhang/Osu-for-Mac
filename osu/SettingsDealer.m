@@ -19,6 +19,17 @@
     return self;
 }
 
+@synthesize runBuild = _runBuild;
+-(void)setRunBuild:(int)runBuild{
+    [defaults setInteger:runBuild forKey:@"Run Build"];
+}
+- (int)runBuild{
+    if ([defaults objectForKey:@"Run Build"] != nil) {
+        return  (int)[defaults integerForKey:@"Run Build"];
+    }
+    return 0;
+}
+
 @synthesize firstConfigured = _firstConfigured;
 - (void)setFirstConfigured:(BOOL)firstConfigured{
     [defaults setBool:firstConfigured forKey:@"First Configured"];
@@ -61,4 +72,5 @@
 -(void)setSaveDirectory:(NSURL *)saveDirectory{
     [defaults setURL:saveDirectory forKey:@"Save Directory"];
 }
+
 @end

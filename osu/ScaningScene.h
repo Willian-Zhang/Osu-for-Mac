@@ -10,18 +10,17 @@
 #import "SKSceneWithAdditions.h"
 
 @class ApplicationSupport;
-typedef void(^scaningCompletion)();
+typedef void(^ScaningCompletion)(BOOL);
 
 @interface ScaningScene : SKSceneWithAdditions{
-    scaningCompletion runCompletionBlock;
+    ScaningCompletion runCompletionBlock;
     SKNode *loadingLabelGroup;
     SKLabelNode *importLabel;
     ApplicationSupport *appSupport;
 }
 
+- (void)makeAllBeatmapsReady:(ScaningCompletion)completionBlock;
 
 
-- (void)addLoadingLineWithString:(NSString *)aString;
-- (void)loadAllBeatmaps:(scaningCompletion)comletion;
 
 @end

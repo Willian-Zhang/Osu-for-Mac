@@ -12,11 +12,13 @@
 
 @class ApplicationSupport;
 @class GlobalMusicPlayer;
+@class SettingsDealer;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet SKView *skView;
+@property (readonly) SettingsDealer *settings;
 @property (retain) ApplicationSupport *appSupport;
 @property (retain) GlobalMusicPlayer *globalMusicPlayer;
 

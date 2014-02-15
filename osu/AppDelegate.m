@@ -12,7 +12,7 @@
 
 #import "GlobalMusicPlayer.h"
 #import "SKSceneWithAdditions.h"
-#import "ImportedOsuDB.h"
+#import "OsuDB.h"
 
 #import "ScaningScene.h"
 #import "MainScene.h"
@@ -24,6 +24,7 @@
 
 @synthesize window = _window;
 @synthesize appSupport;
+@synthesize settings;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -36,31 +37,19 @@
     //self.skView.asynchronous = NO;
     //self.skView.frameInterval = 100;
     
+    settings = [[SettingsDealer alloc] init];
     
-
-    
-    SettingsDealer *settings = [[SettingsDealer alloc] init];
-    if (![settings firstConfigured]) {
-        MainScene *mainScene = [self startMainScene];
-        [mainScene displayFirstRunSettingsWithCompletion:^(NSInteger result){
-            if (result == FirstRunConfigureSucceed) {
-                
-            }else if (result == FirstRunConfigureFailed){
-                [mainScene displayWarning:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
-            }
-        }];
-    }else{
-        MainScene *mainScene = [self startMainScene];
-        [mainScene initBGM];
-    }    
-}
-- (MainScene *)startMainScene{
-    MainScene *mainScene = [MainScene sceneWithSize:CGSizeMake(1152, 720)];
+    MainScene *mainScene = [MainScene sceneWithSize:self.skView.frame.size];
     mainScene.scaleMode = SKSceneScaleModeResizeFill;
     [self.skView presentScene:mainScene];
-    [self.window setAcceptsMouseMovedEvents:YES];
-    [self.window makeFirstResponder:self.skView.scene];
-    return mainScene;
+    //[self.window setAcceptsMouseMovedEvents:YES];
+    //[self.window makeFirstResponder:self.skView.scene];
+    
+    if (![settings firstConfigured]) {
+        [mainScene displayFirstRun];
+    }else{
+        [mainScene initBGM];
+    }    
 }
 
 

@@ -6,18 +6,36 @@
 //  Copyright (c) 2014年 Willian-Zhang. All rights reserved.
 //
 
+typedef NS_ENUM(NSInteger, AppSupportReportEvents ){
+    AppSupportReportUnkonwn         = -1,
+    AppSupportReportImport          = 0,
+    AppSupportReportLoadBeatmap     = 1,
+    AppSupportReportRebuildDatabase = 2,
+    AppSupportReportUpdateDatabase  = 3,
+    AppSupportReportFirstConfigure  = 4
+    };
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ImportedOsuDB;
+@protocol AppSupportReportEventDelegate <NSObject>
+@optional
+- (void)appSupportReportMessgae:(NSString *)message withEvent:(AppSupportReportEvents)event;
+- (void)appSupportReportError:(NSString *)errorString withEvent:(AppSupportReportEvents)event;
+- (void)appSupportReportStartEvent:(AppSupportReportEvents)event;
+- (void)appSupportReportFinishEvent:(AppSupportReportEvents)event;
+@end
 
-@interface ApplicationSupport : NSObject
+@class SettingsDealer;
+@interface ApplicationSupport : NSObject{
+    SettingsDealer *settings;
+}
 
-- (BOOL)isDatabaseExist;
-- (BOOL)isCurrentDatabaseUpToDateToDatabaseOfURL:(NSURL *)databaseURL;
-- (ImportedOsuDB *)getLatestImportedOsuDB;
-- (BOOL)updateWindowsDatabaseOfURL:(NSURL *)databaseURL;
-- (BOOL)importWindowsDatabaseOfURL:(NSURL *)databaseURL;
+@property (weak) id <AppSupportReportEventDelegate> reportDelegate;
+
+@property (readonly) BOOL isAllBeatmapsReady;
+@property (readonly, nonatomic) NSSet *getSetOfAllBeatmaps;
+- (BOOL)makeAllBeatmapsReadyAndReturnError:(NSError **)error;
 
 
 #pragma Core Data

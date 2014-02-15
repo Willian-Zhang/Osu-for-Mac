@@ -10,10 +10,10 @@
 
 #import "AppDelegate.h"
 #import "ApplicationSupport.h"
-#import "ImportedOsuDB.h"
 
+#import "DBTimingPoint.h"
 #import "Beatmap.h"
-#import "TimingPoint.h"
+
 #import "GlobalMusicPlayer.h"
 #import "SKMusicPlayerControllerNode.h"
 
@@ -31,21 +31,25 @@
         /* Setup your scene here */
         [self setAnchorPoint:CGPointMake(0.5, 0.5)];
         self.backgroundColor = [SKColor colorWithRed:0.08 green:0.46 blue:0.98 alpha:1.0];
+        menuLevel = 0;
         
         theBigOSUFraction = (6.0 / 9.0);
         theBigOSUMouseHoverFraction = 1;
 
         [self initTheBigOSU];
         [self initBackground];
-        musicControllerNode = [[SKMusicPlayerControllerNode alloc] init:self];
+        musicControllerNode = [[SKMusicPlayerControllerNode alloc] init];
         musicControllerNode.zPosition = 50;
+        musicControllerNode.position = CGPointMake([super rightMargin], [super topMargin]);
+        [self addChild:musicControllerNode];
+        [self.view.window makeFirstResponder:musicControllerNode];
     }
     return self;
 }
 // called when inited
 - (void)didMoveToView:(SKView *)view{
-    [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
-    [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
+    [self setGMPStartMode:GlobalMusicPlayerStartModeFromBegin];
+    [self setGMPEndMode:GlobalMusicPlayerEndModeRandom];
 }
 - (void)initBackground{
     
@@ -140,43 +144,61 @@
 - (void)initBGM{
     ApplicationSupport *appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
     SettingsDealer *settings = [[SettingsDealer alloc] init];
-    if (![appSupport isDatabaseExist]) {
-        [self displayWarning:NSLocalizedString(@"Go to \"Play → Solo\" to establish a database", @"Database not exist Message")];
+    if (![settings firstConfigured]) {
+        [self displayWarning:NSLocalizedString(@"You have to finish the Settings first!", @"You have to finish the Settings first!")];
+    }else if (![appSupport isAllBeatmapsReady]) {
+            //[self displayWarning:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
     }else{
-        if (![appSupport isCurrentDatabaseUpToDateToDatabaseOfURL:
-              [[settings loadDirectory] URLByAppendingPathComponent:@"osu!.db" isDirectory:NO]]) {
-            [self displayWarning:NSLocalizedString(@"Go to \"Play → Solo\" to update database", @"Database needs update")];
-        }else{
-            
-            ImportedOsuDB *importedDB = appSupport.getLatestImportedOsuDB;
-            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromClimax];
-            [super.musicPlayer playRandomInSet:importedDB.importedBeatmaps];
-            
-            [super.musicPlayer setPlayMode:GlobalMusicPlayerModeFromBegin];
-            [super.musicPlayer setEndMode:GlobalMusicPlayerEndModeRandom];
-            
-            
-            [self didMusicEndPlaying:super.musicPlayer.mapPlaying];
-            
-            
-        }
+        [self setGMPStartMode:GlobalMusicPlayerStartModeFromClimax];
+        [super.GMP playRandom];
+        [self setGMPStartMode:GlobalMusicPlayerStartModeFromBegin];
+        [self synchronizePopingWithRythemOf:super.GMP.mapPlaying];
     }
 }
+- (void)synchronizePopingWithRythemOf:(Beatmap *)beatmap{
+    [theBigOSU removeAllActions];
+    float theBigOSUSpeed = super.GMP.currentBps;
+    float nextTiming = [super.GMP timeIntervalToNextBeat];
+    [theBigOSU runAction:[SKAction sequence:@[
+                                              [SKAction waitForDuration:nextTiming],
+                                              theBigOSUAction
+                                              ]]
+     ];
+    theBigOSU.speed = theBigOSUSpeed;
+    //NSLog(@"Speed: %f",theBigOSU.speed);
+    
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
+    stars.particleBirthRate = theBigOSUSpeed * 10;
+
+}
+- (void)peacePoping{
+    [theBigOSU runAction:[SKAction speedTo:1 duration:0]];
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
+    stars.particleBirthRate = 2;
+
+}
+- (void)displayFirstRun{
+    [self displayFirstRunSettingsWithCompletion:^(NSInteger result){
+        if (result == FirstRunConfigureFailed){
+            [self displayWarning:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
+            return ;
+        }else if (result == FirstRunConfigureSucceed){
+            //here
+        }
+    }];
+}
 - (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block{
-    SKMessageNode *message = [[SKMessageNode alloc] initWithWidth:self.size.width];
-    
-    
-    [message addMessageMaskWithLines:1];
-    [message addMessageLabelWithString:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice") onLine:1];
-    
-    [self addChild:message];
-    [message fadeOut];
+    [self displayMessage:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice")];
+
     [self runAction:[SKAction sequence:@[
                                          [SKAction waitForDuration:1],
                                          [SKAction runBlock:^(void){
         firstRunController = [[FirstRunWindowController alloc] initWithWindowNibName:@"FirstRunWindow"];
         [firstRunController showWindow:self];
-        [firstRunController showRelativeToRect:message.frame ofView:self.view preferredEdge:NSMinYEdge completion:block];
+        [firstRunController showRelativeToRect:CGRectMake(self.view.frame.origin.x,
+                                                          self.view.frame.origin.y - self.view.frame.size.height + 15,
+                                                          self.view.frame.size.width,30)
+                                        ofView:self.view preferredEdge:NSMinYEdge completion:block];
     }]
                                          ]]];
 }
@@ -205,32 +227,16 @@
     [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0]];
 }
 #pragma mark 响应事件 - 主要
-- (void)willMusicEndPlaying:(Beatmap *)beatmap{
-    [theBigOSU runAction:[SKAction speedTo:1 duration:0]];
-    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
-    stars.particleBirthRate = 2;
+- (void)GMPwillEndPlaying:(Beatmap *)beatmap{
+    [self peacePoping];
 }
-- (void)didMusicEndPlaying:(Beatmap *)beatmap{
-    [self didMusicMeetKeyTimingPoint:super.musicPlayer.mapPlaying];
-    [self displayMessage:[NSString stringWithFormat:@"%@ - %@",beatmap.beatmapSetId, beatmap.title]];
+- (void)GMPdidEndPlayingAndPlays:(Beatmap *)beatmap{
+    if (![beatmap indexOfKeyTimingPointsAt:super.GMP.currentTime] == 0) {
+        [self synchronizePopingWithRythemOf:beatmap];
+    }
+    [self displayMessage:[NSString stringWithFormat:@"%@ - %@",beatmap.beatmapSetId, beatmap.title]]; // For Debug!!
+}
 
-}
-- (void)didMusicMeetKeyTimingPoint:(Beatmap *)beatmap{
-    [theBigOSU removeAllActions];
-    float theBigOSUSpeed = [[[beatmap.timingPointsKeySorted objectAtIndex:[super.musicPlayer referanceIndexInKeyTimingPoints]] bps] floatValue];
-    float nextTiming = [super.musicPlayer timeToNextBeat];
-    [theBigOSU runAction:[SKAction sequence:@[
-                                              [SKAction waitForDuration:nextTiming],
-                                              theBigOSUAction
-                                              ]]
-     ];
-    theBigOSU.speed = theBigOSUSpeed;
-    //NSLog(@"Speed: %f",theBigOSU.speed);
-    
-    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
-    stars.particleBirthRate = theBigOSUSpeed * 10;
-
-}
 - (void)showMainMenu{
     float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
     float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * theBigOSUMouseHoverFraction;
@@ -246,7 +252,7 @@
                                                                 [SKAction runBlock:^(void){
         if ([[[SettingsDealer alloc] init] firstConfigured]) {
             SingleSongSelectScene *soloScene = [SingleSongSelectScene sceneWithSize:self.view.window.frame.size];
-            [self.view presentScene:soloScene transition:[SKTransition crossFadeWithDuration:1]];
+            [self.view presentScene:soloScene transition:[SKTransition fadeWithColor:[NSColor blackColor] duration:0.5]];
         }
     }]]]
                                            ]]];
