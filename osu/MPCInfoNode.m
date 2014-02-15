@@ -20,6 +20,11 @@
     }
     return self;
 }
-
+- (void)didMouseEnter{
+    [self runAction:[SKAction scaleTo:1.2 duration:0.1]];
+}
+- (void)didMouseExit{
+    [self runAction:[SKAction scaleTo:1 duration:0.1]];
+}
 
 @end

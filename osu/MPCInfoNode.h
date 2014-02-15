@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SKSceneWithAdditions.h"
 
-@interface MPCInfoNode : SKNode
+@interface MPCInfoNode : SKNode<SKNodeMouseOverEvents>
 
 @end

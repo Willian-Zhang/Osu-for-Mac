@@ -84,7 +84,7 @@
     }
     return self;
 }
-- (void)addButtonBodyTo:(SKNode<SKNodeMouseOverEvents>*)node{
+- (void)addButtonMouseOverEventTo:(SKNode<SKNodeMouseOverEvents>*)node{
     SKPhysicsBody *body = [SKPhysicsBody bodyWithRectangleOfSize:node.calculateAccumulatedFrame.size];
     node.physicsBody = body;
     node.physicsBody.dynamic = NO;
@@ -102,7 +102,7 @@
 {
     next = [[MPCNextNode alloc] init];
     next.position = [self buttonPositionForReversedCount:2];
-    [self addButtonBodyTo:next];
+    [self addButtonMouseOverEventTo:next];
                 //[self.scene.view.window makeFirstResponder:next];
                 //next.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:buttonSize/2];
     [buttons addChild:next];
@@ -112,6 +112,7 @@
     info = [[MPCInfoNode alloc] init];
     info.position = [self buttonPositionForReversedCount:1];
     info.alpha = 0.5;
+    [self addButtonMouseOverEventTo:info];
     [buttons addChild:info];
 }
 - (CGPoint)buttonPositionForReversedCount:(int)count
