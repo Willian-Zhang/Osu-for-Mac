@@ -33,7 +33,7 @@
 
 - (void) setLine: (NSString *) line_ {
   if (line)
-    [line release];
+      ;//[line release]; // removed
   line = line_;
   [self parse];
 }

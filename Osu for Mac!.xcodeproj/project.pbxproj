@@ -26,8 +26,8 @@
 		7D27CB96188DA20900EBF90B /* CustomizedSKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D27CB95188DA20900EBF90B /* CustomizedSKView.m */; };
 		7D2DB14A189638CC009F8FBC /* SKMessageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DB149189638CC009F8FBC /* SKMessageNode.m */; };
 		7D30775618A5367C00F2A740 /* SKMusicPlayerControllerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30775518A5367C00F2A740 /* SKMusicPlayerControllerNode.m */; };
-		7D34382F18AFE58900620D2B /* INIEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382C18AFE58900620D2B /* INIEntry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7D34383018AFE58900620D2B /* INIFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382E18AFE58900620D2B /* INIFile.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D34382F18AFE58900620D2B /* INIEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382C18AFE58900620D2B /* INIEntry.m */; };
+		7D34383018AFE58900620D2B /* INIFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D34382E18AFE58900620D2B /* INIFile.m */; };
 		7D351CA8189652FD00FBDA2A /* MainStar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CA6189652FD00FBDA2A /* MainStar.sks */; };
 		7D351CAC1896557B00FBDA2A /* MainCircle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D351CAA1896557B00FBDA2A /* MainCircle.sks */; };
 		7D3FDD41189C327E003A9BE8 /* menuhit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D3FDD40189C327E003A9BE8 /* menuhit.wav */; };

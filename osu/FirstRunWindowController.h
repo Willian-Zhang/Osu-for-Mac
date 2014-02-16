@@ -8,11 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-enum{
-    ConfigureFailed  = 0,
-    ConfigureSucceed = 1
-};
-typedef void(^firstRunCompletion)(NSInteger);
+typedef void(^firstRunCompletion)(BOOL);
 
 @interface FirstRunWindowController : NSWindowController<NSPopoverDelegate>{
     firstRunCompletion blockKeeped;
@@ -77,6 +73,6 @@ typedef void(^firstRunCompletion)(NSInteger);
 @property (strong) IBOutlet NSButton *windowsDirectoryDifferentDoneOutlet;
 
 
-- (void)showRelativeToRect:(CGRect)rect ofView:(NSView *)view preferredEdge:(NSRectEdge)edge completion:(void(^)(NSInteger result))block;
+- (void)showRelativeToRect:(CGRect)rect ofView:(NSView *)view preferredEdge:(NSRectEdge)edge completion:(void(^)(BOOL result))block;
 
 @end

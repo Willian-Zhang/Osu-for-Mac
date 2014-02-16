@@ -119,7 +119,7 @@
 - (IBAction)cancelButtonPushed:(NSButton *)sender {
     [self.firstRunPopover performClose:sender];
     [callerWindow makeKeyAndOrderFront:sender];
-    blockKeeped(ConfigureFailed);
+    blockKeeped(NO);
 }
 
 - (IBAction)selectWinDirectory:(NSButton *)sender {
@@ -168,7 +168,7 @@
     [settings setSaveDirectory:readDir];
     [settings setFirstConfigured:YES];
     [self.firstRunPopover performClose:sender];
-    blockKeeped(ConfigureSucceed);
+    blockKeeped(YES);
 }
 
 - (IBAction)firstConfigueDifferentDone:(NSButton *)sender {

@@ -8,12 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "SKSceneWithAdditions.h"
-#import "FirstRunWindowController.h"
 
-enum{
-    FirstRunConfigureFailed  = ConfigureFailed,
-    FirstRunConfigureSucceed = ConfigureSucceed
-};
+@class FirstRunWindowController;
 
 @class SKMusicPlayerControllerNode;
 @class TheBigOSU;
@@ -34,6 +30,5 @@ enum{
 }
 - (void)initBGM;
 - (void)displayFirstRun;
-- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block;
 
 @end

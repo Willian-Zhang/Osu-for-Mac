@@ -35,7 +35,7 @@
 - (void) setContents: (NSString *) contents_ {
   self.entries = [NSMutableArray array];
   for (NSString *line in [contents_ componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]]) {
-    [self.entries addObject: [[INIEntry alloc] initWithLine: line]];
+      [self.entries addObject: [[INIEntry alloc] initWithLine: line]];
   }
     contents = contents_; // added for getter to work
 }
@@ -61,7 +61,8 @@
 
 - (NSIndexSet *) sectionIndexes {
   return [self.entries indexesOfObjectsPassingTest: ^(id entry, NSUInteger index, BOOL *stop) {
-    return (BOOL)((INIEntry *)[entry entryType] == INIEntryTypeSection);
+      return (BOOL)([entry entryType] == INIEntryTypeSection);
+    //return (BOOL)((INIEntry *)[entry entryType] == INIEntryTypeSection);
   }];
 }
 

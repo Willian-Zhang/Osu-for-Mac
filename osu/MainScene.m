@@ -14,6 +14,7 @@
 #import "DBTimingPoint.h"
 #import "Beatmap.h"
 
+#import "FirstRunWindowController.h"
 #import "GlobalMusicPlayer.h"
 #import "SKMusicPlayerControllerNode.h"
 
@@ -183,17 +184,18 @@
 
 }
 - (void)displayFirstRun{
-    [self displayFirstRunSettingsWithCompletion:^(NSInteger result){
-        if (result == FirstRunConfigureFailed){
+    [self displayFirstRunSettingsWithCompletion:^(BOOL result){
+        if (result == NO){
             [self displayWarning:NSLocalizedString(@"You have to finish the Settings first!", @"First Run Setting Required Message")];
             return ;
-        }else if (result == FirstRunConfigureSucceed){
+        }else if (result == YES){
+            [self displayWarning:NSLocalizedString(@"You may go to \"Play → Solo\" now〜", @"First Run Setting Configure Done Message")];
             //here
         }
     }];
 }
-- (void)displayFirstRunSettingsWithCompletion:(void (^)(NSInteger result))block{
-    [self displayMessage:NSLocalizedString(@"First time? Follow the guide please~", @"First time Notice")];
+- (void)displayFirstRunSettingsWithCompletion:(void (^)(BOOL result))block{
+    [self displayMessage:NSLocalizedString(@"First time? Follow the guide please〜", @"First time Notice")];
 
     [self runAction:[SKAction sequence:@[
                                          [SKAction waitForDuration:1],
