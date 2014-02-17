@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, GlobalMusicPlayerEndMode) {
     ApplicationSupport *appSupport;
     NSMutableSet *timingTimerSet;
 }
++ (GlobalMusicPlayer *)getGMP;
 
 @property (readwrite) float volume;
 @property Beatmap *mapPlaying;

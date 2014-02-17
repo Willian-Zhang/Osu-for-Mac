@@ -36,7 +36,10 @@
     }
     return self;
 }
-
++ (GlobalMusicPlayer *)getGMP
+{
+    return [(AppDelegate *)[[NSApplication sharedApplication] delegate] globalMusicPlayer];
+}
 
 - (void)playRandom{
     if (![appSupport isAllBeatmapsReady]) {
@@ -57,6 +60,7 @@
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:mp3URL error:&error];
     if (error != nil) {
         [eventDelegate errorOccurred:[NSString stringWithFormat:NSLocalizedString(@"Cannot play %@, you may just skip this QAQ", @"Cannot play mp3 file label"),beatmap.title]];
+        [self next];
         return;
     }
     player.numberOfLoops = 0;
@@ -118,7 +122,8 @@
     float spb       = 1 / [[timingPoint bps] floatValue]; // spb = 1/bps
     
     if (index == -1) {
-        return fmod(offset - player.currentTime,spb);
+        return offset - player.currentTime;
+        //return fmod(offset - player.currentTime,spb);
     }
     return ( spb - (fmod(player.currentTime - offset,spb))   );
 }
@@ -141,7 +146,6 @@
     }
     return index;
 }
-
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     if ([eventDelegate respondsToSelector:@selector(GMPwillEndPlaying:)]) {
         [eventDelegate GMPwillEndPlaying:mapPlaying];

@@ -8,9 +8,31 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface TheBigOSU : SKNode
+@class SKSceneWithAdditions;
+@class TheBigOSUButton;
+@class TheBigOSUShadow;
+@class TheBigOSUShockwave;
+@class TheBigOSUMenuButtons;
 
-- (id)initWithFrame:(NSRect)frame;
+@class GlobalMusicPlayer;
+@class Beatmap;
+@interface TheBigOSU : SKNode{
+    int menuLevel;
+    
+    SKSceneWithAdditions *callerScene;
+    GlobalMusicPlayer *GMP;
+    
+    TheBigOSUButton *button;
+    SKAction        *pop;
+    TheBigOSUShadow *shadow;
+    TheBigOSUShockwave   *shockwave;
+    TheBigOSUMenuButtons *menuButtons;
+}
+
+@property (readwrite) float popingSpeed;
+- (void)resizeTo:(NSRect)frame;
+- (void)synchronizePopingTo:(Beatmap *)beatmap;
+- (id)initWithScene:(SKSceneWithAdditions *)scene;
 @property NSRect frame;
 
 @end

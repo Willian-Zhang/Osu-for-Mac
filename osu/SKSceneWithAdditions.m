@@ -154,9 +154,9 @@
 - (void)didBeginContact:(SKPhysicsContact *)contact{
     //NSLog(@"A:%@ B:%@",contact.bodyA.node.className,contact.bodyB.node.className);//uncomment this to debug mouse events
     //B for Cursor
-    if (contact.bodyB.node == cursor) {
+    if (contact.bodyB.node == cursor || contact.bodyA.node == cursor) {
         for (SKNode<SKNodeMouseOverEvents> *node in contactSet) {
-            if (node == contact.bodyA.node) {
+            if (node == contact.bodyB.node || node == contact.bodyA.node) {
                 if ([node respondsToSelector:@selector(didMouseEnter)]) {
                     
                     [node didMouseEnter];

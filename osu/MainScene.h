@@ -15,17 +15,11 @@
 @class TheBigOSU;
 
 @interface MainScene : SKSceneWithAdditions{
-    int menuLevel;
     
-    float theBigOSUFraction;
-    float theBigOSUMouseHoverFraction;
     
-    SKSpriteNode  *theBigOSU;
-    SKAction      *theBigOSUAction;
-    SKSpriteNode  *theBigOSUShadow;
+    TheBigOSU *theBigOSU;
     
     FirstRunWindowController *firstRunController;
-    
     SKMusicPlayerControllerNode *musicControllerNode;
 }
 - (void)initBGM;
