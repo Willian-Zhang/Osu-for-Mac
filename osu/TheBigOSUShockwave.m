@@ -32,7 +32,6 @@
     [node runAction:action];
 }
 - (void)popWithFrame:(CGRect)frame{
-    
     node = [SKSpriteNode spriteNodeWithTexture:texture size:frame.size];
     node.position = frame.origin;
     node.alpha = originalWaveAlpha;

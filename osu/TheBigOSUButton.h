@@ -13,10 +13,6 @@
     SKSpriteNode *node;
 }
 
-- (id)initWithSize:(CGSize )size;
-- (void)resizeTo:(float)size;
-
-
 @property (readwrite) float hoverFraction;
 
 @end

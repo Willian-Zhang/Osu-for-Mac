@@ -12,18 +12,16 @@
 @implementation TheBigOSUShadow
 
 
-- (id)initWithSize:(CGSize )size
+- (id)init
 {
     self = [super init];
     if (self) {
         theBigOSUTexture = [SKTexture textureWithImageNamed:@"menu-osu"];
-        node = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:size];
+        node = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture];
         node.alpha = originalShadowAlpha;
         [self addChild:node];
         
-        theShadowAction = [SKAction sequence:@[//[SKAction scaleTo:1.01 duration:0],
-                                               //[SKAction fadeAlphaTo:originalShadowAlpha duration:0],
-                                               [SKAction group:@[
+        theShadowAction = [SKAction sequence:@[[SKAction group:@[
                                                                  [SKAction scaleTo:1.04 duration:1],
                                                                  [SKAction fadeAlphaTo:0.02 duration:1]
                                                                  ]],
@@ -36,9 +34,6 @@
 - (void)runAction{
     [node runAction:theShadowAction];
 }
-//- (void)resizeTo:(float)size{
-//    [node runAction:[SKAction resizeToWidth:size height:size duration:0]];
-//}
 - (void)popWithSize:(CGSize )size{
     node = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:size];
     node.alpha = originalShadowAlpha;

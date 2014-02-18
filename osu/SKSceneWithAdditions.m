@@ -107,7 +107,7 @@
     [message fadeOut];
 }
 - (void)addContact:(SKNode<SKNodeMouseOverEvents> *)node{
-    node.physicsBody.contactTestBitMask ^= cursorCategory;
+    node.physicsBody.contactTestBitMask |= cursorCategory;
     [contactSet addObject:node];
 }
 
@@ -158,8 +158,9 @@
         for (SKNode<SKNodeMouseOverEvents> *node in contactSet) {
             if (node == contact.bodyB.node || node == contact.bodyA.node) {
                 if ([node respondsToSelector:@selector(didMouseEnter)]) {
-                    
-                    [node didMouseEnter];
+                    if (node.alpha != 0 && node.parent.alpha != 0) {
+                        [node didMouseEnter];
+                    }
                 }
             }
         }

@@ -14,9 +14,7 @@
     SKSpriteNode *node;
 }
 
-- (id)initWithSize:(CGSize )size;
 - (void)runAction;
-//- (void)resizeTo:(float)size;
 - (void)popWithSize:(CGSize )size;
 
 @end

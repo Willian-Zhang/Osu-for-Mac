@@ -13,13 +13,13 @@
 @implementation TheBigOSUButton
 @synthesize hoverFraction;
 
-- (id)initWithSize:(CGSize )size
+- (id)init
 {
     self = [super init];
     if (self) {
         self.userInteractionEnabled = YES;
         SKTexture *theBigOSUTexture = [SKTexture textureWithImageNamed:@"menu-osu"];
-        node = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture size:size];
+        node = [SKSpriteNode spriteNodeWithTexture:theBigOSUTexture];
         [self addChild:node];
         hoverFraction = 1;
     }
@@ -28,18 +28,10 @@
 
 - (void)didMouseEnter{
     hoverFraction = 1.1;
-//    float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-//    float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * hoverFraction;
     [node runAction:[SKAction scaleTo:hoverFraction duration:0.1]];
 }
 - (void)didMouseExit{
     hoverFraction = 1;
-//    float screenLimitScaleWidth = [self limitScaleWidthForSize:self.size];
-//    float theBigOSUSize = screenLimitScaleWidth * theBigOSUFraction * hoverFraction;
-//    [theBigOSU runAction:[SKAction resizeToWidth:theBigOSUSize height:theBigOSUSize duration:0.4]];
     [node runAction:[SKAction scaleTo:hoverFraction duration:0.1]];
-}
-- (void)resizeTo:(float)size{    
-    [node runAction:[SKAction resizeToWidth:size height:size duration:0]];
 }
 @end

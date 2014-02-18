@@ -12,27 +12,32 @@
 @class TheBigOSUButton;
 @class TheBigOSUShadow;
 @class TheBigOSUShockwave;
-@class TheBigOSUMenuButtons;
+@class TheBigOSUMenuLevel1;
+@class TheBigOSUMenuLevel2;
 
 @class GlobalMusicPlayer;
 @class Beatmap;
 @interface TheBigOSU : SKNode{
     int menuLevel;
     
-    SKSceneWithAdditions *callerScene;
+    //SKSceneWithAdditions *callerScene;
     GlobalMusicPlayer *GMP;
     
     TheBigOSUButton *button;
     SKAction        *pop;
     TheBigOSUShadow *shadow;
     TheBigOSUShockwave   *shockwave;
-    TheBigOSUMenuButtons *menuButtons;
+    TheBigOSUMenuLevel1 *menuLevel1;
+    TheBigOSUMenuLevel2 *menuLevel2;
 }
 
 @property (readwrite) float popingSpeed;
+@property (weak,readonly) SKSceneWithAdditions *callerScene;
 - (void)resizeTo:(NSRect)frame;
 - (void)synchronizePopingTo:(Beatmap *)beatmap;
 - (id)initWithScene:(SKSceneWithAdditions *)scene;
+- (void)presentLevel:(int)level;
+- (void)presentSoloScene;
 @property NSRect frame;
 
 @end

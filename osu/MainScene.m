@@ -44,11 +44,29 @@
     }
     return self;
 }
+- (void)setWindowResizable:(BOOL)resizable{
+    NSWindow *window = self.view.window;
+    if (resizable) {
+        if (!(window.styleMask & NSResizableWindowMask)) {
+            window.styleMask |= (NSResizableWindowMask);
+        }
+        if (!(window.collectionBehavior & NSWindowCollectionBehaviorFullScreenPrimary)) {
+            window.collectionBehavior ^= (NSWindowCollectionBehaviorFullScreenPrimary);
+        }
+        [[window standardWindowButton:NSWindowZoomButton] setEnabled:YES];
+    }else{
+        window.collectionBehavior ^= NSWindowCollectionBehaviorFullScreenPrimary;
+        window.styleMask ^= (NSResizableWindowMask);
+        [[window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
+    }
+}
 // called when inited
 - (void)willMoveFromView:(SKView *)view{
-    NSLog(@"%@",[view.scene.class description]);
+    [self setWindowResizable:NO];
+    
 }
 - (void)didMoveToView:(SKView *)view{
+    [self setWindowResizable:YES];
     [self setGMPStartMode:GlobalMusicPlayerStartModeFromBegin];
     [self setGMPEndMode:GlobalMusicPlayerEndModeRandom];
 }
@@ -72,7 +90,6 @@
     musicControllerNode.position = CGPointMake([super rightMargin], [super topMargin]);
     [self addChild:musicControllerNode];
 }
-
 - (void)initTheBigOSU{
     theBigOSU = [[TheBigOSU alloc] initWithScene:self];
     theBigOSU.zPosition = 10;
@@ -141,15 +158,13 @@
     SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
     circles.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
     stars.particlePositionRange = CGVectorMake(self.size.width, self.size.height);
-//    SKNode *backgroundNodesNode = [self childNodeWithName:@"backgroundNodes"];
-//    if (backgroundNodesNode != nil) {
-//        [backgroundNodesNode removeAllChildren];
-//        [self initBackground];
-//    }
 }
 
 #pragma mark 响应事件 - 主要
 - (void)GMPdidMeetKeyTimingPointFor:(Beatmap *)beatmap{
+    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
+    stars.particleBirthRate = super.GMP.currentBps * 10;
+    
     if ([beatmap indexOfKeyTimingPointsAt:super.GMP.currentTime] != 0) {
         [theBigOSU synchronizePopingTo:beatmap];
     }
@@ -158,17 +173,11 @@
     [self peacePoping];
 }
 - (void)GMPdidEndPlayingAndPlays:(Beatmap *)beatmap{
-//    SKEmitterNode *stars = (SKEmitterNode *)([self childNodeWithName:@"backgroundStars"]);
-//    stars.particleBirthRate = theBigOSUSpeed * 10;
     //if ([beatmap indexOfKeyTimingPointsAt:super.GMP.currentTime] == 0) {
         [theBigOSU synchronizePopingTo:beatmap];
     //}
     [musicControllerNode updateNowPlaying:beatmap.title];
 }
-
-- (void)showMainMenu{
-}
-
 
 
 #pragma mark 响应事件 - 系统
