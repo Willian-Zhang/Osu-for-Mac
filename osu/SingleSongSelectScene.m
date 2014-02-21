@@ -13,8 +13,10 @@
 #import "ApplicationSupport.h"
 #import "GlobalMusicPlayer.h"
 
-#import "Beatmap.h"
+#import "MainScene.h"
 #import "ScaningScene.h"
+
+#import "SKBackNode.h"
 
 @implementation SingleSongSelectScene
 - (id)initWithSize:(CGSize)size
@@ -22,8 +24,8 @@
     self = [super initWithSize:size];
     if (self) {
         self.backgroundColor = [SKColor blackColor];
-        loadSongsDirectory = [[[SettingsDealer alloc] init] loadDirectory];
         appSupport = [(AppDelegate *)[[NSApplication sharedApplication] delegate] appSupport];
+        [self addChild:[[SKBackNode alloc] initWithScene:self]];
     }
     return self;
 }
@@ -59,5 +61,9 @@
 
     
 }
-
+#pragma mark fangfa
+- (void)presentBackScene{
+    MainScene *mainScene = [MainScene sceneWithSize:self.frame.size];
+    [self.view presentScene:mainScene transition:[SKTransition fadeWithColor:[NSColor blackColor] duration:0.5]];
+}
 @end

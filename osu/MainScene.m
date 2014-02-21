@@ -41,6 +41,9 @@
         [self initTheBigOSU];
         [self initBackground];
         [self initMusicController];
+        if ([self.GMP isPlaying]) {
+            [theBigOSU synchronizePopingTo:self.GMP.mapPlaying];
+        }
     }
     return self;
 }

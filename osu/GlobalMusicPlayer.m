@@ -194,14 +194,16 @@
 - (float)volume{
     return player.volume;
 }
+@synthesize playing;
+- (BOOL)isPlaying{
+    return [player isPlaying];
+}
 - (void)setVolume:(float)aVolume{
     player.volume = aVolume;
 }
 - (NSTimeInterval)currentTime{
     return [player currentTime];
 }
-- (BOOL)isPlaying{
-    return [player isPlaying];
-}
+
 
 @end

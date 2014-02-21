@@ -43,6 +43,7 @@ static const uint32_t hitObjectCategory =  0x1 << 2;
  */
 - (void)displayMessage:(NSString *)messageString;
 - (void)displayWarning:(NSString *)messageString;
+- (void)presentBackScene;
 /**
  Don't forget to call super when overide.
  不要忘记在覆写前运行super.

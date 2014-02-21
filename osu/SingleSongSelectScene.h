@@ -12,7 +12,6 @@
 
 @class ApplicationSupport;
 @interface SingleSongSelectScene : SKSceneWithAdditions{
-    NSURL *loadSongsDirectory;
     ApplicationSupport *appSupport;
 }
 

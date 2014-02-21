@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, GlobalMusicPlayerEndMode) {
 + (GlobalMusicPlayer *)getGMP;
 
 @property (readwrite) float volume;
+@property (readonly, getter = isPlaying) BOOL playing;
 @property Beatmap *mapPlaying;
 
 @property (weak) id <GMPEventDelegate> eventDelegate;

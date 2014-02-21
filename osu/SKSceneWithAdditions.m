@@ -110,7 +110,9 @@
     node.physicsBody.contactTestBitMask |= cursorCategory;
     [contactSet addObject:node];
 }
-
+- (void)presentBackScene{
+    
+}
 @synthesize leftMargin;
 @synthesize rightMargin;
 @synthesize topMargin;
